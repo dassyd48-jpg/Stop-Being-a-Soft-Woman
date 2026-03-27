@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>STOP BEING A SOFT WOMAN | DASSY</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
+
+    <style>
+        /* 1. အခြေခံ Layout */
+        html, body {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; background: #000; font-family: sans-serif;
+        }
+
+        /* 2. Video Background */
+        #bg-video {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 0; transition: opacity 1s;
+        }
+
+        /* 3. Lock Screen UI */
+        #lock {
+            position: fixed; width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            flex-direction: column; z-index: 20; background: rgba(0,0,0,0.3);
+            color: #fff; text-align: center;
+        }
+        #lock h2 { letter-spacing: 5px; margin-bottom: 25px; }
+        #lock input {
+            padding: 15px; width: 220px; border-radius: 30px; border: 1px solid #fff;
+            background: rgba(0,0,0,0.6); color: #fff; text-align: center; outline: none;
+        }
+        #lock button {
+            margin-top: 20px; padding: 12px 40px; border-radius: 30px; border: none;
+            background: #fff; color: #000; font-weight: bold; cursor: pointer;
+        }
+
+        /* 4. Book Section - Alignment ပြင်ဆင်ချက် */
+        #book-container {
+            display: none; width: 100%; height: 100%; 
+            position: fixed; top: 0; left: 0; z-index: 10; background: #000;
+        }
+
+        #flipbook-wrapper {
+            width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center; /* အလယ်တည့်တည့်ပို့ပေးသည် */
+        }
+
+        #flipbook {
+            width: 90vw; 
+            height: calc(90vw * 1.414); 
+            max-height: 85vh; 
+            max-width: 480px; /* Mobile မှာ အနေတော် Size */
+            background: #000;
+        }
+
+        #flipbook .page { background: #000; width: 100%; height: 100%; }
+        #flipbook img {
+            width: 100%; height: 100%; object-fit: contain;
+            backface-visibility: hidden; -webkit-backface-visibility: hidden;
+        }
+
+        /* 5. Watermark */
+        .watermark {
+            position: fixed; bottom: 15px; width: 100%; text-align: center;
+            font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 3px;
+            pointer-events: none; z-index: 100; text-transform: uppercase;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false">
+
+    <video id="bg-video" autoplay muted loop playsinline>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <div id="lock">
+        <h2>DASSY PRIVATE</h2>
+        <input type="password" id="pass" placeholder="PASSWORD">
+        <button onclick="unlock()">ENTER STRATEGY</button>
+    </div>
+
+    <div id="book-container">
+        <div id="flipbook-wrapper">
+            <div id="flipbook"></div>
+        </div>
+        <div class="watermark">POWERED BY DASSY</div>
+    </div>
+
+    <audio id="sound" src="flip.mp3"></audio>
+
+    <script>
+        const myPassword = "dassy123";
+        const maxPages = 15;
+
+        function unlock(){
+            const entered = document.getElementById("pass").value;
+            if(entered === myPassword){
+                $("#bg-video").css("opacity", "0");
+                $("#lock").fadeOut(500, function(){
+                    $("#book-container").fadeIn(400);
+                    loadAndInit();
+                });
+            } else {
+                alert("Unauthorized Access.");
+            }
+        }
+
+        function loadAndInit(){
+            const flipbook = $("#flipbook");
+            
+            // စာမျက်နှာများ ထည့်သွင်းခြင်း
+            for(let i=1; i<=maxPages; i++){
+                const pageDiv = $('<div class="page"></div>');
+                const img = $('<img />').attr('src', `page${i}.jpg`);
+                pageDiv.append(img);
+                flipbook.append(pageDiv);
+            }
+
+            // Turn.js စတင်ခြင်း
+            setTimeout(() => {
+                flipbook.turn({
+                    width: flipbook.width(),
+                    height: flipbook.height(),
+                    autoCenter: true, 
+                    display: 'single',
+                    acceleration: true,
+                    gradients: true,
+                    elevation: 50,
+                    duration: 800,
+                    when: { turning: function() { playSound(); } }
+                });
+
+                // Click/Touch to Flip
+                flipbook.bind('touchstart click', function(e) {
+                    const width = $(this).width();
+                    const offset = $(this).offset();
+                    const pageX = e.pageX || (e.originalEvent.touches && e.originalEvent.touches[0].pageX);
+                    
+                    if (pageX) {
+                        const relativeX = pageX - offset.left;
+                        if (relativeX > width / 2) { $(this).turn('next'); } 
+                        else { $(this).turn('previous'); }
+                    }
+                });
+            }, 200);
+        }
+
+        function playSound(){ 
+            let s = document.getElementById("sound"); 
+            if(s) { s.currentTime = 0; s.play().catch(e => {}); }
+        }
+
+        // Resize Fix
+        $(window).resize(function() {
+            if($("#flipbook").turn("is")) {
+                const fb = $("#flipbook");
+                fb.turn("size", fb.parent().width() * 0.9, fb.parent().height() * 0.85);
+            }
+        });
+    </script>
+</body>
+</html>

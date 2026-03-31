@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>THE IRREPLACEABLE QUEEN | DASSY</title>
+    
+    <title>The Irreplaceable Queen | THE EMPEROR</title>
+    <meta name="description" content="အမျိုးသားတို့ 
+မစွန့်လွှတ်နိုင်သော ဧကရီ Shadow Psychology နည်းဗျူဟာများ။">
+    <meta name="keywords" content="The Irreplaceable Queen, Shadow Psychology Myanmar, Dassy, Relationship Advice">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
@@ -14,27 +18,32 @@
             overflow: hidden; background: #000; font-family: sans-serif;
         }
 
+        /* Background Video */
         #bg-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: 0; transition: opacity 1s;
+            object-fit: cover; z-index: 0; transition: opacity 1.5s;
         }
 
+        /* Lock Screen */
         #lock {
             position: fixed; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
-            flex-direction: column; z-index: 20; background: rgba(0,0,0,0.4);
-            color: #fff; text-align: center;
+            flex-direction: column; z-index: 20; background: rgba(0,0,0,0.7);
+            color: #d4af37; text-align: center;
         }
-        #lock h2 { letter-spacing: 5px; margin-bottom: 25px; }
+        #lock h2 { letter-spacing: 5px; margin-bottom: 10px; font-size: 28px; text-transform: uppercase; }
+        #lock p { color: #fff; font-size: 14px; margin-bottom: 25px; opacity: 0.8; }
         #lock input {
-            padding: 15px; width: 220px; border-radius: 30px; border: 1px solid #fff;
-            background: rgba(0,0,0,0.6); color: #fff; text-align: center; outline: none;
+            padding: 15px; width: 220px; border-radius: 5px; border: 1px solid #d4af37;
+            background: rgba(0,0,0,0.6); color: #fff; text-align: center; outline: none; font-size: 16px;
         }
         #lock button {
-            margin-top: 20px; padding: 12px 40px; border-radius: 30px; border: none;
-            background: #fff; color: #000; font-weight: bold; cursor: pointer;
+            margin-top: 20px; padding: 12px 40px; border-radius: 5px; border: none;
+            background: #d4af37; color: #000; font-weight: bold; cursor: pointer; transition: 0.3s;
         }
+        #lock button:hover { background: #fff; transform: scale(1.05); }
 
+        /* Book Layout */
         #book-container {
             display: none; width: 100%; height: 100%; 
             position: fixed; top: 0; left: 0; z-index: 10; background: #000;
@@ -45,20 +54,21 @@
             display: flex; justify-content: center; align-items: center;
         }
 
+        /* A4 Ratio Optimized (1:1.414) */
         #flipbook {
             width: 90vw; 
             height: calc(90vw * 1.414); 
-            max-height: 80vh; 
-            max-width: 450px;
+            max-height: 85vh; 
+            max-width: 450px; /* ဖုန်းမှာကြည့်ရင် အချိုးအစားအမှန်ကန်ဆုံးဖြစ်အောင် */
         }
 
-        .page { background: #000; width: 100%; height: 100%; }
-        .page img { width: 100%; height: 100%; object-fit: contain; }
+        .page { background: #1a1a1a; width: 100%; height: 100%; }
+        .page img { width: 100%; height: 100%; object-fit: fill; } /* A4 ပုံတွေဖြစ်လို့ fill သုံးတာ ပိုအဆင်ပြေပါတယ် */
 
         .watermark {
             position: fixed; bottom: 15px; width: 100%; text-align: center;
-            font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 3px;
-            pointer-events: none; z-index: 100;
+            font-size: 10px; color: rgba(212, 175, 55, 0.4); letter-spacing: 3px;
+            pointer-events: none; z-index: 100; text-transform: uppercase;
         }
     </style>
 </head>
@@ -69,9 +79,10 @@
     </video>
 
     <div id="lock">
-        <h2>DASSY PRIVATE</h2>
+        <h2>THE UNSPOKEN MAGNET</h2>
+        <p>ENTER THE THRONE OF POWER</p>
         <input type="password" id="pass" placeholder="PASSWORD">
-        <button onclick="unlock()">ENTER STRATEGY</button>
+        <button onclick="unlock()">ACCESS STRATEGY</button>
     </div>
 
     <div id="book-container">
@@ -84,20 +95,19 @@
     <audio id="sound" src="flip.mp3"></audio>
 
     <script>
-        const myPassword = "dassy132";
-        // *** အရေးကြီးသည်- ပုံအရေအတွက်ကို Screenshot အတိုင်း ၁၅ ပုံ ပြောင်းထားသည် ***
-        const maxPages = 16; 
+        const myPassword = "dassy123"; // ဓည စိတ်ကြိုက်ပြောင်းနိုင်သည်
+        const maxPages = 16; // စာမျက်နှာ ၁၆ မျက်နှာ
 
         function unlock(){
             const entered = document.getElementById("pass").value;
             if(entered === myPassword){
                 $("#bg-video").css("opacity", "0");
-                $("#lock").fadeOut(500, function(){
-                    $("#book-container").fadeIn(400);
+                $("#lock").fadeOut(800, function(){
+                    $("#book-container").fadeIn(600);
                     loadAndInit();
                 });
             } else {
-                alert("Unauthorized Access.");
+                alert("စကားဝှက် မှားယွင်းနေပါသည်။");
             }
         }
 
@@ -106,8 +116,8 @@
             
             for(let i=1; i<=maxPages; i++){
                 const pageDiv = $('<div class="page"></div>');
-                // GitHub ထဲကအတိုင်း .jpg (စာလုံးအသေး) သုံးထားသည်
-                const img = $('<img />').attr('src', `page${i}.jpg`);
+                // Lazy loading ထည့်ထားပေးလို့ အင်တာနက်နှေးလည်း ဆိုက်မြန်မြန်ပွင့်ပါတယ်
+                const img = $('<img loading="lazy" />').attr('src', `page${i}.jpg`);
                 pageDiv.append(img);
                 flipbook.append(pageDiv);
             }
@@ -117,7 +127,7 @@
                     width: flipbook.width(),
                     height: flipbook.height(),
                     autoCenter: true, 
-                    display: 'single',
+                    display: 'single', // ဖုန်းမှာ တစ်မျက်နှာချင်းစီဖတ်ဖို့ ပိုအဆင်ပြေစေသည်
                     acceleration: true,
                     gradients: true,
                     elevation: 50,
@@ -125,6 +135,7 @@
                     when: { turning: function() { playSound(); } }
                 });
 
+                // Touch & Click Control (စာမျက်နှာလှန်ရန်)
                 flipbook.bind('touchstart click', function(e) {
                     const width = $(this).width();
                     const offset = $(this).offset();
@@ -136,7 +147,7 @@
                         else { $(this).turn('previous'); }
                     }
                 });
-            }, 500);
+            }, 300);
         }
 
         function playSound(){ 

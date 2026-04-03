@@ -64,6 +64,118 @@
             transform: translateY(-15px);
             border-color: var(--antique-gold);
             box-shadow: 0 0 30px rgba(139, 115, 85, 0.1);
+        }
+
+        .vault-item img {
+            width: 100%; height: 400px; object-fit: cover;
+            filter: grayscale(40%) sepia(20%) brightness(80%);
+            border: 1px solid #222;
+            margin-bottom: 25px;
+        }
+
+        .category-tag {
+            color: var(--deep-crimson);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 20px;
+            min-height: 60px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            color: var(--antique-gold);
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .btn-box { display: flex; flex-direction: column; gap: 15px; }
+
+        .btn {
+            text-decoration: none; padding: 16px;
+            font-weight: bold; text-transform: uppercase;
+            letter-spacing: 2px; transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-preview {
+            border: 1px solid #333; color: #666;
+        }
+
+        .btn-preview:hover { border-color: var(--antique-gold); color: var(--antique-gold); }
+
+        .btn-buy {
+            background: var(--deep-crimson);
+            color: #fff;
+            border: 1px solid #440000;
+            box-shadow: 0 0 15px rgba(102, 0, 0, 0.4);
+        }
+
+        .btn-buy:hover {
+            background: #8b0000;
+            box-shadow: 0 0 25px rgba(139, 0, 0, 0.6);
+            transform: scale(1.02);
+        }
+
+        footer {
+            padding: 80px; color: #222; font-size: 0.7rem;
+            letter-spacing: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>DASSY BLOCK VAULT</h1>
+    <p>THE GATE TO FORBIDDEN SECRETS</p>
+</header>
+
+<div class="shelf">
+
+    <div class="vault-item">
+        <div class="category-tag">DARK PSYCHOLOGY ARCHIVE</div>
+        <img src="dream-woman/page1.jpg" alt="Dream Woman Cover">
+        <div class="title">How A Man's Brain Picks His Dream Woman</div>
+        <div class="price">5,490 MMK</div>
+        <div class="btn-box">
+            <a href="dream-woman/index.html" class="btn btn-preview">Enter the Vault</a>
+            <a href="https://wa.me/95948432100?text=I%20want%20the%20Psychology%20Vault%20Key." class="btn btn-buy">Unlock Access</a>
+        </div>
+    </div>
+
+    <div class="vault-item">
+        <div class="category-tag">ROMANCE ARCHIVE (ENGLISH)</div>
+        <img src="https://via.placeholder.com/350x500/050505/8b7355?text=ENGLISH+ARCHIVE" alt="English Love Story">
+        <div class="title">Love in the Shadows: English Edition</div>
+        <div class="price">5,490 MMK</div>
+        <div class="btn-box">
+            <a href="#" class="btn btn-preview">Enter the Vault</a>
+            <a href="https://wa.me/95948432100?text=I%20want%20the%20English%20Love%20Story%20Key." class="btn btn-buy">Unlock Access</a>
+        </div>
+    </div>
+
+    <div class="vault-item">
+        <div class="category-tag">KIDS ARCHIVE (INTERACTIVE)</div>
+        <img src="https://via.placeholder.com/350x500/050505/8b7355?text=KIDS+ARCHIVE" alt="Kids Story">
+        <div class="title">ကလေးပုံပြင်များ (Digital Activity Book)</div>
+        <div class="price">5,490 MMK</div>
+        <div class="btn-box">
+            <a href="#" class="btn btn-preview">Enter the Vault</a>
+            <a href="https://wa.me/95948432100?text=ကလေးပုံပြင်စာအုပ်အတွက်%20Key%20ဝယ်ချင်လို့ပါ။" class="btn btn-buy">Unlock Access</a>
+        </div>
+    </div>
+
+</div>
+
+<footer>UNCENSORED CONTENT BY DASSY</footer>
 
 </body>
 </html>

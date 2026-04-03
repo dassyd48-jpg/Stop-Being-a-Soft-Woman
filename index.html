@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DASSY BLOCK VAULT | PREMIUM ACCESS</title>
+    <title>DASSY BLOCK VAULT | FORBIDDEN SECRETS</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* လင်းလက်သော Metallic Gold */
-            --bright-gold: #f7e1ad;
+            /* သင်ပြထားသော Royal Gold Color */
+            --royal-gold: #c5a059;
             --main-gold: #d4af37;
             --shadow-gold: #8a6d3b;
-            /* ပိုမိုမှောင်သော အနီနက်ရောင် */
-            --header-dark-crimson: #120000;
+            /* Header Dark Theme */
+            --header-dark: #0a0a0a;
+            --header-darker: #000000;
             --body-black: #050505;
         }
 
@@ -22,57 +23,60 @@
             color: #888;
             font-family: 'Special Elite', cursive;
             display: flex; flex-direction: column; align-items: center;
+            overflow-x: hidden;
         }
 
+        /* ခြောက်ခြားစရာ Header */
         header {
-            text-align: center; padding: 120px 20px;
+            text-align: center; padding: 150px 20px 200px;
             width: 100%;
-            background: radial-gradient(circle, #2a0000 0%, var(--header-dark-crimson) 100%);
-            border-bottom: 1px solid #330000;
+            position: relative;
+            /* ပန်းခက် Mandala Pattern */
+            background-color: var(--header-dark);
+            background-image: 
+                radial-gradient(circle at center, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 100 100"><path fill="%231a1a1a" d="M50 0 L 55 10 A 10 10 0 0 1 65 10 L 70 0 A 10 10 0 0 1 70 10 A 10 10 0 0 1 80 15 L 90 15 A 10 10 0 0 1 80 25 L 90 35 L 80 35 A 10 10 0 0 1 70 45 L 75 55 L 70 55 A 10 10 0 0 1 60 45 L 60 55 A 10 10 0 0 1 50 45 L 40 55 L 40 45 A 10 10 0 0 1 30 55 L 25 45 A 10 10 0 0 1 30 35 L 20 35 L 20 25 A 10 10 0 0 1 10 15 L 20 15 A 10 10 0 0 1 30 10 L 30 0 A 10 10 0 0 1 35 10 A 10 10 0 0 1 45 10 L 50 0 Z"/></svg>');
+            background-size: cover;
+            border-bottom: 3px solid var(--royal-gold);
             overflow: hidden;
         }
 
-        /* Animated Metallic Shine Effect */
+        /* Royal Gold Frame */
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 180px;
+            background: linear-gradient(to top, rgba(197, 160, 89, 0.9), transparent);
+            filter: drop-shadow(0 0 30px rgba(197, 160, 89, 0.4));
+        }
+
+        /* DASSY BLOCK VAULT Premium Gold Font */
         header h1 {
-            font-family: 'Cinzel Decorative', serif;
+            font-family: 'Cinzel Decorative', serif; /* Premium Gothic Font */
             font-size: clamp(2.5rem, 8vw, 4.5rem);
             margin: 0;
             letter-spacing: 12px;
             text-transform: uppercase;
             font-weight: 900;
+            position: relative; z-index: 2;
             
             /* Gold Gradient */
-            background: linear-gradient(
-                to right, 
-                var(--shadow-gold) 0%, 
-                var(--main-gold) 25%, 
-                var(--bright-gold) 50%, 
-                var(--main-gold) 75%, 
-                var(--shadow-gold) 100%
-            );
-            background-size: 200% auto;
+            background: linear-gradient(to bottom, #f7e1ad 0%, var(--main-gold) 50%, var(--shadow-gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             
-            /* Shining Animation */
-            animation: shine 4s linear infinite;
-            
-            /* စာလုံးကြွစေရန် Glow */
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
-        }
-
-        @keyframes shine {
-            to { background-position: 200% center; }
+            /* Glow Effect */
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
         }
 
         header p {
-            color: #550000;
+            color: #660000;
             font-size: 1rem;
             margin-top: 25px;
-            letter-spacing: 8px;
+            letter-spacing: 7px;
             text-transform: uppercase;
             font-weight: bold;
-            opacity: 0.8;
+            position: relative; z-index: 2;
         }
 
         /* Content Container */
@@ -80,52 +84,54 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 40px; width: 90%; max-width: 1200px; padding: 80px 0;
+            margin-top: -50px; /* Header Frame အောက်ကို နည်းနည်းဝင်စေရန် */
+            position: relative; z-index: 3;
         }
 
         .vault-item {
-            background: #080808;
+            background: #0a0a0a;
             border: 1px solid #1a1a1a;
             padding: 30px;
             transition: 0.5s;
-            box-shadow: 0 20px 50px rgba(0,0,0,1);
+            box-shadow: 0 10px 40px rgba(0,0,0,1);
         }
 
         .vault-item:hover {
             transform: translateY(-15px);
-            border-color: var(--main-gold);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.1);
+            border-color: var(--royal-gold);
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.1);
         }
 
         .vault-item img {
             width: 100%; height: 400px; object-fit: cover;
-            filter: grayscale(20%) brightness(80%);
+            filter: grayscale(30%) contrast(110%);
             border-bottom: 1px solid #222;
             margin-bottom: 25px;
         }
 
         .price {
             font-size: 1.5rem; color: var(--main-gold);
-            margin: 20px 0 30px; font-weight: bold;
+            margin-bottom: 30px; font-weight: bold;
             text-align: center;
         }
 
         .btn-buy {
             display: block; text-decoration: none; padding: 18px;
-            background: linear-gradient(135deg, #660000, #330000);
+            background: linear-gradient(135deg, #8b0000, #4a0000);
             color: #fff; text-align: center; font-weight: bold;
-            letter-spacing: 3px; border: 1px solid #440000;
+            letter-spacing: 3px; border: 1px solid #300;
             transition: 0.4s;
         }
 
         .btn-buy:hover {
-            background: #8b0000;
+            background: #ff0000;
             box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
             transform: scale(1.02);
         }
 
         footer {
-            padding: 100px; color: #150000; font-size: 0.8rem;
-            letter-spacing: 6px; text-transform: uppercase;
+            padding: 100px; color: #150000; font-size: 0.7rem;
+            letter-spacing: 5px; text-transform: uppercase;
         }
     </style>
 </head>
@@ -156,7 +162,7 @@
     </div>
 </div>
 
-<footer>OFFICIAL DIGITAL VAULT</footer>
+<footer>© DASSY BLOCK VAULT</footer>
 
 </body>
 </html>

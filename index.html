@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASSY PRIVATE - DIGITAL LIBRARY</title>
+    <style>
+        :root {
+            --primary-gold: #d4af37;
+            --dark-bg: #0a0e14;
+            --card-bg: #161b22;
+            --text-silver: #cfd8dc;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        header {
+            text-align: center; padding: 50px 20px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(10,14,20,1));
+            width: 100%;
+        }
+
+        header h1 {
+            color: var(--primary-gold);
+            letter-spacing: 4px; font-size: 2rem; margin: 0;
+            text-transform: uppercase;
+        }
+
+        header p { color: var(--text-silver); font-size: 0.9rem; margin-top: 10px; }
+
+        .book-shelf {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; width: 90%; max-width: 1100px; padding: 40px 0;
+        }
+
+        .book-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px; padding: 25px;
+            text-align: center; transition: 0.4s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-gold);
+        }
+
+        .book-card img {
+            width: 100%; height: 350px; object-fit: cover;
+            border-radius: 8px; margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .book-title {
+            font-size: 1.2rem; color: var(--primary-gold);
+            margin-bottom: 10px; height: 50px; display: flex; align-items: center; justify-content: center;
+        }
+
+        .price { font-size: 1.1rem; color: white; margin-bottom: 20px; }
+
+        .btn-group { display: flex; flex-direction: column; gap: 12px; }
+
+        .btn {
+            text-decoration: none; padding: 12px; border-radius: 6px;
+            font-weight: bold; transition: 0.3s;
+        }
+
+        .btn-preview {
+            background: transparent; border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+        }
+
+        .btn-preview:hover { background: var(--primary-gold); color: black; }
+
+        .btn-buy {
+            background: linear-gradient(145deg, #ffffff, #9e9e9e);
+            color: black; border: none;
+        }
+
+        .btn-buy:hover { transform: scale(1.03); background: #fff; }
+
+        footer { margin-top: auto; padding: 40px; color: rgba(255,255,255,0.3); font-size: 0.8rem; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Dassy Private</h1>
+    <p>DIGITAL LIBRARY & PREMIUM CONTENT</p>
+</header>
+
+<div class="book-shelf">
+
+    <div class="book-card">
+        <img src="dream-woman/page1.jpg" alt="Dream Woman Cover">
+        <div class="book-title">How A Man's Brain Picks His Dream Woman</div>
+        <div class="price">5,490 MMK</div>
+        <div class="btn-group">
+            <a href="dream-woman/index.html" class="btn btn-preview">📖 READ PREVIEW</a>
+            <a href="https://wa.me/95948432100?text=မင်္ဂလာပါ၊%20Dream%20Woman%20စာအုပ်အတွက်%20ငွေချေပြီး%20Password%20ယူချင်လို့ပါခင်ဗျာ။" class="btn btn-buy">💳 BUY & GET PASSWORD</a>
+        </div>
+    </div>
+
+    <div class="book-card">
+        <img src="https://via.placeholder.com/350x500/161b22/d4af37?text=English+Short+Stories" alt="English Stories Cover">
+        <div class="book-title">English Short Stories (English Version)</div>
+        <div class="price">5,490 MMK</div>
+        <div class="btn-group">
+            <a href="#" class="btn btn-preview">📖 READ PREVIEW</a>
+            <a href="https://wa.me/95948432100?text=I%20would%20like%20to%20buy%20the%20English%20Short%20Stories%20Flipping%20Book%20and%20get%20the%20password." class="btn btn-buy">💳 BUY & GET PASSWORD</a>
+        </div>
+    </div>
+
+    <div class="book-card">
+        <img src="https://via.placeholder.com/350x500/161b22/d4af37?text=Children's+Stories" alt="Kids Story Cover">
+        <div class="book-title">ကလေးပုံပြင်များ Flipping Book</div>
+        <div class="price">5,490 MMK</div>
+        <div class="btn-group">
+            <a href="#" class="btn btn-preview">📖 READ PREVIEW</a>
+            <a href="https://wa.me/95948432100?text=မင်္ဂလာပါ၊%20ကလေးပုံပြင်စာအုပ်အတွက်%20ငွေချေပြီး%20Password%20ယူချင်လို့ပါခင်ဗျာ။" class="btn btn-buy">💳 BUY & GET PASSWORD</a>
+        </div>
+    </div>
+
+</div>
+
+<footer>POWERED BY DASSY PRIVATE</footer>
+
+</body>
+</html>

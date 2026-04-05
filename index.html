@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* သင်ပြထားသော Metallic Bronze Gold အရောင် */
             --metallic-gold: #b38b59; 
             --dark-bronze: #8a6d3b;
             --header-crimson: #1a0000;
@@ -30,10 +29,8 @@
             border-bottom: 1px solid #2a0000;
         }
 
-        /* Metallic Bronze Effect */
         header h1 {
             font-family: 'Cinzel Decorative', serif;
-            /* Gradient သုံးပြီး Metallic အရောင် ဖန်တီးထားပါသည် */
             background: linear-gradient(to bottom, #d4af37 0%, #b38b59 50%, #8a6d3b 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -53,12 +50,39 @@
             font-weight: bold;
         }
 
+        /* --- Category Section Styling --- */
+        .category-container {
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 60px;
+        }
+
+        .category-title {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--metallic-gold);
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            border-left: 4px solid var(--metallic-gold);
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+
         .shelf {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px; width: 90%; max-width: 1200px; padding: 60px 0;
+            gap: 40px; 
+            padding-bottom: 60px;
         }
 
+        .divider {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #333, transparent);
+            margin: 40px 0;
+        }
+
+        /* --- Vault Item Styling --- */
         .vault-item {
             background: #0a0a0a;
             border: 1px solid #151515;
@@ -89,12 +113,14 @@
             font-size: 1.2rem; color: #fff;
             margin-bottom: 20px; min-height: 60px;
             display: flex; align-items: center; justify-content: center;
+            text-align: center;
         }
 
         .price {
             font-size: 1.4rem; 
             color: var(--metallic-gold);
             margin-bottom: 30px;
+            text-align: center;
         }
 
         .btn-box { display: flex; flex-direction: column; gap: 12px; }
@@ -113,27 +139,25 @@
         .btn-preview:hover { border-color: var(--metallic-gold); color: #fff; }
 
         .btn-buy {
-            background: linear-gradient(145deg, #8b0000, #4a0000);
+            background-color: #0088cc;
             color: #fff;
-            border: 1px solid #300;
+            border: none;
         }
 
         .btn-buy:hover {
-            background: #a00000;
-            box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+            background: #00a2f0;
+            box-shadow: 0 0 20px rgba(0, 136, 204, 0.4);
         }
 
         footer {
-    padding: 80px 20px;
-    color: #d4af37; /* 🌟 ရှင်းလင်းတောက်ပတဲ့ ရွှေရောင် (Gold) ဖြစ်သွားပါပြီ */
-    font-size: 0.8rem;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    text-align: center;
-    width: 100%;
-    display: block;
-    clear: both;
-}
+            padding: 80px 20px;
+            color: #d4af37;
+            font-size: 0.8rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-align: center;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -143,70 +167,84 @@
     <p>THE GATE TO FORBIDDEN SECRETS</p>
 </header>
 
-<div class="shelf">
-    <div class="vault-item">
-        <div class="tag">Psychology Archive</div>
-        <img src="dream-woman/page1.jpg" alt="Dream Woman">
-        <div class="title">How A Man's Brain Picks His Dream Woman</div>
-        <div class="price">5,490 MMK</div>
-        <div class="btn-box">
-            <a href="dream-woman/index.html" class="btn btn-preview">Read Preview</a>
-            <a href="https://t.me/Dassy_Digital_Library" class="btn btn-buy" style="background-color: #0088cc; border: none;">
-                Telegram မှာ ဝယ်ယူရန်
-            </a>
+<section class="category-container">
+    <h2 class="category-title">Psychology Archive</h2>
+    <div class="shelf">
+        <div class="vault-item">
+            <div class="tag">Psychology Archive</div>
+            <img src="dream-woman/page1.jpg" alt="Dream Woman">
+            <div class="title">How A Man's Brain Picks His Dream Woman</div>
+            <div class="price">5,490 MMK</div>
+            <div class="btn-box">
+                <a href="dream-woman/index.html" class="btn btn-preview">Read Preview</a>
+                <a href="https://t.me/Dassy_Digital_Library" class="btn btn-buy">Telegram မှာ မေးမြန်းမယ်</a>
+            </div>
         </div>
-    </div>
 
-    <div class="vault-item">
-        <div class="tag">Psychology Archive</div>
-        <img src="the-irreplaceable-queen/page1.jpg" alt="Queen">
-        <div class="title">The Irreplaceable Queen</div>
-        <div class="price">4,590 MMK</div>
-        <div class="btn-box">
-            <a href="the-irreplaceable-queen/index.html" class="btn btn-preview">Read Preview</a>
-            <a href="https://t.me/Dassy_Digital_Library" class="btn btn-buy" style="background-color: #0088cc; border: none;">
-                Telegram မှာ ဝယ်ယူရန်
-            </a>
+        <div class="vault-item">
+            <div class="tag">Psychology Archive</div>
+            <img src="the-irreplaceable-queen/page1.jpg" alt="Queen">
+            <div class="title">The Irreplaceable Queen</div>
+            <div class="price">4,590 MMK</div>
+            <div class="btn-box">
+                <a href="the-irreplaceable-queen/index.html" class="btn btn-preview">Read Preview</a>
+                <a href="https://t.me/Dassy_Digital_Library" class="btn btn-buy">Telegram မှာ မေးမြန်းမယ်</a>
+            </div>
         </div>
-    </div>
 
-    <div class="vault-item">
-        <div class="tag">Psychology Archive</div>
-        <img src="the-unreadable-shadow/page1.jpg" alt="Shadow">
-        <div class="title">The Unreadable Shadow</div>
-        <div class="price">5,490 MMK</div>
-        <div class="btn-box">
-            <a href="the-unreadable-shadow/index.html" class="btn btn-preview">Read Preview</a>
-            <a href="https://t.me/Dassy_Digital_Library" class="btn btn-buy" style="background-color: #0088cc; border: none;">
-                Telegram မှာ ဝယ်ယူရန်
-            </a>
+        <div class="vault-item">
+            <div class="tag">Psychology Archive</div>
+            <img src="the-unreadable-shadow/page1.jpg" alt="Shadow">
+            <div class="title">The Unreadable Shadow</div>
+            <div class="price">5,490 MMK</div>
+            <div class="btn-box">
+                <a href="the-unreadable-shadow/index.html" class="btn btn-preview">Read Preview</a>
+                <a href="https://t.me/Dassy_Digital_Library" class="btn btn-buy">Telegram မှာ မေးမြန်းမယ်</a>
+            </div>
+        </div>
+
+        <div class="vault-item">
+            <div class="tag">Psychology Archive</div>
+            <img src="the-unspoken-magnet/page1.jpg" alt="Magnet">
+            <div class="title">The Unspoken Magnet</div>
+            <div class="price">5,490 MMK</div>
+            <div class="btn-box">
+                <a href="the-unspoken-magnet/index.html" class="btn btn-preview">Read Preview</a>
+                <a href="https://t.me/Dassy_Digital_Library" class="btn btn-buy">Telegram မှာ မေးမြန်းမယ်</a>
+            </div>
+        </div>
+
+        <div class="vault-item">
+            <div class="tag">Psychology Archive</div>
+            <img src="the-ghost-in-his-mind/page1.jpg" alt="Ghost">
+            <div class="title">The Ghost In His Mind</div>
+            <div class="price">5,590 MMK</div>
+            <div class="btn-box">
+                <a href="the-ghost-in-his-mind/index.html" class="btn btn-preview">Read Preview</a>
+                <a href="https://t.me/Dassy_Digital_Library" class="btn btn-buy">Telegram မှာ မေးမြန်းမယ်</a>
+            </div>
         </div>
     </div>
-<div class="vault-item">
-        <div class="tag">Psychology Archive</div>
-        <img src="the-unspoken-magnet/page1.jpg" alt="Magnet">
-        <div class="title">The Unspoken Magnet</div>
-        <div class="price">5,490 MMK</div>
-        <div class="btn-box">
-            <a href="the-unspoken-magnet/index.html" class="btn btn-preview">Read Preview</a>
-            <a href="https://t.me/Dassy_Digital_Library" class="btn btn-buy" style="background-color: #0088cc; border: none;">
-                Telegram မှာ ဝယ်ယူရန်
-            </a>
-        </div>
+</section>
+
+<hr class="divider">
+
+<section class="category-container">
+    <h2 class="category-title">Kids' Learning Vault</h2>
+    <div class="shelf">
+        <p style="color: #444; text-align: center; width: 100%; grid-column: 1 / -1; padding: 40px;">Coming Soon: Digital Learning Resources for Kids</p>
     </div>
-<div class="vault-item">
-        <div class="tag">Psychology Archive</div>
-        <img src="the-ghost-in-his-mind/page1.jpg" alt="Ghost">
-        <div class="title">The Ghost In His Mind</div>
-        <div class="price">5,590 MMK</div>
-        <div class="btn-box">
-            <a href="the-ghost-in-his-mind/index.html" class="btn btn-preview">Read Preview</a>
-            <a href="https://t.me/Dassy_Digital_Library" class="btn btn-buy" style="background-color: #0088cc; border: none;">
-                Telegram မှာ ဝယ်ယူရန်
-            </a>
-        </div>
+</section>
+
+<hr class="divider">
+
+<section class="category-container">
+    <h2 class="category-title">English Story Books</h2>
+    <div class="shelf">
+        <p style="color: #444; text-align: center; width: 100%; grid-column: 1 / -1; padding: 40px;">Coming Soon: Immersive English Stories</p>
     </div>
-    
+</section>
+
 <footer>UNCENSORED CONTENT BY DASSY</footer>
 
 </body>

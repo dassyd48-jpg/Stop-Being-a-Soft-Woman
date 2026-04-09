@@ -4,10 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>The Irreplaceable Queen | THE EMPEROR</title>
-    <meta name="description" content="အမျိုးသားတို့ 
-မစွန့်လွှတ်နိုင်သော ဧကရီ Shadow Psychology နည်းဗျူဟာများ။">
-    <meta name="keywords" content="The Irreplaceable Queen, Shadow Psychology Myanmar, Dassy, Relationship Advice">
+    <title>The Irreplaceable Queen | DASSY Digital Library</title>
+    <meta name="title" content="The Irreplaceable Queen | DASSY Digital Library">
+    <meta name="description" content="အမျိုးသားတို့ မစွန့်လွှတ်နိုင်သော ဧကရီ Shadow Psychology နည်းဗျူဟာများ။ Official digital book by DASSY Digital Library.">
+    <meta name="keywords" content="The Irreplaceable Queen, Shadow Psychology Myanmar, DASSY, Digital Library, Relationship Advice, Psychology Books Myanmar">
+    <meta name="author" content="DASSY Digital Library">
+
+    <meta property="og:type" content="book">
+    <meta property="og:url" content="https://dassyd48-jpg.github.io/Digital-Library/the-irreplaceable-queen/">
+    <meta property="og:title" content="The Irreplaceable Queen | DASSY Digital Library">
+    <meta property="og:description" content="Master the art of Shadow Psychology. Original content by DASSY Digital Library.">
+    <meta property="og:image" content="page1.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": "The Irreplaceable Queen",
+      "author": {
+        "@type": "Organization",
+        "name": "DASSY Digital Library"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "DASSY Digital Library"
+      },
+      "description": "အမျိုးသားတို့ မစွန့်လွှတ်နိုင်သော ဧကရီ Shadow Psychology နည်းဗျူဟာများ။",
+      "url": "https://dassyd48-jpg.github.io/Digital-Library/the-irreplaceable-queen/",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://t.me/Dassy_Digital_Library",
+        "availability": "https://schema.org/InStock",
+        "priceCurrency": "MMK"
+      }
+    }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
@@ -17,14 +48,10 @@
             margin: 0; padding: 0; width: 100%; height: 100%;
             overflow: hidden; background: #000; font-family: sans-serif;
         }
-
-        /* Background Video */
         #bg-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: 0; transition: opacity 1.5s;
         }
-
-        /* Lock Screen */
         #lock {
             position: fixed; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
@@ -42,29 +69,22 @@
             background: #d4af37; color: #000; font-weight: bold; cursor: pointer; transition: 0.3s;
         }
         #lock button:hover { background: #fff; transform: scale(1.05); }
-
-        /* Book Layout */
         #book-container {
             display: none; width: 100%; height: 100%; 
             position: fixed; top: 0; left: 0; z-index: 10; background: #000;
         }
-
         #flipbook-wrapper {
             width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
         }
-
-        /* A4 Ratio Optimized (1:1.414) */
         #flipbook {
             width: 90vw; 
             height: calc(90vw * 1.414); 
             max-height: 85vh; 
-            max-width: 450px; /* ဖုန်းမှာကြည့်ရင် အချိုးအစားအမှန်ကန်ဆုံးဖြစ်အောင် */
+            max-width: 450px;
         }
-
         .page { background: #1a1a1a; width: 100%; height: 100%; }
-        .page img { width: 100%; height: 100%; object-fit: fill; } /* A4 ပုံတွေဖြစ်လို့ fill သုံးတာ ပိုအဆင်ပြေပါတယ် */
-
+        .page img { width: 100%; height: 100%; object-fit: fill; }
         .watermark {
             position: fixed; bottom: 15px; width: 100%; text-align: center;
             font-size: 10px; color: rgba(212, 175, 55, 0.4); letter-spacing: 3px;
@@ -83,20 +103,25 @@
         <p>ENTER THE THRONE OF POWER</p>
         <input type="password" id="pass" placeholder="PASSWORD">
         <button onclick="unlock()">ACCESS STRATEGY</button>
+        <div style="margin-top: 15px;">
+            <a href="https://t.me/Dassy_Digital_Library" target="_blank" style="color: #d4af37; text-decoration: none; font-size: 13px;">
+                📩 Don't have a password? Contact DASSY.
+            </a>
+        </div>
     </div>
 
     <div id="book-container">
         <div id="flipbook-wrapper">
             <div id="flipbook"></div>
         </div>
-        <div class="watermark">POWERED BY DASSY</div>
+        <div class="watermark">POWERED BY DASSY DIGITAL LIBRARY</div>
     </div>
 
     <audio id="sound" src="flip.mp3"></audio>
 
     <script>
-        const myPassword = "dassy123"; // ဓည စိတ်ကြိုက်ပြောင်းနိုင်သည်
-        const maxPages = 16; // စာမျက်နှာ ၁၆ မျက်နှာ
+        const myPassword = "dassy123";
+        const maxPages = 16; 
 
         function unlock(){
             const entered = document.getElementById("pass").value;
@@ -113,34 +138,28 @@
 
         function loadAndInit(){
             const flipbook = $("#flipbook");
-            
             for(let i=1; i<=maxPages; i++){
                 const pageDiv = $('<div class="page"></div>');
-                // Lazy loading ထည့်ထားပေးလို့ အင်တာနက်နှေးလည်း ဆိုက်မြန်မြန်ပွင့်ပါတယ်
                 const img = $('<img loading="lazy" />').attr('src', `page${i}.jpg`);
                 pageDiv.append(img);
                 flipbook.append(pageDiv);
             }
-
             setTimeout(() => {
                 flipbook.turn({
                     width: flipbook.width(),
                     height: flipbook.height(),
                     autoCenter: true, 
-                    display: 'single', // ဖုန်းမှာ တစ်မျက်နှာချင်းစီဖတ်ဖို့ ပိုအဆင်ပြေစေသည်
+                    display: 'single',
                     acceleration: true,
                     gradients: true,
                     elevation: 50,
                     duration: 1000,
                     when: { turning: function() { playSound(); } }
                 });
-
-                // Touch & Click Control (စာမျက်နှာလှန်ရန်)
                 flipbook.bind('touchstart click', function(e) {
                     const width = $(this).width();
                     const offset = $(this).offset();
                     const pageX = e.pageX || (e.originalEvent.touches && e.originalEvent.touches[0].pageX);
-                    
                     if (pageX) {
                         const relativeX = pageX - offset.left;
                         if (relativeX > width / 2) { $(this).turn('next'); } 

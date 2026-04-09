@@ -4,11 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>HIS
-DREAM WOMAN | MASTER THE MYSTERY</title>
-    <meta name="description" content="အလင်းထဲမှာ လူတိုင်းနဲ့အတူ ကပြနေစရာ မလိုပါဘူး။ အရိပ်ထဲကနေပဲ ပွဲကို အသာစီးနဲ့ ကစားပါ။ 'The Unreadable Shadow' ဟာ သင့်ရဲ့ တည်ရှိမှုကို Premium ဖြစ်စေပြီး၊ ဘယ်သူမှ ဖတ်လို့မရတဲ့ Strategic Mystery (ဗျူဟာမြောက် လျှို့ဝှက်ချက်) တွေနဲ့ ကိုယ့်ကိုယ်ကိုယ် ကာကွယ်နည်းဖြစ်ပါတယ်။">
-    <meta name="keywords" content="HIS
-DREAM WOMAN, Strategic Mystery Myanmar, Dassy, Premium Presence, Dark Psychology">
+    <title>How A Man's Brain Picks His Dream Woman | DASSY Digital Library</title>
+    <meta name="title" content="How A Man's Brain Picks His Dream Woman | DASSY Digital Library">
+    <meta name="description" content="အမျိုးသားတစ်ယောက်ရဲ့ စိတ်အာရုံက သူ့ရဲ့ အိပ်မက်သူရဲကောင်းကို ဘယ်လိုရွေးချယ်သလဲ။ Official digital book by DASSY Digital Library.">
+    <meta name="keywords" content="HIS DREAM WOMAN, Strategic Mystery Myanmar, Dassy, Premium Presence, Dark Psychology, Relationship Advice Myanmar">
+    <meta name="author" content="DASSY Digital Library">
+
+    <meta property="og:type" content="book">
+    <meta property="og:url" content="https://dassyd48-jpg.github.io/Digital-Library/dream-woman/">
+    <meta property="og:title" content="How A Man's Brain Picks His Dream Woman | DASSY Digital Library">
+    <meta property="og:description" content="Explore the psychology behind attraction and dream partners. Published by DASSY Digital Library.">
+    <meta property="og:image" content="page1.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": "How A Man's Brain Picks His Dream Woman",
+      "author": {
+        "@type": "Organization",
+        "name": "DASSY Digital Library"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "DASSY Digital Library"
+      },
+      "url": "https://dassyd48-jpg.github.io/Digital-Library/dream-woman/",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://t.me/Dassy_Digital_Library",
+        "availability": "https://schema.org/InStock",
+        "priceCurrency": "MMK"
+      }
+    }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
@@ -29,11 +58,10 @@ DREAM WOMAN, Strategic Mystery Myanmar, Dassy, Premium Presence, Dark Psychology
         #lock {
             position: fixed; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
-            flex-direction: column; z-index: 20; background: rgba(0,0,0,0.7); /* ဗီဒီယိုကို ပိုမှောင်အောင်လုပ်ထားသည် */
+            flex-direction: column; z-index: 20; background: rgba(0,0,0,0.7);
             color: #d4af37; text-align: center;
         }
 
-        /* ငွေရောင်လင်းလက်သော စာသား effect */
         .silver-text {
             background: linear-gradient(to bottom, #cfd8dc 0%, #ffffff 50%, #b0bec5 100%);
             -webkit-background-clip: text;
@@ -47,7 +75,6 @@ DREAM WOMAN, Strategic Mystery Myanmar, Dassy, Premium Presence, Dark Psychology
             margin-bottom: 10px; 
             font-size: 28px; 
             text-transform: uppercase;
-            /* ငွေရောင် Glossy Effect ထည့်သွင်းခြင်း */
             background: linear-gradient(145deg, #e0e0e0 0%, #ffffff 45%, #bdbdbd 55%, #f5f5f5 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -55,7 +82,7 @@ DREAM WOMAN, Strategic Mystery Myanmar, Dassy, Premium Presence, Dark Psychology
         }
 
         #lock p { 
-            color: #b0bec5; /* ငွေမှင်ရောင် */
+            color: #b0bec5; 
             font-size: 14px; 
             margin-bottom: 25px; 
             opacity: 0.9; 
@@ -67,7 +94,6 @@ DREAM WOMAN, Strategic Mystery Myanmar, Dassy, Premium Presence, Dark Psychology
             background: rgba(255,255,255,0.05); color: #fff; text-align: center; outline: none; font-size: 16px;
         }
 
-        /* ငွေရောင် Button */
         #lock button {
             margin-top: 20px; 
             padding: 12px 40px; 
@@ -87,10 +113,9 @@ DREAM WOMAN, Strategic Mystery Myanmar, Dassy, Premium Presence, Dark Psychology
             transform: scale(1.05); 
         }
 
-        /* Book Layout */
         #book-container {
             display: none; width: 100%; height: 100%; 
-            position: fixed; top: 0; left: 0; z-index: 10; background: #222; /* စာအုပ်ဝင်ဖတ်တဲ့ Background Color က Dark Grey ဖြစ်သည် */
+            position: fixed; top: 0; left: 0; z-index: 10; background: #222;
         }
 
         #flipbook-wrapper {
@@ -98,22 +123,17 @@ DREAM WOMAN, Strategic Mystery Myanmar, Dassy, Premium Presence, Dark Psychology
             display: flex; justify-content: center; align-items: center;
         }
 
-        /* A4 Ratio Optimized (1:1.414) */
         #flipbook {
             width: 90vw; 
             height: calc(90vw * 1.414); 
             max-height: 85vh; 
-            max-width: 450px; /* ဖုန်းမှာကြည့်ရင် အချိုးအစားအမှန်ကန်ဆုံးဖြစ်အောင် */
-            
-            /* စာမျက်နှာအားလုံး၏ အနောက်မှာ ကျမယ့် အရိပ် (The Main Drop Shadow) */
+            max-width: 450px;
             box-shadow: 0 20px 80px rgba(0,0,0,0.8);
         }
 
-        /* စာမျက်နှာအရောင်ကို Dark Grey သို့ ပြောင်းထားသည် */
         .page { background: #222; width: 100%; height: 100%; border-radius: 5px; overflow: hidden; position: relative; }
-        .page img { width: 100%; height: 100%; object-fit: fill; } /* A4 ပုံတွေဖြစ်လို့ fill သုံးတာ ပိုအဆင်ပြေပါတယ် */
+        .page img { width: 100%; height: 100%; object-fit: fill; }
 
-        /* စာရွက်ကြားက သဘာဝကျသော အရိပ် (Turn.js gradient effect) */
         .turn-js-gradient {
             background: linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, rgba(0,0,0,0.5) 100%) !important;
         }
@@ -132,25 +152,29 @@ DREAM WOMAN, Strategic Mystery Myanmar, Dassy, Premium Presence, Dark Psychology
     </video>
 
     <div id="lock">
-        <h2 class="silver-text">How A MAN'S BRAIN PICKS HIS
-DREAM WOMAN</h2>
+        <h2 class="silver-text">How A MAN'S BRAIN PICKS HIS DREAM WOMAN</h2>
         <p>MASTER THE MYSTERY</p>
         <input type="password" id="pass" placeholder="PASSWORD">
         <button onclick="unlock()">ACCESS THE SHADOW</button>
+        <div style="margin-top: 15px;">
+            <a href="https://t.me/Dassy_Digital_Library" target="_blank" style="color: #b0bec5; text-decoration: none; font-size: 13px; opacity: 0.8;">
+                📩 Don't have a password? Contact DASSY.
+            </a>
+        </div>
     </div>
 
     <div id="book-container">
         <div id="flipbook-wrapper">
             <div id="flipbook"></div>
         </div>
-        <div class="watermark">POWERED BY DASSY</div>
+        <div class="watermark">POWERED BY DASSY DIGITAL LIBRARY</div>
     </div>
 
     <audio id="sound" src="flip.mp3"></audio>
 
     <script>
-        const myPassword = "DREAM99"; // ဓည စိတ်ကြိုက်ပြောင်းနိုင်သည်
-        const maxPages = 17; // စာမျက်နှာ ၁၇ မျက်နှာ
+        const myPassword = "DREAM99"; 
+        const maxPages = 17; 
 
         function unlock(){
             const entered = document.getElementById("pass").value;
@@ -170,7 +194,6 @@ DREAM WOMAN</h2>
             
             for(let i=1; i<=maxPages; i++){
                 const pageDiv = $('<div class="page"></div>');
-                // Lazy loading ထည့်ထားပေးလို့ အင်တာနက်နှေးလည်း ဆိုက်မြန်မြန်ပွင့်ပါတယ်
                 const img = $('<img loading="lazy" />').attr('src', `page${i}.jpg`);
                 pageDiv.append(img);
                 flipbook.append(pageDiv);
@@ -178,24 +201,20 @@ DREAM WOMAN</h2>
 
             setTimeout(() => {
                 const flipbookWidth = flipbook.width();
-                const flipbookHeight = flipbookWidth * 1.414; // Force A4 Ratio
+                const flipbookHeight = flipbookWidth * 1.414;
 
                 flipbook.turn({
                     width: flipbookWidth,
                     height: flipbookHeight,
                     autoCenter: true, 
-                    display: 'single', // ဖုန်းမှာ တစ်မျက်နှာချင်းစီဖတ်ဖို့ ပိုအဆင်ပြေစေသည်
+                    display: 'single',
                     acceleration: true,
-                    
-                    // Realistic Shadow Effects
-                    gradients: true, // စာရွက်ကြားက သဘာဝကျသော အရိပ်
-                    elevation: 100, // စာရွက်လှန်တဲ့အခါ ကြွတက်လာမယ့် အမြင့် (Shadow ပိုပေါ်စေသည်)
-                    
-                    duration: 1200, // လှန်တဲ့နှုန်းကို နည်းနည်းလေး နှေးထားသည် (Smooth ဖြစ်စေရန်)
+                    gradients: true,
+                    elevation: 100,
+                    duration: 1200,
                     when: { turning: function() { playSound(); } }
                 });
 
-                // Touch & Click Control (စာမျက်နှာလှန်ရန်)
                 flipbook.bind('touchstart click', function(e) {
                     const width = $(this).width();
                     const offset = $(this).offset();

@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <title>How A Man's Brain Picks His Dream Woman | DASSY Digital Library</title>
-    <meta name="title" content="How A Man's Brain Picks His Dream Woman | DASSY Digital Library">
     <meta name="description" content="အမျိုးသားတစ်ယောက်ရဲ့ စိတ်အာရုံက သူ့ရဲ့ အိပ်မက်သူရဲကောင်းကို ဘယ်လိုရွေးချယ်သလဲ။ Official digital book by DASSY Digital Library.">
-    <meta name="keywords" content="HIS DREAM WOMAN, Strategic Mystery Myanmar, Dassy, Premium Presence, Dark Psychology, Relationship Advice Myanmar">
     <meta name="author" content="DASSY Digital Library">
 
     <meta property="og:type" content="book">
     <meta property="og:url" content="https://dassyd48-jpg.github.io/Digital-Library/dream-woman/">
     <meta property="og:title" content="How A Man's Brain Picks His Dream Woman | DASSY Digital Library">
-    <meta property="og:description" content="Explore the psychology behind attraction and dream partners. Published by DASSY Digital Library.">
+    <meta property="og:description" content="Explore the psychology behind attraction.">
     <meta property="og:image" content="page1.jpg">
 
     <script type="application/ld+json">
@@ -21,20 +19,13 @@
       "@context": "https://schema.org",
       "@type": "Book",
       "name": "How A Man's Brain Picks His Dream Woman",
-      "author": {
-        "@type": "Organization",
-        "name": "DASSY Digital Library"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "DASSY Digital Library"
-      },
+      "author": { "@type": "Organization", "name": "DASSY Digital Library" },
+      "publisher": { "@type": "Organization", "name": "DASSY Digital Library" },
       "url": "https://dassyd48-jpg.github.io/Digital-Library/dream-woman/",
       "offers": {
         "@type": "Offer",
         "url": "https://t.me/Dassy_Digital_Library",
-        "availability": "https://schema.org/InStock",
-        "priceCurrency": "MMK"
+        "availability": "https://schema.org/InStock"
       }
     }
     </script>
@@ -43,106 +34,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
 
     <style>
-        html, body {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            overflow: hidden; background: #000; font-family: sans-serif;
-        }
-
-        /* Background Video - Lock Screen မှာ ပုံမှန်အတိုင်း */
-        #bg-video {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: 0; transition: opacity 1.5s;
-        }
-
-        /* Lock Screen ပြင်ဆင်ချက် */
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: sans-serif; }
+        
+        /* Video Background - ပြန်ထည့်ပေးထားပါတယ် */
+        #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: opacity 1.5s; }
+        
         #lock {
-            position: fixed; width: 100%; height: 100%;
-            display: flex; justify-content: center; align-items: center;
-            flex-direction: column; z-index: 20; background: rgba(0,0,0,0.7);
-            color: #d4af37; text-align: center;
+            position: fixed; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;
+            flex-direction: column; z-index: 20; background: rgba(0,0,0,0.7); color: #d4af37; text-align: center;
         }
 
         .silver-text {
             background: linear-gradient(to bottom, #cfd8dc 0%, #ffffff 50%, #b0bec5 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
-            font-weight: bold;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;
         }
 
-        #lock h2 { 
-            letter-spacing: 5px; 
-            margin-bottom: 10px; 
-            font-size: 28px; 
-            text-transform: uppercase;
-            background: linear-gradient(145deg, #e0e0e0 0%, #ffffff 45%, #bdbdbd 55%, #f5f5f5 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
-        }
-
-        #lock p { 
-            color: #b0bec5; 
-            font-size: 14px; 
-            margin-bottom: 25px; 
-            opacity: 0.9; 
-            letter-spacing: 2px;
-        }
-
+        #lock h2 { letter-spacing: 5px; margin-bottom: 10px; font-size: 26px; text-transform: uppercase; }
         #lock input {
             padding: 15px; width: 220px; border-radius: 5px; border: 1px solid #b0bec5;
             background: rgba(255,255,255,0.05); color: #fff; text-align: center; outline: none; font-size: 16px;
         }
 
         #lock button {
-            margin-top: 20px; 
-            padding: 12px 40px; 
-            border-radius: 5px; 
-            border: 1px solid #ffffff;
-            background: linear-gradient(145deg, #ffffff, #9e9e9e);
-            color: #000; 
-            font-weight: bold; 
-            cursor: pointer; 
-            transition: 0.3s;
-            box-shadow: 0 0 10px rgba(255,255,255,0.2);
+            margin-top: 20px; padding: 12px 40px; border-radius: 5px; border: 1px solid #ffffff;
+            background: linear-gradient(145deg, #ffffff, #9e9e9e); color: #000; font-weight: bold; cursor: pointer;
         }
 
-        #lock button:hover { 
-            background: #fff; 
-            box-shadow: 0 0 20px rgba(255,255,255,0.5);
-            transform: scale(1.05); 
-        }
-
-        #book-container {
-            display: none; width: 100%; height: 100%; 
-            position: fixed; top: 0; left: 0; z-index: 10; background: #222;
-        }
-
-        #flipbook-wrapper {
-            width: 100%; height: 100%;
-            display: flex; justify-content: center; align-items: center;
-        }
-
-        #flipbook {
-            width: 90vw; 
-            height: calc(90vw * 1.414); 
-            max-height: 85vh; 
-            max-width: 450px;
-            box-shadow: 0 20px 80px rgba(0,0,0,0.8);
-        }
-
-        .page { background: #222; width: 100%; height: 100%; border-radius: 5px; overflow: hidden; position: relative; }
+        #book-container { display: none; width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 10; background: #222; }
+        #flipbook-wrapper { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
+        #flipbook { width: 90vw; height: calc(90vw * 1.414); max-height: 85vh; max-width: 450px; box-shadow: 0 20px 80px rgba(0,0,0,0.8); }
+        .page { background: #222; width: 100%; height: 100%; }
         .page img { width: 100%; height: 100%; object-fit: fill; }
 
-        .turn-js-gradient {
-            background: linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, rgba(0,0,0,0.5) 100%) !important;
-        }
-
-        .watermark {
-            position: fixed; bottom: 15px; width: 100%; text-align: center;
-            font-size: 10px; color: rgba(212, 175, 55, 0.4); letter-spacing: 3px;
-            pointer-events: none; z-index: 100; text-transform: uppercase;
-        }
+        .watermark { position: fixed; bottom: 15px; width: 100%; text-align: center; font-size: 10px; color: rgba(212, 175, 55, 0.4); z-index: 100; letter-spacing: 3px; }
     </style>
 </head>
 <body>
@@ -153,12 +77,12 @@
 
     <div id="lock">
         <h2 class="silver-text">How A MAN'S BRAIN PICKS HIS DREAM WOMAN</h2>
-        <p>MASTER THE MYSTERY</p>
+        <p style="color: #b0bec5;">MASTER THE MYSTERY</p>
         <input type="password" id="pass" placeholder="PASSWORD">
         <button onclick="unlock()">ACCESS THE SHADOW</button>
         <div style="margin-top: 15px;">
             <a href="https://t.me/Dassy_Digital_Library" target="_blank" style="color: #b0bec5; text-decoration: none; font-size: 13px; opacity: 0.8;">
-                📩 Don't have a password? Contact DASSY.
+                📩 Contact DASSY for Password
             </a>
         </div>
     </div>
@@ -180,18 +104,15 @@
             const entered = document.getElementById("pass").value;
             if(entered === myPassword){
                 $("#bg-video").css("opacity", "0");
-                $("#lock").fadeOut(800, function(){
-                    $("#book-container").fadeIn(600);
+                $("#lock").fadeOut(500, function(){
+                    $("#book-container").fadeIn(400);
                     loadAndInit();
                 });
-            } else {
-                alert("စကားဝှက် မှားယွင်းနေပါသည်။");
-            }
+            } else { alert("စကားဝှက် မှားယွင်းနေပါသည်။"); }
         }
 
         function loadAndInit(){
             const flipbook = $("#flipbook");
-            
             for(let i=1; i<=maxPages; i++){
                 const pageDiv = $('<div class="page"></div>');
                 const img = $('<img loading="lazy" />').attr('src', `page${i}.jpg`);
@@ -200,33 +121,24 @@
             }
 
             setTimeout(() => {
-                const flipbookWidth = flipbook.width();
-                const flipbookHeight = flipbookWidth * 1.414;
-
                 flipbook.turn({
-                    width: flipbookWidth,
-                    height: flipbookHeight,
+                    width: flipbook.width(),
+                    height: flipbook.height(),
                     autoCenter: true, 
                     display: 'single',
                     acceleration: true,
                     gradients: true,
                     elevation: 100,
-                    duration: 1200,
-                    when: { turning: function() { playSound(); } }
-                });
-
-                flipbook.bind('touchstart click', function(e) {
-                    const width = $(this).width();
-                    const offset = $(this).offset();
-                    const pageX = e.pageX || (e.originalEvent.touches && e.originalEvent.touches[0].pageX);
-                    
-                    if (pageX) {
-                        const relativeX = pageX - offset.left;
-                        if (relativeX > width / 2) { $(this).turn('next'); } 
-                        else { $(this).turn('previous'); }
+                    duration: 1000,
+                    when: {
+                        turning: function() { playSound(); },
+                        // Heyzine လိုမျိုး ထောင့်ကကိုင်လှန်မှရအောင် လုပ်ထားပါတယ်
+                        start: function(event, pageObject, corner) {
+                            if (corner === null) { event.preventDefault(); }
+                        }
                     }
                 });
-            }, 300);
+            }, 200);
         }
 
         function playSound(){ 

@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>THE GHOST IN HIS MIND | MASTER THE MYSTERY BY DASSY</title>
-    <meta name="description" content="'THE GHOST IN HIS MIND' ဟာ သင့်ရဲ့ တည်ရှိမှုကို Premium ဖြစ်စေမယ့် Strategic Mystery ဗျူဟာတွေ ပါဝင်တဲ့ DASSY ရဲ့ Official Digital Book ဖြစ်ပါတယ်။">
-    <meta name="keywords" content="THE GHOST IN HIS MIND, Dassy Digital Library, Strategic Mystery, Dark Psychology Myanmar">
-    <meta property="og:title" content="THE GHOST IN HIS MIND - DASSY">
-    <meta property="og:image" content="page1.jpg">
+    <title>THE GHOST IN HIS MIND | DASSY DIGITAL LIBRARY</title>
+    <meta name="description" content="'THE GHOST IN HIS MIND' ဟာ သင့်ရဲ့ တည်ရှိမှုကို Premium ဖြစ်စေမယ့် Strategic Mystery ဗျူဟာမြောက် လျှို့ဝှက်ချက်တွေ ပါဝင်တဲ့ DASSY ရဲ့ Official Digital Book ဖြစ်ပါတယ်။">
+    <meta name="keywords" content="THE GHOST IN HIS MIND, Dassy, Strategic Mystery, Myanmar Digital Library, Dark Psychology">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
 
     <style>
         html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: sans-serif; }
-        #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: opacity 1.2s; }
         
+        /* Background Video */
+        #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: opacity 1.5s; }
+
+        /* Lock Screen */
         #lock {
             position: fixed; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;
             flex-direction: column; z-index: 20; background: rgba(0,0,0,0.75); color: #d4af37; text-align: center;
@@ -25,23 +26,22 @@
         .silver-text {
             background: linear-gradient(to bottom, #cfd8dc 0%, #ffffff 50%, #b0bec5 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3)); font-weight: bold;
+            font-weight: bold; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
         }
 
         #lock h2 { letter-spacing: 5px; margin-bottom: 10px; font-size: 28px; text-transform: uppercase; }
-        #lock p { color: #b0bec5; font-size: 13px; margin-bottom: 25px; letter-spacing: 2px; opacity: 0.8; }
+        #lock p { color: #b0bec5; font-size: 14px; margin-bottom: 25px; letter-spacing: 2px; opacity: 0.9; }
+        #lock input { padding: 15px; width: 220px; border-radius: 5px; border: 1px solid #b0bec5; background: rgba(255,255,255,0.05); color: #fff; text-align: center; outline: none; font-size: 16px; }
         
-        #lock input {
-            padding: 15px; width: 220px; border-radius: 5px; border: 1px solid #b0bec5;
-            background: rgba(255,255,255,0.05); color: #fff; text-align: center; outline: none; font-size: 16px;
-        }
-
         #lock button {
             margin-top: 20px; padding: 12px 40px; border-radius: 5px; border: 1px solid #ffffff;
             background: linear-gradient(145deg, #ffffff, #9e9e9e); color: #000; font-weight: bold;
-            cursor: pointer; transition: 0.3s; box-shadow: 0 0 15px rgba(255,255,255,0.2);
+            cursor: pointer; transition: 0.3s; box-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
 
+        #lock button:hover { background: #fff; transform: scale(1.05); }
+
+        /* Book Layout */
         #book-container { display: none; width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 10; background: #1a1a1a; }
         #flipbook-wrapper { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
         
@@ -50,7 +50,7 @@
             box-shadow: 0 20px 80px rgba(0,0,0,0.9);
         }
 
-        .page { background: #222; width: 100%; height: 100%; border-radius: 4px; overflow: hidden; }
+        .page { background: #222; width: 100%; height: 100%; border-radius: 5px; overflow: hidden; }
         .page img { width: 100%; height: 100%; object-fit: fill; }
 
         .watermark {
@@ -69,7 +69,10 @@
         <input type="password" id="pass" placeholder="PASSWORD">
         <button onclick="unlock()">ACCESS THE SHADOW</button>
         <div style="margin-top: 25px;">
-            <a href="https://t.me/Dassy_Digital_Library" target="_blank" style="color: #b0bec5; text-decoration: none; font-size: 12px; border-bottom: 1px solid #b0bec5; opacity: 0.6;">Contact DASSY for Help</a>
+            <a href="https://t.me/Dassy_Digital_Library" target="_blank" 
+               style="color: #b0bec5; text-decoration: none; font-size: 13px; border-bottom: 1px solid #b0bec5; opacity: 0.8; letter-spacing: 1px;">
+               📩 Don't have a password? Contact DASSY
+            </a>
         </div>
     </div>
 
@@ -81,15 +84,15 @@
     <audio id="sound" src="flip.mp3" preload="auto"></audio>
 
     <script>
-        const myPassword = "GHOST321"; // သင်ထားခဲ့တဲ့အတိုင်း မပြောင်းလဲပါ
+        const myPassword = "GHOST321"; // Password မပြောင်းလဲပါ
         const maxPages = 14; 
 
         function unlock(){
             const entered = document.getElementById("pass").value;
             if(entered === myPassword){
                 $("#bg-video").css("opacity", "0");
-                $("#lock").fadeOut(600, function(){
-                    $("#book-container").fadeIn(400);
+                $("#lock").fadeOut(800, function(){
+                    $("#book-container").fadeIn(600);
                     loadAndInit();
                 });
             } else { alert("စကားဝှက် မှားယွင်းနေပါသည်။"); }
@@ -101,7 +104,7 @@
 
             for(let i=1; i<=maxPages; i++){
                 const pageDiv = $('<div class="page"></div>');
-                // ပထမ ၃ မျက်နှာကို အရင် Load လုပ်ပြီး ကျန်တာကို Lazy load လုပ်ပါတယ်
+                // Performance အတွက် ပထမ ၃ မျက်နှာကို အမြန် load လုပ်ပြီး ကျန်တာကို Lazy load လုပ်ပါတယ်
                 const img = $(`<img loading="${i < 4 ? 'eager' : 'lazy'}" />`).attr('src', `page${i}.jpg`);
                 pageDiv.append(img);
                 flipbook.append(pageDiv);
@@ -121,7 +124,7 @@
                 });
             }, 200);
 
-            // Click/Touch နဲ့ လှန်လို့ရအောင် ပြုလုပ်ထားခြင်း
+            // Touch & Click Control
             flipbook.on('click touchstart', function(e) {
                 const width = $(this).width();
                 const offset = $(this).offset();

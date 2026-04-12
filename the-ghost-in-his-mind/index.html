@@ -136,16 +136,17 @@
 
     <script>
         // Settings
-        const myPassword = "GHOST321"; 
-        const maxPages = 14; // စာမျက်နှာအရေအတွက်ကို လိုသလို ပြင်နိုင်ပါတယ်
+        const myPassword = "DREAM99"; 
+        const maxPages = 16; 
         const flipSound = document.getElementById("sound");
 
         function unlock(){
             const entered = document.getElementById("pass").value;
             if(entered === myPassword){
                 $("#bg-video").css("opacity", "0");
-                $("#lock").fadeOut(600, function(){
-                    $("#book-container").fadeIn(500);
+                // Password မှန်ရင် အမြန်ဆုံး ဖွင့်ပေးမယ်
+                $("#lock").fadeOut(300, function(){
+                    $("#book-container").show();
                     loadAndInit();
                 });
             } else {
@@ -158,28 +159,29 @@
             
             for(let i=1; i<=maxPages; i++){
                 const pageDiv = $('<div class="page"></div>');
-                const img = $('<img loading="lazy" />').attr('src', `page${i}.jpg`);
+                // ပထမ ၃ မျက်နှာကို ဦးစားပေးတင်မယ်၊ ကျန်တာကို အနောက်ကနေ ဖြည်းဖြည်းချင်းတင်မယ်
+                const img = $('<img />').attr({
+                    'src': `page${i}.jpg`,
+                    'loading': (i <= 3) ? 'eager' : 'lazy'
+                });
                 pageDiv.append(img);
                 flipbook.append(pageDiv);
             }
 
-            setTimeout(() => {
-                flipbook.turn({
-                    width: flipbook.width(),
-                    height: flipbook.height(),
-                    autoCenter: true, 
-                    display: 'single',
-                    acceleration: true,
-                    gradients: true,
-                    elevation: 100,
-                    duration: 800,
-                    when: {
-                        turning: function(event, page, view) {
-                            playSound();
-                        }
-                    }
-                });
-            }, 250);
+            // Initialize Turn.js - စောင့်ရချိန် လျှော့ချထားပါတယ်
+            flipbook.turn({
+                width: flipbook.width(),
+                height: flipbook.height(),
+                autoCenter: true, 
+                display: 'single',
+                acceleration: true,
+                gradients: true,
+                elevation: 50,
+                duration: 600,
+                when: {
+                    turning: function() { playSound(); }
+                }
+            });
         }
 
         function playSound(){ 

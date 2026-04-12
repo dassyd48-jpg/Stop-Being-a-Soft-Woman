@@ -116,12 +116,9 @@
                     elevation: 100,
                     duration: 800,
                     when: {
-                        start: function(event, pageObject, corner) {
-                            if (corner === null) { 
-                                event.preventDefault(); 
-                            } else {
-                                playSound();
-                            }
+                        turning: function(event, page, view) {
+                            // စာရွက်လှန်လိုက်တဲ့အချိန်မှာပဲ အသံထွက်စေခြင်း
+                            playSound();
                         }
                     }
                 });

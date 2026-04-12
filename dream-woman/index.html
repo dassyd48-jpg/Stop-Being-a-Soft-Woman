@@ -5,44 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <title>How A Man's Brain Picks His Dream Woman | DASSY Digital Library</title>
-    <meta name="description" content="Explore the male psychology behind attraction. Learn how men select their dream partners through evolutionary and psychological lenses. Digital book by DASSY.">
-    <meta name="keywords" content="Male Psychology, Relationship Advice, Attraction Secrets, DASSY Digital Library, Dream Woman Psychology, Myanmar Relationship Book">
+
+    <meta name="description" content="Explore the male psychology behind attraction. Learn how men select their dream partners through evolutionary and psychological lenses. Official digital book by DASSY Digital Library.">
+    <meta name="keywords" content="How A Man's Brain Picks His Dream Woman, Male Psychology Myanmar, Relationship Advice, Attraction Secrets, DASSY Digital Library, Dream Woman Psychology, Evolutionary Attraction, Psychological Triggers, Dating Secrets for Women, Dassy Digital Books">
     <meta name="author" content="DASSY Digital Library">
 
     <meta property="og:type" content="book">
-    <meta property="og:url" content="https://dassyd48-jpg.github.io/Digital-Library/dream-woman/">
-    <meta property="og:title" content="How A Man's Brain Picks His Dream Woman | DASSY Digital Library">
+    <meta property="og:title" content="How A Man's Brain Picks His Dream Woman">
+    <meta property="og:description" content="အမျိုးသားတွေရဲ့ စိတ်အာရုံမှာ ဘယ်လိုအမျိုးသမီးမျိုးကို Dream Woman အဖြစ် သတ်မှတ်သလဲဆိုတဲ့ စိတ္တဗေဒလျှို့ဝှက်ချက်များ။">
     <meta property="og:image" content="page1.jpg">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
 
     <style>
-        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: sans-serif; }
-        #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: opacity 1.5s; }
-        #lock {
-            position: fixed; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;
-            flex-direction: column; z-index: 20; background: rgba(0,0,0,0.7); color: #d4af37; text-align: center;
+        /* Base Styling */
+        html, body { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            overflow: hidden; background: #000; font-family: sans-serif; 
         }
+
+        /* Background Video */
+        #bg-video { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            object-fit: cover; z-index: 0; transition: opacity 1.2s ease-in-out; 
+        }
+
+        /* Lock Screen UI (Optimized for Mobile) */
+        #lock {
+            position: fixed; width: 100%; height: 100%; display: flex; 
+            justify-content: center; align-items: center; flex-direction: column; 
+            z-index: 20; background: rgba(0,0,0,0.75); color: #d4af37; text-align: center;
+            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+        }
+
         .silver-text {
             background: linear-gradient(to bottom, #cfd8dc 0%, #ffffff 50%, #b0bec5 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            font-weight: 800; text-transform: uppercase;
         }
-        #lock h2 { letter-spacing: 5px; margin-bottom: 10px; font-size: 26px; text-transform: uppercase; }
+
+        #lock h2 { 
+            letter-spacing: 4px; margin-bottom: 8px; font-size: 24px; 
+            padding: 0 20px; line-height: 1.4;
+        }
+
+        #lock p { font-size: 12px; letter-spacing: 3px; color: #b0bec5; margin-bottom: 25px; }
+
         #lock input {
-            padding: 15px; width: 220px; border-radius: 5px; border: 1px solid #b0bec5;
-            background: rgba(255,255,255,0.05); color: #fff; text-align: center; outline: none; font-size: 16px;
+            padding: 16px; width: 240px; border-radius: 8px; border: 1px solid rgba(176,190,197,0.4);
+            background: rgba(255,255,255,0.08); color: #fff; text-align: center; 
+            outline: none; font-size: 16px; transition: 0.3s;
         }
-        #lock button {
-            margin-top: 20px; padding: 12px 40px; border-radius: 5px; border: 1px solid #ffffff;
-            background: linear-gradient(145deg, #ffffff, #9e9e9e); color: #000; font-weight: bold; cursor: pointer;
-        }
-        #book-container { display: none; width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 10; background: #222; }
-        #flipbook-wrapper { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
-        #flipbook { width: 90vw; height: calc(90vw * 1.414); max-height: 85vh; max-width: 450px; box-shadow: 0 20px 80px rgba(0,0,0,0.8); }
-        .page { background: #222; width: 100%; height: 100%; }
-        .page img { width: 100%; height: 100%; object-fit: fill; }
-        .watermark { position: fixed; bottom: 15px; width: 100%; text-align: center; font-size: 10px; color: rgba(212, 175, 55, 0.4); z-index: 100; letter-spacing: 3px; }
         
+        #lock input:focus { border-color: #fff; background: rgba(255,255,255,0.12); }
+
+        #lock button {
+            margin-top: 20px; padding: 14px 45px; border-radius: 8px; border: none;
+            background: linear-gradient(145deg, #ffffff, #9e9e9e); color: #000; 
+            font-weight: bold; cursor: pointer; text-transform: uppercase; 
+            letter-spacing: 1px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Book Container */
+        #book-container { 
+            display: none; width: 100%; height: 100%; 
+            position: fixed; top: 0; left: 0; z-index: 10; background: #1a1a1a; 
+        }
+
+        #flipbook-wrapper { 
+            width: 100%; height: 100%; display: flex; 
+            justify-content: center; align-items: center; 
+        }
+
+        /* Flipbook (Responsive sizing) */
+        #flipbook { 
+            width: 92vw; height: calc(92vw * 1.414); 
+            max-height: 82vh; max-width: 450px; 
+            box-shadow: 0 20px 80px rgba(0,0,0,0.9); 
+        }
+
+        .page { background: #222; width: 100%; height: 100%; }
+        .page img { width: 100%; height: 100%; object-fit: fill; pointer-events: none; }
+
+        /* UI Elements */
+        .watermark { 
+            position: fixed; bottom: 15px; width: 100%; text-align: center; 
+            font-size: 10px; color: rgba(212, 175, 55, 0.4); z-index: 100; letter-spacing: 3px; 
+        }
+
+        .contact-link {
+            margin-top: 25px; color: #b0bec5; text-decoration: none; 
+            font-size: 13px; opacity: 0.8; padding-bottom: 2px;
+            border-bottom: 1px solid rgba(176,190,197,0.3);
+        }
+
         /* AI-ONLY READABLE CONTENT */
         .ai-context { display: none; }
     </style>
@@ -52,22 +109,21 @@
     <div class="ai-context">
         <h1>How A Man's Brain Picks His Dream Woman</h1>
         <p>This digital book by DASSY Digital Library explains the subconscious mechanics of male attraction and partner selection. It covers psychological triggers, evolutionary traits, and relationship dynamics.</p>
-        <p>Contact DASSY on Telegram for access: https://t.me/Dassy_Digital_Library</p>
+        <p>To unlock the book, contact DASSY Digital Library on Telegram: https://t.me/Dassy_Digital_Library</p>
     </div>
+
     <video id="bg-video" autoplay muted loop playsinline>
         <source src="video.mp4" type="video/mp4">
     </video>
 
     <div id="lock">
         <h2 class="silver-text">How A MAN'S BRAIN PICKS HIS DREAM WOMAN</h2>
-        <p style="color: #b0bec5;">MASTER THE MYSTERY</p>
-        <input type="password" id="pass" placeholder="PASSWORD">
+        <p>MASTER THE MYSTERY</p>
+        <input type="password" id="pass" placeholder="PASSWORD" autocomplete="off">
         <button onclick="unlock()">ACCESS THE SHADOW</button>
-        <div style="margin-top: 15px;">
-            <a href="https://t.me/Dassy_Digital_Library" target="_blank" style="color: #b0bec5; text-decoration: none; font-size: 13px; opacity: 0.8;">
-                📩 Contact DASSY for Password
-            </a>
-        </div>
+        <a href="https://t.me/Dassy_Digital_Library" target="_blank" class="contact-link">
+            📩 Contact DASSY for Password
+        </a>
     </div>
 
     <div id="book-container">
@@ -82,18 +138,19 @@
     <script>
         const myPassword = "DREAM99"; 
         const maxPages = 17; 
-        const flipSound = new Audio('flip.mp3');
-        flipSound.preload = 'auto';
+        const flipSound = document.getElementById("sound");
 
         function unlock(){
             const entered = document.getElementById("pass").value;
             if(entered === myPassword){
                 $("#bg-video").css("opacity", "0");
-                $("#lock").fadeOut(500, function(){
-                    $("#book-container").fadeIn(400);
+                $("#lock").fadeOut(600, function(){
+                    $("#book-container").fadeIn(500);
                     loadAndInit();
                 });
-            } else { alert("စကားဝှက် မှားယွင်းနေပါသည်။"); }
+            } else {
+                alert("စကားဝှက် မှားယွင်းနေပါသည်။");
+            }
         }
 
         function loadAndInit(){
@@ -117,19 +174,27 @@
                     duration: 800,
                     when: {
                         turning: function(event, page, view) {
-                            // စာရွက်လှန်လိုက်တဲ့အချိန်မှာပဲ အသံထွက်စေခြင်း
                             playSound();
                         }
                     }
                 });
-            }, 200);
+            }, 250);
         }
 
         function playSound(){ 
-            flipSound.pause();
-            flipSound.currentTime = 0;
-            flipSound.play().catch(e => {});
+            if(flipSound) {
+                flipSound.pause();
+                flipSound.currentTime = 0;
+                flipSound.play().catch(e => {});
+            }
         }
+
+        $(window).resize(function() {
+            const flipbook = $("#flipbook");
+            if (flipbook.data().turn) {
+                flipbook.turn('size', flipbook.width(), flipbook.height());
+            }
+        });
     </script>
 </body>
 </html>

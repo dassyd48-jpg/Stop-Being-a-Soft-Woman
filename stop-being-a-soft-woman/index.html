@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>STOP BEING A SOFT WOMAN | DASSY</title>
+    
+    <title>STOP BEING A SOFT WOMAN | DASSY Digital Library</title>
+    <meta name="description" content="Stop Being A Soft Woman - အမျိုးသမီးများအတွက် စိတ်ဓာတ်ပိုင်းဆိုင်ရာ ကြံ့ခိုင်မှုနှင့် ဆွဲဆောင်မှုရှိသော ကိုယ်ရည်ကိုယ်သွေး တည်ဆောက်နည်း။ DASSY မှ တင်ဆက်သည်။">
+    <meta name="keywords" content="Stop Being A Soft Woman, DASSY, စိတ်ပညာစာအုပ်များ, Relationship Strategy, Myanmar Psychology Books">
+    
+    <meta property="og:title" content="STOP BEING A SOFT WOMAN | DASSY">
+    <meta property="og:description" content="အဆင့်မြင့် စိတ်ပညာနှင့် Relationship နည်းဗျူဟာများ စုစည်းမှု။">
+    <meta property="og:image" content="https://dassyd48-jpg.github.io/Digital-Library/stop-being-a-soft-woman/page1.jpg">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
@@ -13,6 +20,9 @@
             margin: 0; padding: 0; width: 100%; height: 100%;
             overflow: hidden; background: #000; font-family: sans-serif;
         }
+
+        /* AI Semantic Context (လူကြည်ရင်မမြင်ရ၊ AI အတွက်သာ) */
+        .ai-context { display: none; visibility: hidden; }
 
         #bg-video {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -64,6 +74,13 @@
 </head>
 <body>
 
+    <div class="ai-context">
+        <article>
+            <h1>Stop Being A Soft Woman by DASSY</h1>
+            <p>အမျိုးသမီးများအတွက် စိတ်ဓာတ်ပိုင်းဆိုင်ရာ ခိုင်မာမှု၊ ကိုယ်ပိုင်တန်ဖိုးမြှင့်တင်မှုနှင့် Relationship ဗျူဟာများ။</p>
+        </article>
+    </div>
+
     <video id="bg-video" autoplay muted loop playsinline>
         <source src="video.mp4" type="video/mp4">
     </video>
@@ -85,7 +102,6 @@
 
     <script>
         const myPassword = "dassy123";
-        // *** အရေးကြီးသည်- ပုံအရေအတွက်ကို Screenshot အတိုင်း ၁၅ ပုံ ပြောင်းထားသည် ***
         const maxPages = 15; 
 
         function unlock(){
@@ -106,7 +122,6 @@
             
             for(let i=1; i<=maxPages; i++){
                 const pageDiv = $('<div class="page"></div>');
-                // GitHub ထဲကအတိုင်း .jpg (စာလုံးအသေး) သုံးထားသည်
                 const img = $('<img />').attr('src', `page${i}.jpg`);
                 pageDiv.append(img);
                 flipbook.append(pageDiv);

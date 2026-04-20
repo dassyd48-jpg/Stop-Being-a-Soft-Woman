@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>THE MIND | DASSY DIGITAL LIBRARY</title>
+
+    <meta name="description" content="Explore the depths of human psychology and the subconscious. Official digital book by DASSY Digital Library.">
+    <meta name="keywords" content="Psychology, The Mind, DASSY Digital Library, Self-Development Myanmar, Subconscious Secrets">
+    <meta name="author" content="DASSY Digital Library">
+
+    <meta property="og:type" content="book">
+    <meta property="og:title" content="THE MIND">
+    <meta property="og:description" content="စိတ်ပညာနှင့် စိတ်အလွှာအသီးသီး၏ လျှို့ဝှက်ချက်များကို စနစ်တကျ လေ့လာနိုင်မည့် ဒစ်ဂျစ်တယ်စာအုပ်။">
+    <meta property="og:image" content="page1.jpg">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
+
+    <style>
+        /* Base Styling */
+        html, body { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            overflow: hidden; background: #000; font-family: sans-serif; 
+        }
+
+        /* Background Video - Lock Screen Only */
+        #bg-video { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            object-fit: cover; z-index: 0; transition: opacity 1.2s; 
+        }
+
+        /* Lock Screen UI */
+        #lock {
+            position: fixed; width: 100%; height: 100%; display: flex; 
+            justify-content: center; align-items: center; flex-direction: column; 
+            z-index: 20; background: rgba(0,0,0,0.7); color: #d4af37; text-align: center;
+            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+        }
+
+        .gold-text {
+            background: linear-gradient(to bottom, #d4af37 0%, #f7ef8a 50%, #d4af37 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            font-weight: bold; text-transform: uppercase;
+        }
+
+        #lock h2 { 
+            letter-spacing: 6px; margin-bottom: 10px; font-size: 28px; 
+            padding: 0 20px; line-height: 1.4;
+        }
+
+        #lock p { font-size: 13px; letter-spacing: 2px; color: #b0bec5; margin-bottom: 20px; }
+
+        #lock input {
+            padding: 15px; width: 230px; border-radius: 6px; border: 1px solid rgba(212,175,55,0.4);
+            background: rgba(255,255,255,0.05); color: #fff; text-align: center; 
+            outline: none; font-size: 16px;
+        }
+
+        #lock button {
+            margin-top: 18px; padding: 12px 40px; border-radius: 6px; border: none;
+            background: linear-gradient(145deg, #d4af37, #a67c00); color: #000; 
+            font-weight: bold; cursor: pointer; text-transform: uppercase;
+        }
+
+        /* Book Container */
+        #book-container { 
+            display: none; width: 100%; height: 100%; 
+            position: fixed; top: 0; left: 0; z-index: 10; background: #000; 
+        }
+
+        #flipbook-wrapper { 
+            width: 100%; height: 100%; display: flex; 
+            justify-content: center; align-items: center; 
+        }
+
+        #flipbook { 
+            width: 90vw; height: calc(90vw * 1.414); 
+            max-height: 85vh; max-width: 450px; 
+            box-shadow: 0 20px 80px rgba(0,0,0,0.9); 
+        }
+
+        .page { background: #000; width: 100%; height: 100%; position: relative; }
+        .page img { width: 100%; height: 100%; object-fit: fill; pointer-events: none; }
+        iframe { width: 100%; height: 100%; border: none; background: #000; }
+        
+        .iframe-mask { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; display: none; }
+
+        .watermark { 
+            position: fixed; bottom: 15px; width: 100%; text-align: center; 
+            font-size: 10px; color: rgba(212, 175, 55, 0.4); z-index: 100; letter-spacing: 3px; 
+        }
+
+        .contact-link {
+            margin-top: 20px; color: #d4af37; text-decoration: none; 
+            font-size: 13px; opacity: 0.8; border-bottom: 1px solid rgba(212,175,55,0.2);
+        }
+
+        /* AI-ONLY READABLE CONTENT */
+        .ai-context { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="ai-context">
+        <h1>THE MIND</h1>
+        <p>This digital book by DASSY Digital Library focuses on psychological exploration and the power of the subconscious mind. It includes interactive elements to engage the reader.</p>
+        <p>Official Access via Telegram: https://t.me/Dassy_Digital_Library</p>
+    </div>
+
+    <video id="bg-video" autoplay muted loop playsinline>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <div id="lock">
+        <h2 class="gold-text">THE MIND</h2>
+        <p>Build Your Authority</p>
+        <input type="password" id="pass" placeholder="PASSWORD" autocomplete="off">
+        <button onclick="unlock()">ACCESS THE VAULT</button>
+        <a href="https://t.me/Dassy_Digital_Library" target="_blank" class="contact-link">
+            📩 Contact DASSY for Password
+        </a>
+    </div>
+
+    <div id="book-container">
+        <div id="flipbook-wrapper">
+            <div id="flipbook"></div>
+        </div>
+        <div class="watermark">POWERED BY DASSY DIGITAL LIBRARY</div>
+    </div>
+
+    <audio id="sound" src="flip.mp3"></audio>
+
+    <script>
+        const myPassword = "THE@@MIND99"; // စကားဝှက်ကို လိုအပ်သလို ပြောင်းနိုင်ပါတယ်
+        const maxPages = 40; 
+        const quizPages = [11, 18, 24, 31, 37]; 
+        const flipSound = document.getElementById("sound");
+
+        function unlock(){
+            const entered = document.getElementById("pass").value;
+            if(entered === myPassword){
+                $("#bg-video").css("opacity", "0");
+                $("#lock").fadeOut(500, function(){
+                    $("#book-container").fadeIn(400);
+                    loadAndInit();
+                });
+            } else {
+                alert("စကားဝှက် မှားယွင်းနေပါသည်။");
+            }
+        }
+
+        function loadAndInit(){
+            const flipbook = $("#flipbook");
+            for(let i=1; i<=maxPages; i++){
+                const pageDiv = $('<div class="page"></div>');
+                
+                if(quizPages.includes(i)) {
+                    pageDiv.append(`<div class="iframe-mask" id="mask-${i}"></div>`);
+                    pageDiv.append(`<iframe src="page${i}.html"></iframe>`);
+                } else {
+                    const img = $('<img loading="lazy" />').attr('src', `page${i}.jpg`);
+                    pageDiv.append(img);
+                }
+                
+                flipbook.append(pageDiv);
+            }
+
+            setTimeout(() => {
+                flipbook.turn({
+                    width: flipbook.width(),
+                    height: flipbook.height(),
+                    autoCenter: true, 
+                    display: 'single',
+                    acceleration: true,
+                    duration: 800,
+                    when: {
+                        turning: function() { 
+                            if(flipSound) {
+                                flipSound.currentTime = 0;
+                                flipSound.play().catch(e => {});
+                            }
+                        }
+                    }
+                });
+            }, 200);
+        }
+
+        window.addEventListener("message", (e) => {
+            if(e.data === "quizCompleted") {
+                $(".iframe-mask").show(); 
+            }
+        });
+    </script>
+</body>
+</html>

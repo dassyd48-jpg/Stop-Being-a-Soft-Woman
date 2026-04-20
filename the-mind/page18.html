@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { background: #000; color: #d4af37; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        .card { border: 1px solid rgba(212, 175, 55, 0.4); padding: 30px; border-radius: 15px; background: #111; width: 100%; max-width: 420px; text-align: center; }
+        .warning-box { background: rgba(255, 171, 64, 0.1); padding: 12px; border-radius: 8px; margin-bottom: 20px; }
+        .warning-text { font-size: 11px; color: #ffab40; letter-spacing: 1px; font-weight: bold; text-transform: uppercase; }
+        h3 { font-size: 19px; line-height: 1.6; margin-bottom: 25px; color: #f7ef8a; }
+        .option { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 1px solid rgba(212, 175, 55, 0.2); background: rgba(255,255,255,0.02); color: #d4af37; border-radius: 8px; cursor: pointer; transition: all 0.3s; text-align: left; font-size: 14px; }
+        .option:hover { background: #d4af37; color: #000; }
+        #result-box { display: none; margin-top: 10px; padding: 25px; border: 1px solid #d4af37; background: #000; border-radius: 12px; animation: fadeIn 0.6s; }
+        .result-title { font-size: 24px; font-weight: bold; color: #f7ef8a; display: block; margin-bottom: 12px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="warning-box"><span class="warning-text">⚠️ မိမိကိုယ်ကို ရိုးသားစွာ ဆန်းစစ်ပါ။</span></div>
+        <h3 id="q-text">လူတစ်ယောက်ကို စတွေ့တဲ့အခါ ဘယ်အရာကို အရင်ဆုံး သတိထားမိသလဲ?</h3>
+        <div id="opts">
+            <button class="option" onclick="process(1)">၁။ မျက်လုံးနှင့် အကြည့်</button>
+            <button class="option" onclick="process(2)">၂။ ဝတ်စားဆင်ယင်မှုနှင့် အသွင်အပြင်</button>
+            <button class="option" onclick="process(3)">၃။ အသံနေအသံထားနှင့် စကားပြောပုံ</button>
+            <button class="option" onclick="process(4)">၄။ သူပေးတဲ့ ခံစားချက်စွမ်းအင် (Vibe)</button>
+            <button class="option" onclick="process(5)">၅။ မျက်နှာအမူအရာနှင့် အပြုံး</button>
+        </div>
+        <div id="result-box">
+            <span id="res-title" class="result-title"></span>
+            <p id="res-desc"></p>
+            <p style="font-size: 11px; color: #888; margin-top: 20px;">စာမျက်နှာလှန်၍ ဆက်လက်ဖတ်ရှုပါ</p>
+        </div>
+    </div>
+    <script>
+        const data = {
+            1: { title: "THE SOUL READER", desc: "သင်ဟာ စကားလုံးတွေထက် လူတွေရဲ့ အတွင်းစိတ် ခံစားချက်ကို ပိုမိုသိမြင်နိုင်သူပါ။" },
+            2: { title: "THE AESTHETIC", desc: "သင်ဟာ အမြင်အာရုံ စူးရှပြီး စနစ်တကျရှိမှုကို တန်ဖိုးထားတဲ့ ခေါင်းဆောင်ကောင်းတစ်ဦးပါ။" },
+            3: { title: "THE AUDITORY", desc: "သင်ဟာ ဆက်သွယ်ရေး စွမ်းရည်မြင့်မားပြီး စကားလုံးတွေရဲ့ အနက်အဓိပ္ပာယ်ကို နားလည်သူပါ။" },
+            4: { title: "THE INTUITIVE", desc: "သင့်မှာ ထူးခြားတဲ့ အလိုလိုသိစိတ် (Inutition) ရှိပြီး အန္တရာယ်ကို ကြိုတင်သိမြင်တတ်ပါတယ်။" },
+            5: { title: "THE POSITIVE", desc: "သင်ဟာ လူမှုဆက်ဆံရေး ပြေပြစ်ပြီး တခြားသူတွေကို နွေးထွေးမှု ပေးနိုင်သူပါ။" }
+        };
+        function process(c) {
+            document.getElementById('q-text').style.display = 'none';
+            document.getElementById('opts').style.display = 'none';
+            document.querySelector('.warning-box').style.display = 'none';
+            document.getElementById('res-title').innerText = data[c].title;
+            document.getElementById('res-desc').innerText = data[c].desc;
+            document.getElementById('result-box').style.display = 'block';
+            window.parent.postMessage("quizCompleted", "*");
+        }
+    </script>
+</body>
+</html>

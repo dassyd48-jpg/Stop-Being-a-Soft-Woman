@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { background: #000; color: #d4af37; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        .card { border: 1px solid rgba(212, 175, 55, 0.5); padding: 30px; border-radius: 20px; background: #111; width: 100%; max-width: 400px; text-align: center; }
+        .warning { font-size: 11px; color: #ffab40; margin-bottom: 20px; text-transform: uppercase; border-bottom: 1px solid rgba(255,171,64,0.2); padding-bottom: 10px; }
+        h3 { font-size: 18px; line-height: 1.5; margin-bottom: 25px; color: #f7ef8a; }
+        .option { display: block; width: 100%; padding: 14px; margin: 8px 0; border: 1px solid rgba(212, 175, 55, 0.3); background: rgba(255,255,255,0.03); color: #d4af37; border-radius: 10px; cursor: pointer; text-align: left; font-size: 14px; }
+        .option:hover { background: #d4af37; color: #000; font-weight: bold; }
+        #result-box { display: none; margin-top: 20px; padding: 20px; border: 1px solid #d4af37; background: rgba(212, 175, 55, 0.1); border-radius: 12px; animation: fadeIn 0.8s ease; }
+        .result-title { font-size: 22px; font-weight: bold; color: #fff; display: block; margin-bottom: 10px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="warning">⚠️ မရွေးချယ်ခင် သေချာစွာစဉ်းစားပါ။ မိမိကိုယ်ကို ရိုးသားပါ။</div>
+        <h3>သင့်ရဲ့ "Shadow Side" မှာ ဘယ်လိုစွမ်းအားမျိုး ပုန်းကွယ်နေသလဲ?</h3>
+        <button class="option" onclick="showResult(1)">၁။ အရာရာကို ထိန်းချုပ်လိုစိတ်</button>
+        <button class="option" onclick="showResult(2)">၂။ သူတစ်ပါးရဲ့ အာရုံစိုက်မှုကို ရယူလိုစိတ်</button>
+        <button class="option" onclick="showResult(3)">၃။ အားလုံးထက် သာလွန်လိုစိတ်</button>
+        <button class="option" onclick="showResult(4)">၄။ တစ်ဦးတည်း သီးခြားနေလိုစိတ်</button>
+        <button class="option" onclick="showResult(5)">၅။ အမှန်တရားကိုသာ ဖော်ထုတ်လိုစိတ်</button>
+        <div id="result-box">
+            <span id="res-title" class="result-title"></span>
+            <p id="res-desc"></p>
+            <p style="font-size: 10px; color: #888; margin-top: 15px;">(စာမျက်နှာကို ဘေးသို့လှန်ပါ)</p>
+        </div>
+    </div>
+    <script>
+        const results = {
+            1: { title: "THE COMMANDER", desc: "သင့်မှာ လူတွေကို ဦးဆောင်နိုင်တဲ့ လျှို့ဝှက်စွမ်းအားရှိပါတယ်။" },
+            2: { title: "THE CHARISMATIC", desc: "လူတွေရဲ့ အချစ်ကို ရယူနိုင်တဲ့ ဆွဲဆောင်မှုရှိပါတယ်။" },
+            3: { title: "THE ACHIEVER", desc: "ဘယ်လို အတားအဆီးကိုမဆို ကျော်ဖြတ်မယ့်သူပါ။" },
+            4: { title: "THE OBSERVER", desc: "အခြေအနေတွေကို နောက်ကွယ်ကနေ ထိန်းချုပ်နိုင်သူပါ။" },
+            5: { title: "THE REVOLUTIONARY", desc: "ပြောင်းလဲမှုတွေကို စတင်နိုင်တဲ့ သတ္တိရှိသူပါ။" }
+        };
+        function showResult(n) {
+            document.querySelector('h3').style.display = 'none';
+            document.querySelectorAll('.option').forEach(o => o.style.display = 'none');
+            document.getElementById('res-title').innerText = results[n].title;
+            document.getElementById('res-desc').innerText = results[n].desc;
+            document.getElementById('result-box').style.display = 'block';
+            window.parent.postMessage("quizCompleted", "*");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { background: #000; color: #d4af37; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        .card { border: 1px solid rgba(212, 175, 55, 0.4); padding: 30px; border-radius: 15px; background: #111; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        .warning-box { background: rgba(255, 171, 64, 0.1); padding: 12px; border-radius: 8px; margin-bottom: 20px; }
+        .warning-text { font-size: 11px; color: #ffab40; letter-spacing: 1px; font-weight: bold; text-transform: uppercase; display: block; }
+        h3 { font-size: 19px; line-height: 1.6; margin-bottom: 25px; color: #f7ef8a; }
+        .option { display: block; width: 100%; padding: 15px; margin: 10px 0; border: 1px solid rgba(212, 175, 55, 0.2); background: rgba(255,255,255,0.02); color: #d4af37; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; text-align: left; font-size: 14px; }
+        .option:hover { background: #d4af37; color: #000; transform: scale(1.02); }
+        #result-box { display: none; margin-top: 10px; padding: 25px; border: 1px solid #d4af37; background: #000; border-radius: 12px; animation: slideUp 0.6s ease; }
+        .result-title { font-size: 24px; font-weight: bold; color: #f7ef8a; display: block; margin-bottom: 12px; }
+        .result-desc { font-size: 15px; color: #e0e0e0; line-height: 1.7; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="warning-box"><span class="warning-text">⚠️ မရွေးချယ်ခင် သေချာစွာစဉ်းစားပါ။ မိမိကိုယ်ကို ရိုးသားပါ။</span></div>
+        <h3 id="q">သင့်ကို လူတွေက ဘယ်လိုအချက်နဲ့ အမှတ်ရနေစေချင်သလဲ?</h3>
+        <div id="opts">
+            <button class="option" onclick="run(1)">၁။ အောင်မြင်ကျော်ကြားသော ပုဂ္ဂိုလ်</button>
+            <button class="option" onclick="run(2)">၂။ ကြင်နာတတ်ပြီး ကူညီတတ်သူ</button>
+            <button class="option" onclick="run(3)">၃။ ပညာရှိပြီး လမ်းပြပေးနိုင်သူ</button>
+            <button class="option" onclick="run(4)">၄။ ရဲရင့်ပြတ်သားသော တိုက်ပွဲဝင်သူ</button>
+            <button class="option" onclick="run(5)">၅။ ဆန်းသစ်သော အရာများကို ဖန်တီးသူ</button>
+        </div>
+        <div id="result-box">
+            <span id="rt" class="result-title"></span>
+            <p id="rd" class="result-desc"></p>
+            <hr style="border: 0; border-top: 1px solid rgba(212,175,55,0.2); margin: 20px 0;">
+            <p style="font-size: 11px; color: #888;">စာမျက်နှာလှန်၍ ဆက်လက်ဖတ်ရှုပါ</p>
+        </div>
+    </div>
+    <script>
+        const res = {
+            1: { t: "THE ICON", d: "သင်ဟာ နောင်လာနောက်သားတွေအတွက် စံပြပုဂ္ဂိုလ်တစ်ဦးအဖြစ် ထာဝရအမှတ်ရနေစေမယ့်သူပါ။" },
+            2: { t: "THE HEART", d: "လူတွေရဲ့ နှလုံးသားထဲမှာ အနွေးထွေးဆုံးနဲ့ အယုံကြည်ရဆုံးသူတစ်ဦးအဖြစ် တည်ရှိနေပါလိမ့်မယ်။" },
+            3: { t: "THE SAGE", d: "အမှောင်ထဲမှာ မီးရှူးတန်ဆောင်လို လမ်းပြပေးခဲ့တဲ့ ပညာရှိတစ်ဦးအဖြစ် အသိအမှတ်ပြုခံရမှာပါ။" },
+            4: { t: "THE WARRIOR", d: "မတရားမှုကို တိုက်ဖျက်ခဲ့တဲ့ သူရဲကောင်းတစ်ဦးအဖြစ် ဂုဏ်ယူစွာ အမှတ်ရနေကြပါလိမ့်မယ်။" },
+            5: { t: "THE CREATOR", d: "ကမ္ဘာကြီးကို ဆန်းသစ်တဲ့ အတွေးအခေါ်တွေနဲ့ ပြောင်းလဲခဲ့တဲ့ ဖန်တီးရှင်တစ်ဦး ဖြစ်လာမှာပါ။" }
+        };
+        function run(n) {
+            document.getElementById('q').style.display = 'none';
+            document.getElementById('opts').style.display = 'none';
+            document.querySelector('.warning-box').style.display = 'none';
+            document.getElementById('rt').innerText = res[n].t;
+            document.getElementById('rd').innerText = res[n].d;
+            document.getElementById('result-box').style.display = 'block';
+            window.parent.postMessage("quizCompleted", "*");
+        }
+    </script>
+</body>
+</html>

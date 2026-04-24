@@ -4,29 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { background: #001a1d; color: #4ed9e6; font-family: sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; }
-        .quiz-container { width: 100%; max-width: 500px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(78, 217, 230, 0.3); border-radius: 15px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .phase-label { font-size: 10px; color: #ffab40; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
-        h2 { font-size: 16px; line-height: 1.6; margin: 15px 0; color: #fff; }
-        .option { display: block; width: 100%; padding: 12px; margin: 8px 0; background: rgba(78, 217, 230, 0.05); border: 1px solid rgba(78, 217, 230, 0.2); color: #4ed9e6; border-radius: 8px; cursor: pointer; text-align: left; transition: 0.3s; font-size: 13px; line-height: 1.4; }
-        .option:hover { background: #4ed9e6; color: #000; font-weight: bold; transform: translateX(5px); }
-        #result-box { display: none; margin-top: 15px; padding: 15px; border: 1px solid #ffab40; background: rgba(255, 171, 64, 0.1); border-radius: 10px; animation: fadeInUp 0.5s ease; }
-        .res-title { font-size: 14px; font-weight: bold; color: #ffab40; margin-bottom: 8px; display: block; border-left: 3px solid #ffab40; padding-left: 8px; }
-        .res-desc { color: #fff; font-size: 13px; line-height: 1.6; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        body { 
+            background: #001a1d; color: #4ed9e6; font-family: sans-serif; 
+            margin: 0; padding: 20px; display: flex; justify-content: center; 
+            align-items: center; min-height: 100vh; box-sizing: border-box; 
+        }
+
+        .quiz-container { 
+            width: 100%; max-width: 500px; background: rgba(0, 0, 0, 0.5); 
+            border: 1px solid rgba(78, 217, 230, 0.2); border-radius: 12px; 
+            padding: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .phase-label { 
+            font-size: 10px; color: #ffab40; letter-spacing: 3px; 
+            text-transform: uppercase; font-weight: bold; opacity: 0.8;
+        }
+
+        h2 { font-size: 17px; line-height: 1.6; margin: 15px 0; color: #fff; }
+
+        .option { 
+            display: block; width: 100%; padding: 14px; margin: 10px 0; 
+            background: rgba(78, 217, 230, 0.05); border: 1px solid rgba(78, 217, 230, 0.2); 
+            color: #4ed9e6; border-radius: 8px; cursor: pointer; text-align: left; 
+            transition: 0.3s ease; font-size: 13px; line-height: 1.5; 
+        }
+
+        .option:hover { 
+            background: #4ed9e6; color: #000; font-weight: bold; 
+            transform: translateX(8px); border-color: #fff;
+        }
+
+        #result-box { 
+            display: none; margin-top: 15px; padding: 20px; 
+            border: 1px solid #ffab40; background: rgba(255, 171, 64, 0.08); 
+            border-radius: 10px; animation: fadeInUp 0.5s ease; 
+        }
+
+        .res-title { 
+            font-size: 15px; font-weight: bold; color: #ffab40; 
+            margin-bottom: 10px; display: block; border-left: 4px solid #ffab40; 
+            padding-left: 10px; text-transform: uppercase;
+        }
+
+        .res-desc { color: #fff; font-size: 13px; line-height: 1.7; margin-bottom: 20px; }
+
+        .next-btn { 
+            display: block; width: 100%; padding: 15px; background: #ffab40; 
+            color: #000; border: none; border-radius: 6px; font-weight: 900; 
+            cursor: pointer; text-align: center; text-transform: uppercase;
+            letter-spacing: 1px; transition: 0.3s;
+        }
+
+        .next-btn:hover { background: #fff; box-shadow: 0 5px 15px rgba(255,171,64,0.3); }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
+
 <div class="quiz-container">
-    <span class="phase-label">စာမျက်နှာ ၅၀ - စိတ်ဓာတ်ခိုင်မာမှု</span>
+    <span class="phase-label">MENTAL RESILIENCE: PAGE 50</span>
     <h2 id="q-text">တစ်ဖက်လူက "အားနာတတ်တဲ့ စိတ်" ကို သုံးပြီး သင့်ကို တိုက်ခိုက်လာရင် ဘယ်လို လုပ်မလဲ?</h2>
+    
     <div id="options-group">
-        <button class="option" onclick="showAnalysis('The Ruthless', 'အားနာမှုဆိုတာကို လုံးဝ ဖျောက်ပစ်ပြီး ကိုယ့်အကျိုးစီးပွားကိုပဲ ဦးစားပေးခြင်းက အောင်မြင်မယ့် အမျိုးသားတစ်ယောက်ရဲ့ မရှိမဖြစ် စိတ်ဓာတ်ပါ။')">၁။ အားနာမှုဆိုတာကို လုံးဝ ဖျောက်ပစ်ပြီး ကိုယ့်အကျိုးစီးပွားကိုပဲ ဦးစားပေးတယ်</button>
-        <button class="option" onclick="showAnalysis('The Stoic', 'ခံစားချက်နောက်ကို လုံးဝမလိုက်ဘဲ တည်ငြိမ်စွာနဲ့ ငြင်းဆိုခြင်းဖြင့် သင့်ရဲ့ စိတ်ခိုင်မာမှုနဲ့ ရင့်ကျက်မှုကို ပြသနိုင်ပါတယ်။')">၂။ ခံစားချက်နောက်ကို လုံးဝမလိုက်ဘဲ တည်ငြိမ်စွာနဲ့ ငြင်းဆိုတယ်</button>
-        <button class="option" onclick="showAnalysis('The Silence Master', 'ဘာမှပြန်မပြောဘဲ တိတ်ဆိတ်နေခြင်းဖြင့် တစ်ဖက်လူကို အကြပ်ရိုက်အောင်လုပ်ခြင်းက စိတ်ပညာအရ အကြီးမားဆုံး အာဏာကို ရယူခြင်းပါ။')">၃။ ဘာမှပြန်မပြောဘဲ တိတ်ဆိတ်နေခြင်းဖြင့် တစ်ဖက်လူကို အကြပ်ရိုက်အောင်လုပ်တယ်</button>
-        <button class="option" onclick="showAnalysis('The Boundary King', 'ကိုယ့်ရဲ့ စည်းကမ်းဟာ အရာအားလုံးထက် မြင့်မားတယ်ဆိုတာကို ပြသခြင်းဖြင့် သင့်ရဲ့ သိက္ခာနဲ့ အာဏာကို ခိုင်မာစေပါတယ်။')">၄။ ကိုယ့်ရဲ့ စည်းကမ်းဟာ အရာအားလုံးထက် မြင့်မားတယ်ဆိုတာကို ပြသတယ်</button>
-        <button class="option" onclick="showAnalysis('The High Value Man', 'သင့်ရဲ့ အချိန်နဲ့ စွမ်းအင်ကို မထိုက်တန်တဲ့သူအတွက် အသုံးမခံဘဲ လှည့်ထွက်သွားခြင်းက အဆင့်အတန်းမြင့်တဲ့ အမျိုးသားတစ်ယောက်ရဲ့ လုပ်ရပ်ပါ။')">၅။ သင့်ရဲ့ အချိန်နဲ့ စွမ်းအင်ကို မထိုက်တန်တဲ့သူအတွက် အသုံးမခံဘူး</button>
-   </div>
+        <button class="option" onclick="showAnalysis('THE RUTHLESS STRATEGIST', 'သင်ဟာ ခံစားချက်ကို ဦးနှောက်အောက်မှာ ထားနိုင်သူပါ။ အားနာမှုဆိုတာ လိုအပ်ချက်ထက်ပိုရင် အားနည်းချက်ဖြစ်သွားတတ်တယ်ဆိုတာ သင်သိပါတယ်။ ကိုယ့်အကျိုးစီးပွားကို အပေးအယူမရှိ ကာကွယ်တတ်ခြင်းက သင့်ရဲ့ အာဏာကို ခိုင်မြဲစေပါတယ်။')">၁။ အားနာမှုဆိုတာကို လုံးဝ ဖျောက်ပစ်ပြီး ကိုယ့်အကျိုးစီးပွားကိုပဲ ဦးစားပေးတယ်</button>
+        
+        <button class="option" onclick="showAnalysis('THE UNFAZED STOIC', 'သင်ဟာ တည်ငြိမ်တဲ့ ရေပြင်တစ်ခုလိုပါပဲ။ တစ်ဖက်လူက ဘယ်လိုပဲ စိတ်ပိုင်းဆိုင်ရာ တွန်းအားပေးပါစေ၊ ခံစားချက်နောက်ကို လုံးဝမလိုက်ဘဲ တည်ငြိမ်စွာနဲ့ ငြင်းဆိုခြင်းက သင့်ရဲ့ ရင့်ကျက်မှုနဲ့ စိတ်ခိုင်မာမှုကို ပြသရာရောက်ပါတယ်။')">၂။ ခံစားချက်နောက်ကို လုံးဝမလိုက်ဘဲ တည်ငြိမ်စွာနဲ့ ငြင်းဆိုတယ်</button>
+        
+        <button class="option" onclick="showAnalysis('THE SILENCE ARCHITECT', 'တိတ်ဆိတ်ခြင်းက အသံအကျယ်ဆုံး တုံ့ပြန်မှုဖြစ်တယ်ဆိုတာ သင်နားလည်ထားပါတယ်။ ဘာမှပြန်မပြောဘဲ တိတ်ဆိတ်နေခြင်းက တစ်ဖက်လူကို စိုးရိမ်စိတ်ဝင်စေပြီး အခြေအနေကို သင့်စိတ်ကြိုက် ပြန်လည်ထိန်းချုပ်နိုင်စေပါတယ်။')">၃။ ဘာမှပြန်မပြောဘဲ တိတ်ဆိတ်နေခြင်းဖြင့် တစ်ဖက်လူကို အကြပ်ရိုက်အောင်လုပ်တယ်</button>
+        
+        <button class="option" onclick="showAnalysis('THE BOUNDARY SOVEREIGN', 'သင်ဟာ ကိုယ့်ကိုယ်ကိုယ် ဂုဏ်သိက္ခာကို အလေးထားသူပါ။ ကိုယ့်ရဲ့ စည်းကမ်းနဲ့ Boundary ဟာ အရာအားလုံးထက် မြင့်မားတယ်ဆိုတာကို ပြတ်ပြတ်သားသား ပြသခြင်းဖြင့် သင့်ရဲ့ သိက္ခာနဲ့ Authority ကို ခိုင်မာစေပါတယ်။')">၄။ ကိုယ့်ရဲ့ စည်းကမ်းဟာ အရာအားလုံးထက် မြင့်မားတယ်ဆိုတာကို ပြသတယ်</button>
+        
+        <button class="option" onclick="showAnalysis('THE HIGH VALUE ELITE', 'သင်ဟာ သင့်ရဲ့ တန်ဖိုးကို ကောင်းကောင်းသိသူပါ။ မထိုက်တန်တဲ့သူတွေရဲ့ ကြိုးကိုင်မှုမှာ အချိန်နဲ့ စွမ်းအင်ကို အဖြုန်းမခံဘဲ အေးဆေးစွာ လှည့်ထွက်သွားခြင်းက အဆင့်အတန်းမြင့်တဲ့ အမျိုးသားတစ်ယောက်ရဲ့ အမြင့်ဆုံး တုံ့ပြန်မှုပါပဲ။')">၅။ သင့်ရဲ့ အချိန်နဲ့ စွမ်းအင်ကို မထိုက်တန်တဲ့သူအတွက် အသုံးမခံဘူး</button>
+    </div>
 
     <div id="result-box">
         <span class="res-title" id="res-title"></span>
@@ -37,14 +89,16 @@
         </button>
     </div>
 </div>
+
 <script>
     function showAnalysis(title, desc) {
         document.getElementById('options-group').style.display = 'none';
-        document.getElementById('q-text').style.opacity = '0.5';
+        document.getElementById('q-text').style.opacity = '0.3';
         document.getElementById('res-title').innerText = title;
         document.getElementById('res-desc').innerText = desc;
         document.getElementById('result-box').style.display = 'block';
     }
 </script>
+
 </body>
 </html>

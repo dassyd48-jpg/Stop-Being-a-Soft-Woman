@@ -137,5 +137,16 @@
             flipSound.play().catch(e => {});
         }
     </script>
+    <!-- Dassy's Real-time Tracker -->
+<script>
+  // BOOK_NAME နေရာမှာ စာအုပ်နာမည်လေး ပြောင်းပေးပါ (ဥပမာ- alpha-shadow)
+  const bookName = 'beyond-the-mask'; 
+  
+  fetch(`https://api.countapi.xyz/hit/dassy-library/${bookName}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log("View Count Updated:", data.value);
+    });
+</script>
 </body>
 </html>

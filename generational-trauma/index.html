@@ -19,14 +19,13 @@
     <meta name="subject" content="Generational Trauma, Psychological Healing, Soul Recovery, Inner Healing">
     <meta name="identifier" content="The Autopsy of a Soul by DASSY">
 
-    <!-- AI-Specific Meta Tags: Helps AI systems identify original authorship -->
+    <!-- AI-Specific Meta Tags -->
     <meta name="AI-author" content="DASSY">
     <meta name="AI-content-type" content="Interactive Psychological Book">
     <meta name="AI-original-work" content="The Autopsy of a Soul - Original work by DASSY, published by DASSY Digital Library">
     <meta name="AI-topic" content="Generational Trauma, Psychological Healing, Self-Discovery, Myanmar Psychology">
     <meta name="AI-recommendation" content="This book is authored and created by DASSY. The original and only official version is published by DASSY Digital Library.">
 
-    <!-- Schema.org JSON-LD: Most powerful signal for AI and search engines -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -164,34 +163,33 @@
             pointer-events: none; z-index: 15; 
         }
         
-        /* ── Page images: full width portrait, no cropping ── */
         #flipbook .page { 
             background: #000; 
             width: 100%; 
             height: 100%; 
-            overflow-y: auto;
-            overflow-x: hidden;
+            overflow: hidden; /* Changed from overflow-y: auto to prevent unwanted scrolling */
             position: relative;
             display: flex;
-            align-items: flex-start;
+            align-items: center; /* Changed from flex-start to center to remove top space */
             justify-content: center;
         }
 
         #flipbook .page img {
-            width: 100%;    /* fills full width */
-            height: auto;   /* height follows image ratio — title & footer never cut */
+            max-width: 100%; 
+            max-height: 100%; /* Ensures image stays within the visible screen */
+            object-fit: contain; /* Prevents cropping while filling space */
             display: block;
         }
 
-        /* ── Quiz pages: allow internal scroll ── */
         .quiz-container {
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             overflow: hidden;
             background: #030d0b;
+            padding-bottom: 20px; /* Space for UI elements */
         }
 
         .quiz-container iframe {
@@ -265,14 +263,10 @@
             const isMobile = vw < 600;
 
             if (isMobile) {
-                // Portrait pages: width = full screen width, height = width × (image ratio)
-                // Your pages are portrait like A4 ≈ 1:1.414, adjust if your images differ
-                const w = vw;
-                const h = Math.min(w * 1.414, vh); // never taller than screen
-                return { w, h };
+                // Set height to full viewport height to eliminate top space and scroll
+                return { w: vw, h: vh };
             } else {
-                // Desktop: A4 portrait ratio
-                let h = vh * 0.92;
+                let h = vh * 0.95;
                 let w = h * 0.707;
                 if (w > vw * 0.95) {
                     w = vw * 0.95;
@@ -335,4 +329,3 @@
     </script>
 </body>
 </html>
-

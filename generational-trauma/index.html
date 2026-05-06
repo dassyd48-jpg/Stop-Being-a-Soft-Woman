@@ -2,7 +2,7 @@
 <html lang="my">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>THE AUTOPSY OF A SOUL | DASSY DIGITAL LIBRARY</title>
     
     <!-- SEO Meta Tags -->
@@ -148,8 +148,8 @@
             height: 100%; 
             display: flex; 
             justify-content: center; 
-            align-items: flex-start; /* FIX: Align to top to remove dead space */
-            padding-top: 0;
+            align-items: center; 
+            padding-top: env(safe-area-inset-top);
         }
 
         .watermark { 
@@ -162,7 +162,7 @@
             background: #000; 
             width: 100%; 
             height: 100%; 
-            overflow: hidden; /* FIX: Prevent accidental page scrolling */
+            overflow: hidden; 
             position: relative;
             display: flex;
             align-items: center;
@@ -171,8 +171,8 @@
 
         #flipbook .page img {
             width: 100%;    
-            height: 100%;   /* FIX: Force height to stay within viewport */
-            object-fit: contain; /* FIX: Ensure image fits without cropping or overflow */
+            height: 100%;   
+            object-fit: contain; 
             display: block;
         }
 
@@ -257,7 +257,6 @@
             const isMobile = vw < 600;
 
             if (isMobile) {
-                // FIX: Use full viewport height minus a small safety margin for address bars
                 const h = vh - 20; 
                 const w = vw;
                 return { w, h };
@@ -292,7 +291,7 @@
                 autoCenter: true, 
                 display: 'single', 
                 acceleration: true,
-                elevation: 0, // FIX: Smoother transition on mobile
+                elevation: 0, 
                 when: {
                     turning: function(e, page) {
                         if (isQuizLocked) { 

@@ -175,9 +175,10 @@
 }
 
         #flipbook .page img {
-    width: 100%;    
-    height: 100%;   
-    object-fit: fill; /* This forces the page to stretch vertically to your red line */
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Keeps your art from looking 'squashed' */
+    background: #000;    /* Fills the gaps if aspect ratios don't match */
     display: block;
 }
 
@@ -245,16 +246,22 @@
         }, false);
 
         function unlock() {
-            if(document.getElementById("pass").value === myPassword) {
-                $("#bg-video, #lock").fadeOut(1000, function() { $(this).remove(); });
-                $("#book-container").show().animate({opacity: 1}, 1000);
-                loadAndInit();
-                const dark = document.getElementById("bgm-dark");
-                dark.volume = 0.3; dark.play().catch(()=>{});
-            } else {
-                alert("ACCESS DENIED: ကုဒ်မှားယွင်းနေပါသည်။");
-            }
-        }
+    if(document.getElementById("pass").value === myPassword) {
+        // Prime the audio context
+        const dark = document.getElementById("bgm-dark");
+        dark.volume = 0.3;
+        
+        $("#bg-video, #lock").fadeOut(800, function() { 
+            $(this).remove(); 
+            // Only show and init AFTER the lock is gone
+            $("#book-container").show().css("opacity", 1);
+            loadAndInit(); 
+            dark.play().catch(e => console.log("Audio blocked until further interaction"));
+        });
+    } else {
+        alert("ACCESS DENIED: ကုဒ်မှားယွင်းနေပါသည်။");
+    }
+}
 
         function getBookSize() {
     const vw = window.innerWidth;

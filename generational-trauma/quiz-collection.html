@@ -2,7 +2,7 @@
 <html lang="my">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="https://fonts.googleapis.com/css2?family=Pyidaungsu:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -22,29 +22,37 @@
             background: var(--dark-bg); 
             color: var(--neon-green); 
             font-family: 'Pyidaungsu', 'Segoe UI', sans-serif; 
-            overflow: hidden;
+            overflow: hidden; /* Prevents double scrollbars */
         }
 
+        /* The Magic Wrapper: Manages the vertical centering and scrolling */
         #scroll-wrapper {
             width: 100%;
             height: 100%;
             overflow-y: auto;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             -webkit-overflow-scrolling: touch;
         }
 
         #container { 
             width: 92%; 
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 10px 15px 20px; /* Reduced top padding */
-            background: radial-gradient(circle at center, #061c18 0%, #000 100%); 
-            min-height: 100%;
+            max-width: 500px;
+            /* Equal vertical spacing top and bottom for symmetry */
+            padding: 40px 0; 
+            /* This centers the content perfectly if there is extra space */
+            margin: auto; 
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            min-height: min-content;
         }
 
         .warning-text {
             color: var(--gold);
-            font-size: 10px; /* Smaller font */
+            font-size: 10px;
             text-align: center;
             letter-spacing: 1.5px;
             margin-bottom: 8px;
@@ -66,7 +74,7 @@
         }
 
         h2 { 
-            font-size: 0.95rem; /* Smaller question text */
+            font-size: 1rem; 
             line-height: 1.5; 
             margin-bottom: 15px; 
             color: #fff; 
@@ -74,45 +82,33 @@
             text-align: center; 
         }
         
-        .options { display: flex; flex-direction: column; gap: 8px; }
+        .options { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+        
         .option { 
             background: rgba(46, 204, 113, 0.05); 
             border: 1px solid rgba(46, 204, 113, 0.2); 
             color: var(--text-dim); 
-            padding: 12px; 
+            padding: 14px; 
             cursor: pointer; 
-            font-size: 12.5px; 
-            line-height: 1.6; 
+            font-size: 13px; 
+            line-height: 1.5; 
             border-radius: 8px;
+            transition: 0.2s;
         }
+
         .option:active { 
             background: rgba(46, 204, 113, 0.15); 
             border-color: var(--neon-green); 
             color: #fff; 
         }
+
         .option-header { 
             color: var(--neon-green); 
             font-weight: bold; 
             display: block; 
             margin-bottom: 3px; 
-            font-size: 12px; 
+            font-size: 11px; 
             text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* NEW IN-LIST SCROLL INDICATOR */
-        .scroll-indicator {
-            text-align: center;
-            color: var(--gold);
-            font-size: 10px;
-            letter-spacing: 2px;
-            padding: 10px 0;
-            animation: bounce 1.5s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); opacity: 0.5; }
-            50% { transform: translateY(5px); opacity: 1; }
         }
 
         .reveal-grid { 
@@ -123,24 +119,27 @@
         }
         .reveal-item { 
             border: 1px solid var(--gold); 
-            padding: 12px 5px;
+            padding: 15px 5px;
             display: flex; 
             flex-direction: column;
             align-items: center; 
             background: rgba(212, 175, 55, 0.05);
             border-radius: 8px;
+            cursor: pointer;
         }
         .reveal-item .icon { font-size: 24px; margin-bottom: 5px; }
 
-        #result-screen { display: none; text-align: center; padding-top: 20px; }
-        .result-title { color: var(--gold); font-size: 16px; margin-bottom: 10px; text-transform: uppercase; }
-        .result-desc { font-size: 13px; line-height: 1.7; color: #ddd; }
+        #result-screen { display: none; text-align: center; }
+        .result-title { color: var(--gold); font-size: 18px; margin-bottom: 12px; text-transform: uppercase; }
+        .result-desc { font-size: 14px; line-height: 1.8; color: #ddd; }
         
         .next-btn { 
-            margin-top: 20px; padding: 14px; background: transparent; 
+            margin-top: 25px; padding: 15px; background: transparent; 
             color: var(--neon-green); border: 1px solid var(--neon-green); 
             width: 100%; font-weight: bold; text-transform: uppercase; border-radius: 4px;
         }
+
+        #statusMsg { font-size: 11px; margin-top: 8px; color: var(--gold); }
     </style>
 </head>
 <body>
@@ -148,12 +147,11 @@
 <div id="scroll-wrapper">
   <div id="container">
     <span class="warning-text">မိမိကိုယ်ကိုယ် မလိမ်ညာဘဲ အမှန်အတိုင်း ဖြေဆိုပါ</span>
+    
     <div id="quiz-screen">
         <span class="label" id="page-label"></span>
         <h2 id="question-text"></h2>
         <div id="options-list"></div>
-        <!-- Scroll indicator only appears if content is long -->
-        <div id="scroll-note" class="scroll-indicator" style="display:none;">↓ SCROLL FOR MORE OPTIONS ↓</div>
     </div>
 
     <div id="result-screen">
@@ -168,7 +166,7 @@
 <script>
     const quizData = {
         2: { title: "THE AWAKENING: SOUL EXPOSURE", q: "ဒီစာအုပ်ကိုမဖတ်ခင် မင်းရဲ့လက်ရှိ 'ရှင်သန်ခြင်း' အခြေအနေကို အမှန်အတိုင်း ရွေးချယ်ပါ။", options: [ { t: "THE PRETENDER", q_t: "လောကကြီးရှေ့မှာ အရာရာအဆင်ပြေနေသယောင် မျက်နှာဖုံးတပ်ပြီး ဟန်ဆောင်နေမိတယ်", d: "မင်းရဲ့ မျက်နှာဖုံးက အရမ်းထူထဲနေပါပြီ။ ဒီစာအုပ်က အဲ့ဒီမျက်နှာဖုံးအောက်မှာ ပုပ်ပွနေတဲ့ အမှန်တရားတွေကို ခွဲထုတ်ပေးပါလိမ့်မယ်။" }, { t: "THE ESCAPIST", q_t: "ပြဿနာတွေကို ရင်ဆိုင်ရမှာထက် ဖျော်ဖြေရေးတစ်ခုခုထဲမှာ ကိုယ့်ကိုယ်ကိုယ် နစ်မြုပ်ထားရတာ ပိုကြိုက်တယ်", d: "မင်းဟာ ကိုယ့်ကိုယ်ကိုယ် ပြန်တွေ့ရမှာကို အကြောက်ဆုံးသူပါ။ အာရုံလွှဲနေခြင်းက ခေတ္တပဲ ငြိမ်းချမ်းစေပြီး ပြဿနာကတော့ မင်းနောက်မှာ အမြဲရှိနေပါတယ်။" }, { t: "THE ANALYZER", q_t: "ခံစားချက်တွေထက် ယုတ္တိဗေဒနောက်ကိုပဲ လိုက်ရင်း ကိုယ့်စိတ်ကို ပိတ်လှောင်ထားမိတယ်", d: "ဦးနှောက်က ခိုးတဲ့အတိုင်းပဲ နေထိုင်ရင်း မင်းရဲ့ နှလုံးသားက တဖြည်းဖြည်း အေးခဲလာနေပါပြီ။ ခံစားချက်မဲ့ခြင်းက ကာကွယ်မှုမဟုတ်ဘဲ အကျဉ်းထောင်တစ်ခုပါ။" }, { t: "THE TRUTH-HUNTER", q_t: "ဘယ်လောက်ပဲ နာကျင်ပါစေ ငါ့ရဲ့ အဆိပ်အတောက်တွေနဲ့ စရိုက်အမှန်ကို သိဖို့ အသင့်ပဲ", d: "မင်းရဲ့ ရဲရင့်မှုကို ချီးကျူးပါတယ်။ ဒါပေမဲ့ သတိထားပါ၊ မင်းတွေ့ရမယ့် အမှန်တရားက မင်းထင်ထားတာထက် ပိုပြီး ရုပ်ပျက်ဆင်းပျက် နိုင်ပါတယ်။" }, { t: "THE LOST SOUL", q_t: "ငါ ဘယ်သူလဲ၊ ဘာကို လိုချင်နေတာလဲဆိုတာကို လုံးဝ ရှာမတွေ့တော့ဘဲ လမ်းပျောက်နေတယ်", d: "လမ်းပျောက်နေခြင်းက အသစ်ကစဖို့ အကောင်းဆုံး အချက်ပေးသံပါ။ မင်းရဲ့ စိတ်ဝိညာဉ်အပိုင်းအစတွေကို ဒီစာအုပ်ထဲမှာ ပြန်ရှာဖွေကြည့်ပါ။" } ] },
-        9: { title: "GATE 1: INHERITANCE", q: "မင်းရဲ့ ဆုံးဖြတ်ချက်တွေထဲမှာ မင်းမိဘတွေနဲ့ အတိတ်က လူတွေရဲ့ 'အရိပ်' တွေ ဘယ်လောက်အထိ ပါနေသလဲ?", options: [ { t: "The Obedient", q_t: "ကိုယ့်ဆန္ဒထက် မိသားစုနဲ့ လူကြီးတွေ စိတ်တိုင်းကျဖြစ်ဖို့ကိုပဲ ဦးစားပေးနေမိတယ်", d: "မင်းဟာ တခြားလူတွေရဲ့ အလိုကျ ရှင်သန်ပေးနေရတဲ့ ရုပ်သေးရုပ် ဖြစ်နေပါတယ်။ မင်းရဲ့ ကိုယ်ပိုင်သက်သက် ဖြစ်တည်မှုကို အမြန်ဆုံး ပြန်ရှာပါ။" }, { t: "The Rebel", q_t: "ဘာကြောင့်မှန်းမသိဘဲ အရာရာကို ဆန့်ကျင်နေရမှ လွတ်လပ်တယ်လို့ ထင်နေမိတယ်", d: "ဆန့်ကျင်နေခြင်းကလည်း တကယ်တော့ မလွတ်မြောက်သေးတာပါပဲ။ မင်းရဲ့ လုပ်ရပ်တွေက သူတစ်ပါးအပေါ် မူတည်ပြီး တုံ့ပြန်နေရတဲ့ သံကြိုးကွင်းဆက်ထဲမှာပဲ ရှိနေပါသေးတယ်။" }, { t: "The Fixer", q_t: "မိသားစုရဲ့ အမှားတွေနဲ့ ပြဿနာတွေကို ကိုယ်စားလိုက်ဖြေရှင်းပေးရင်း နာကျင်နေရတယ်", d: "တပါးသူရဲ့ ဝန်ထုပ်ဝန်ပိုးတွေကို ထမ်းထားရင်း မင်းရဲ့ ပခုံးတွေ ကျိုးပဲ့နေပါပြီ။ မင်းက သူတို့ရဲ့ ကယ်တင်ရှင် မဟုတ်သလို အပြစ်ပေးခံရသူလည်း မဟုတ်ပါဘူး။" }, { t: "The Runaway", q_t: "အတိတ်က အမှတ်တရတွေက ခြောက်လှန့်လွန်းလို့ အဝေးဆုံးကို အမြဲပြေးထွက်နေမိတယ်", d: "ဘယ်လောက်ဝေးဝေးပြေးပြေး မင်းရဲ့ စိတ်ဒဏ်ရာတွေက မင်းရဲ့ ခရီးဆောင်အိတ်ထဲမှာ အမြဲပါနေပါတယ်။ အခု ရပ်လိုက်ပြီး အတိတ်ကို သတ္တိရှိရှိ လှည့်ကြည့်ရမယ့်အချိန်ပါ။" }, { t: "The Copycat", q_t: "ငါ့ဘဝက ငါ့မိဘတွေရဲ့ ဘဝပုံစံအတိုင်း လိုက်တုပနေသလိုပဲ ခံစားရတယ်", d: "မင်းဟာ ကိုယ်ပိုင်ဇာတ်ညွှန်းကို မရေးဘဲ အခြားသူရဲ့ ဇာတ်ညွှန်းဟောင်းအတိုင်း ကပြနေရတဲ့ သရုပ်ဆောင်တစ်ယောက်ပါ။ မင်းရဲ့ မူပိုင် ဘဝကို ဖန်တီးပါ။" } ] },
+        9: { title: "GATE 1: INHERITANCE", q: "မင်းရဲ့ ဆုံးဖြတ်ချက်တွေထဲမှာ မင်းမိဘတွေနဲ့ အတိတ်က လူတွေရဲ့ 'အရိပ်' တွေ ဘယ်လောက်အထိ ပါနေသလဲ?", options: [ { t: "The Obedient", q_t: "ကိုယ့်ဆန္ဒထက် မိသားစုနဲ့ လူကြီးတွေ စိတ်တိုင်းကျဖြစ်ဖို့ကိုပဲ ဦးစားပေးနေမိတယ်", d: "မင်းဟာ တခြားလူတွေရဲ့ အလိုကျ ရှင်သန်ပေးနေရတဲ့ ရုပ်သေးရုပ် ဖြစ်နေပါတယ်။ မင်းရဲ့ ကိုယ်ပိုင်သက်သက် ဖြစ်တည်မှုကို အမြန်ဆုံး ပြန်ရှာပါ။" }, { t: "The Rebel", q_t: "ဘာကြောင့်မှန်းမသိဘဲ အရာရာကို ဆန့်ကျင်နေရမှ လွတ်လပ်တယ်လို့ ထင်နေမိတယ်", d: "ဆန့်ကျင်နေခြင်းကလည်း တကယ်တော့ မလွတ်မြောက်သေးတာပါပဲ။ မင်းရဲ့ လုပ်ရပ်တွေက သူတစ်ပါးအပေါ် မူတည်ပြီး တုံ့ပြန်နေရတဲ့ သံကြိုးကミュニဆက်ထဲမှာပဲ ရှိနေပါသေးတယ်။" }, { t: "The Fixer", q_t: "မိသားစုရဲ့ အမှားတွေနဲ့ ပြဿနာတွေကို ကိုယ်စားလိုက်ဖြေရှင်းပေးရင်း နာကျင်နေရတယ်", d: "တပါးသူရဲ့ ဝန်ထုပ်ဝန်ပိုးတွေကို ထမ်းထားရင်း မင်းရဲ့ ပခုံးတွေ ကျိုးပဲ့နေပါပြီ။ မင်းက သူတို့ရဲ့ ကယ်တင်ရှင် မဟုတ်သလို အပြစ်ပေးခံရသူလည်း မဟုတ်ပါဘူး။" }, { t: "The Runaway", q_t: "အတိတ်က အမှတ်တရတွေက ခြောက်လှန့်လွန်းလို့ အဝေးဆုံးကို အမြဲပြေးထွက်နေမိတယ်", d: "ဘယ်လောက်ဝေးဝေးပြေးပြေး မင်းရဲ့ စိတ်ဒဏ်ရာတွေက မင်းရဲ့ ခရီးဆောင်အိတ်ထဲမှာ အမြဲပါနေပါတယ်။ အခု ရပ်လိုက်ပြီး အတိတ်ကို သတ္တိရှိရှိ လှည့်ကြည့်ရမယ့်အချိန်ပါ။" }, { t: "The Copycat", q_t: "ငါ့ဘဝက ငါ့မိဘတွေရဲ့ ဘဝပုံစံအတိုင်း လိုက်တုပနေသလိုပဲ ခံစားရတယ်", d: "မင်းဟာ ကိုယ်ပိုင်ဇာတ်ညွှန်းကို မရေးဘဲ အခြားသူရဲ့ ဇာတ်ညွှန်းဟောင်းအတိုင်း ကပြနေရတဲ့ သရုပ်ဆောင်တစ်ယောက်ပါ။ မင်းရဲ့ မူပိုင် ဘဝကို ဖန်တီးပါ။" } ] },
         14: { title: "GATE 2: SOCIAL DECAY", q: "လူမှုပတ်ဝန်းကျင်ကြားမှာ မင်းဘယ်လို 'အရောင်ပြောင်း' ရှင်သန်နေသလဲ?", options: [ { t: "The Chameleon", q_t: "တွေ့တဲ့လူအပေါ် မူတည်ပြီး ငါ့ရဲ့ စရိုက်ကို လိုသလို ပြောင်းလဲပြနေမိတယ်", d: "မျက်နှာဖုံးတွေ အများကြီး သုံးနေရတာ မပင်ပန်းဘူးလား? မင်းရဲ့ မူလအရောင်က ဘာလဲဆိုတာတောင် မင်းကိုယ်တိုင် မေ့နေပါပြီ။" }, { t: "The Hermit", q_t: "လူတွေနဲ့ ရောနှောရမှာကို စိတ်ကုန်လွန်းလို့ အထီးကျန်ခြင်းထဲမှာပဲ ပုန်းအောင်းနေမိတယ်", d: "အထီးကျန်ခြင်းက မင်းကို ကာကွယ်ပေးထားတယ်လို့ ထင်ရပေမယ့် တကယ်တော့ မင်းကို အရှင်လတ်လတ် မြေမြှုပ်ထားတာပါ။" }, { t: "The Mirror", q_t: "ကိုယ့်ကိုယ်ကိုယ် အားမရလို့ သူတစ်ပါးရဲ့ ပုံစံတွေကိုပဲ လိုက်တုပရင်း ကိုယ့်ကိုကိုယ် ရှာနေမိတယ်", d: "မင်းဟာ တခြားလူတွေရဲ့ အလင်းကိုပဲ ပြန်ဟပ်နေတဲ့ မှန်တစ်ချပ်ပါ။ မှန်ထဲမှာ မင်းရဲ့ ကိုယ်ပိုင် အနှစ်သာရဆိုတာ မရှိသလောက် ဖြစ်နေပါပြီ။" }, { t: "The People Pleaser", q_t: "သူတစ်ပါး စိတ်မဆိုးဖို့အတွက် ငါ့ရဲ့ ခံစားချက်တွေကို အမြဲတမ်း နှိပ်ကွပ်ထားမိတယ်", d: "လူတိုင်းကို စိတ်ချမ်းသာအောင် လုပ်ပေးနေရင်း မင်းရဲ့ စိတ်ဝိညာဉ်ကတော့ သေဆုံးနေပါပြီ။ မင်းကိုယ်မင်း အရင်ဆုံး ပြန်ချစ်ပါ။" }, { t: "The Wallflower", q_t: "ဘယ်သူ့အာရုံစိုက်မှုကိုမှ မခံချင်ဘဲ မမြင်ရတဲ့ လူတစ်ယောက်လို ရှင်သန်နေမိတယ်", d: "အရိပ်ထဲမှာ ပုန်းနေခြင်းက ဘေးကင်းပေမယ့် မင်းရဲ့ တန်ဖိုးတွေကို ကမ္ဘာကြီးက ဘယ်တော့မှ သိခွင့်ရမှာ မဟုတ်ပါဘူး။" } ] },
         19: { title: "GATE 3: BURIED ALIVE", q: "မင်းရဲ့ အိပ်မက်တွေနဲ့ စိတ်ကူးတွေကို ဘယ်အရာတွေက ဖျက်ဆီးခဲ့တာလဲ?", options: [ { t: "The Realist", q_t: "လက်တွေ့ဆန်ရမယ်ဆိုတဲ့ အယူအဆနဲ့ ငါ့ရဲ့ စိတ်ကူးယဉ်မှုတွေကို ကိုယ်တိုင် သတ်ပစ်ခဲ့တယ်", d: "လက်တွေ့ကျခြင်းဆိုတာ တစ်ခါတစ်ရံမှာ ကြောက်စိတ်ကို ဖုံးကွယ်ထားတဲ့ နာမည်တစ်ခုပါ။ မင်းရဲ့ စိတ်ကူးတွေကို ပြန်ရှင်သန်ခွင့်ပေးပါ။" }, { t: "The Waiter", q_t: "ပြီးပြည့်စုံတဲ့ အချိန်ကောင်းကို စောင့်နေရင်းနဲ့ပဲ ဘာမှမလုပ်ဖြစ်ဘဲ အချိန်တွေ ကုန်သွားတယ်", d: "စောင့်နေရခြင်းက အလုံခြုံဆုံး ဆင်ခြေတစ်ခုပါ။ ပြီးပြည့်စုံတဲ့အချိန်ဆိုတာ ဘယ်တော့မှ ရှိမလာဘူးဆိုတာ မင်းသိဖို့ လိုပါတယ်။" }, { t: "The Dreamer", q_t: "စိတ်ကူးယဉ်ကမ္ဘာထဲမှာပဲ ပျော်နေပြီး လက်တွေ့လုပ်ဖို့ ကျတော့ ကြောက်ရွံ့နေမိတယ်", d: "လုပ်ဆောင်မှုမပါတဲ့ စိတ်ကူးတွေက စိတ်အာသာဖြေခြင်း သက်သက်ပါပဲ။ မင်းရဲ့ ကမ္ဘာက အတွေးထဲမှာပဲ တည်ရှိနေပါတယ်။" }, { t: "The Quitter", q_t: "အခက်အခဲလေး တစ်ခုတွေ့တာနဲ့ ငါ့ရဲ့ ကြိုးစားမှုတွေကို ချက်ချင်း လက်လျှော့လိုက်မိတယ်", d: "ရှုံးမှာကြောက်တဲ့စိတ်က မင်းကို အမြဲတမ်း နောက်ဆုတ်စေပါတယ်။ မအောင်မြင်ခင်မှာ ရပ်တန့်လိုက်တာကသာ စစ်မှန်တဲ့ ရှုံးနိမ့်ခြင်းပါ။" }, { t: "The Burdened", q_t: "တာဝန်ဝတ္တရားတွေက များလွန်းလို့ ငါတကယ် လုပ်ချင်တာတွေကို ထည့်မတွက်နိုင်ခဲ့ဘူး", d: "မင်းဟာ သူတစ်ပါးအတွက် အနစ်နာခံရင်း မင်းကိုယ်မင်း သစ္စာဖောက်နေမိတာပါ။ မင်းဘဝရဲ့ ပိုင်ရှင်က မင်းပဲ ဖြစ်သင့်ပါတယ်။" } ] },
         24: { title: "GATE 4: PAST TRAUMA", q: "အတိတ်က နာကျင်မှုတွေက မင်းကို ဘယ်လိုပုံစံ ပြောင်းလဲပစ်ခဲ့သလဲ?", options: [ { t: "The Victim", q_t: "ဖြစ်ခဲ့သမျှတွေက ငါ့အပြစ်တွေလို့ပဲ ယူဆပြီး ကိုယ့်ကိုယ်ကိုယ် အမြဲနှိပ်စက်နေမိတယ်", d: "အတိတ်ရဲ့ သားကောင်ဖြစ်နေခြင်းကနေ ရုန်းထွက်ပါ။ ဖြစ်ခဲ့တာတွေက မင်းရဲ့ တန်ဖိုးကို မသတ်မှတ်နိုင်ပါဘူး။" }, { t: "The Numb", q_t: "ထပ်ပြီး မနာကျင်ချင်တော့လို့ ဘာကိုမှ မခံစားရအောင် စိတ်ကို အေးစက်အောင် လုပ်ထားလိုက်တယ်", d: "နာကျင်မှုကို ပိတ်ထားရင်း ပျော်ရွှင်မှုကိုပါ မင်းပိတ်မိသွားပါပြီ။ ခံစားချက်မဲ့ခြင်းက မင်းကို လူသေတစ်ယောက်လို ဖြစ်စေပါတယ်။" }, { t: "The Angry One", q_t: "လူတိုင်းကို ဒေါသနဲ့ တုံ့ပြန်ပြီး ငါ့အနားကို ဘယ်သူမှ မကပ်နိုင်အောင် တွန်းထုတ်နေမိတယ်", d: "မင်းရဲ့ ဒေါသတွေက မင်းကိုယ်မင်း ကာကွယ်နေတာ မဟုတ်ဘဲ မင်းရဲ့ အတွင်းစိတ်ကိုပဲ ပြန်လောင်ကျွမ်းနေတာပါ။" }, { t: "The Haunt", q_t: "မေ့ပစ်ဖို့ ကြိုးစားလေ ပိုပြီး သတိရလေဖြစ်နေတဲ့ အမှတ်တရတွေကြားမှာ ပိတ်မိနေတယ်", d: "မေ့ပစ်ဖို့ ကြိုးစားနေသရွေ့ အတိတ်က ရှိနေဦးမှာပါ။ ရင်ဆိုင်ပြီး နားလည်ပေးလိုက်မှသာ အဲ့ဒီအမှတ်တရတွေက မင်းကို လွှတ်ပေးမှာပါ။" }, { t: "The Survivor", q_t: "လွတ်မြောက်ခဲ့ပြီလို့ ထင်ရပေမယ့် အမာရွတ်တွေကို ကြည့်ပြီး အချိန်မရွေး ပြန်ပြိုလဲမယ့် အခြေအနေမှာ ရှိနေတယ်", d: "အမာရွတ်တွေက မင်းရဲ့ သန်မာမှုကို ပြတာပါ။ မင်းဟာ အရင်ကထက် ပိုသန်မာလာပြီဆိုတာကို ကိုယ့်ကိုယ်ကိုယ် ယုံကြည်လိုက်ပါ။" } ] },
@@ -209,19 +207,6 @@
                 list.appendChild(btn);
             });
         }
-
-        // Logic to show scroll indicator only if options overflow
-        const wrapper = document.getElementById('scroll-wrapper');
-        const note = document.getElementById('scroll-note');
-        setTimeout(() => {
-            if (wrapper.scrollHeight > wrapper.clientHeight) {
-                note.style.display = 'block';
-            }
-        }, 300);
-
-        wrapper.onscroll = () => {
-            if (wrapper.scrollTop > 50) note.style.display = 'none';
-        };
     }
 
     function showResult(t, d) {
@@ -242,10 +227,9 @@
                 <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(212, 175, 55, 0.3);">
                     <textarea id="userExperience" style="width: 100%; height: 70px; background: rgba(255,255,255,0.05); border: 1px solid var(--neon-green); color: #fff; padding: 10px; border-radius: 5px; margin-bottom: 10px; resize: none;" placeholder="မင်းရဲ့ ခံစားချက်ကို ဒီမှာရေးပါ..."></textarea>
                     <button id="submitExp" style="width: 100%; padding: 14px; background: var(--neon-green); color: #000; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; text-transform: uppercase;">ပို့မည်</button>
-                    <div id="statusMsg" style="font-size: 11px; margin-top: 8px; color: var(--gold);"></div>
+                    <div id="statusMsg"></div>
                 </div>
             `;
-            // Submit Logic Kept Same
             document.getElementById('submitExp').onclick = function() {
                 const expText = document.getElementById('userExperience').value;
                 const status = document.getElementById('statusMsg');

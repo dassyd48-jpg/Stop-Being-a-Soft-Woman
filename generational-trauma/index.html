@@ -58,18 +58,12 @@
     }
     </script>
 
-    <!-- Open Graph for Social Media -->
     <meta property="og:title" content="THE AUTOPSY OF A SOUL | DASSY">
     <meta property="og:description" content="An original interactive psychological book by DASSY. Break free from the shadows of the past.">
     <meta property="og:image" content="cover.jpg">
     <meta property="og:type" content="book">
     <meta property="og:site_name" content="DASSY Digital Library">
-    <meta property="book:author" content="DASSY">
-    <meta property="book:tag" content="Generational Trauma">
-    <meta property="book:tag" content="Psychology Myanmar">
-    <meta property="book:tag" content="Inner Healing">
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="THE AUTOPSY OF A SOUL | DASSY">
     <meta name="twitter:description" content="An original interactive psychological book by DASSY. Break free from the shadows of the past.">
@@ -154,11 +148,12 @@
             height: 100%; 
             display: flex; 
             justify-content: center; 
-            align-items: center; 
+            align-items: flex-start; /* FIX: Align to top to remove dead space */
+            padding-top: 0;
         }
 
         .watermark { 
-            position: absolute; bottom: 8px; width: 100%; text-align: center; 
+            position: absolute; bottom: 5px; width: 100%; text-align: center; 
             font-size: 9px; color: var(--gold); opacity: 0.2; letter-spacing: 2px; 
             pointer-events: none; z-index: 15; 
         }
@@ -167,17 +162,17 @@
             background: #000; 
             width: 100%; 
             height: 100%; 
-            overflow: hidden; /* Changed from overflow-y: auto to prevent unwanted scrolling */
+            overflow: hidden; /* FIX: Prevent accidental page scrolling */
             position: relative;
             display: flex;
-            align-items: center; /* Changed from flex-start to center to remove top space */
+            align-items: center;
             justify-content: center;
         }
 
         #flipbook .page img {
-            max-width: 100%; 
-            max-height: 100%; /* Ensures image stays within the visible screen */
-            object-fit: contain; /* Prevents cropping while filling space */
+            width: 100%;    
+            height: 100%;   /* FIX: Force height to stay within viewport */
+            object-fit: contain; /* FIX: Ensure image fits without cropping or overflow */
             display: block;
         }
 
@@ -186,10 +181,9 @@
             height: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             overflow: hidden;
             background: #030d0b;
-            padding-bottom: 20px; /* Space for UI elements */
         }
 
         .quiz-container iframe {
@@ -263,8 +257,10 @@
             const isMobile = vw < 600;
 
             if (isMobile) {
-                // Set height to full viewport height to eliminate top space and scroll
-                return { w: vw, h: vh };
+                // FIX: Use full viewport height minus a small safety margin for address bars
+                const h = vh - 20; 
+                const w = vw;
+                return { w, h };
             } else {
                 let h = vh * 0.95;
                 let w = h * 0.707;
@@ -296,6 +292,7 @@
                 autoCenter: true, 
                 display: 'single', 
                 acceleration: true,
+                elevation: 0, // FIX: Smoother transition on mobile
                 when: {
                     turning: function(e, page) {
                         if (isQuizLocked) { 

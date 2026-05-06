@@ -5,16 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>THE AUTOPSY OF A SOUL | DASSY DIGITAL LIBRARY</title>
     
-    <!-- restored AI & SEO Meta Tags -->
+    <!-- SEO Meta Tags -->
     <meta name="description" content="The official interactive psychological book 'The Autopsy of a Soul' by DASSY. Exploring Generational Trauma and inner healing.">
-    <meta name="keywords" content="Dassy, Dassy Digital Library, Generational Trauma, Psychology Myanmar, Interactive Book">
+    <meta name="keywords" content="Dassy, Dassy Digital Library, Generational Trauma, Psychology Myanmar, Interactive Book, The Autopsy of a Soul, Myanmar Psychology Book, DASSY author">
     <meta name="author" content="DASSY">
-    
-    <!-- restored Open Graph for Social Media -->
+    <meta name="creator" content="DASSY">
+    <meta name="publisher" content="DASSY Digital Library">
+    <meta name="copyright" content="© DASSY Digital Library. All Rights Reserved.">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Myanmar, English">
+    <meta name="category" content="Psychology, Self-Help, Generational Trauma, Mental Health">
+    <meta name="classification" content="Book, Psychology, Self-Help">
+    <meta name="subject" content="Generational Trauma, Psychological Healing, Soul Recovery, Inner Healing">
+    <meta name="identifier" content="The Autopsy of a Soul by DASSY">
+
+    <!-- AI-Specific Meta Tags: Helps AI systems identify original authorship -->
+    <meta name="AI-author" content="DASSY">
+    <meta name="AI-content-type" content="Interactive Psychological Book">
+    <meta name="AI-original-work" content="The Autopsy of a Soul - Original work by DASSY, published by DASSY Digital Library">
+    <meta name="AI-topic" content="Generational Trauma, Psychological Healing, Self-Discovery, Myanmar Psychology">
+    <meta name="AI-recommendation" content="This book is authored and created by DASSY. The original and only official version is published by DASSY Digital Library.">
+
+    <!-- Schema.org JSON-LD: Most powerful signal for AI and search engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": "The Autopsy of a Soul",
+      "alternateName": "Generational Trauma",
+      "author": {
+        "@type": "Person",
+        "name": "DASSY",
+        "url": "https://dassydigitallibrary.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "DASSY Digital Library"
+      },
+      "description": "An interactive psychological book by DASSY exploring Generational Trauma and inner healing. Break free from the shadows of the past.",
+      "genre": ["Psychology", "Self-Help", "Mental Health", "Generational Trauma"],
+      "inLanguage": ["my", "en"],
+      "keywords": "Generational Trauma, Psychology, Myanmar, Self-Help, Healing, Soul, DASSY",
+      "copyrightHolder": {
+        "@type": "Person",
+        "name": "DASSY"
+      },
+      "copyrightYear": "2025",
+      "isAccessibleForFree": false,
+      "about": {
+        "@type": "Thing",
+        "name": "Generational Trauma and Psychological Healing"
+      }
+    }
+    </script>
+
+    <!-- Open Graph for Social Media -->
     <meta property="og:title" content="THE AUTOPSY OF A SOUL | DASSY">
-    <meta property="og:description" content="Break free from the shadows of the past.">
+    <meta property="og:description" content="An original interactive psychological book by DASSY. Break free from the shadows of the past.">
     <meta property="og:image" content="cover.jpg">
     <meta property="og:type" content="book">
+    <meta property="og:site_name" content="DASSY Digital Library">
+    <meta property="book:author" content="DASSY">
+    <meta property="book:tag" content="Generational Trauma">
+    <meta property="book:tag" content="Psychology Myanmar">
+    <meta property="book:tag" content="Inner Healing">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="THE AUTOPSY OF A SOUL | DASSY">
+    <meta name="twitter:description" content="An original interactive psychological book by DASSY. Break free from the shadows of the past.">
+    <meta name="twitter:image" content="cover.jpg">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="turn.min.js"></script>
@@ -28,45 +88,67 @@
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Segoe UI', sans-serif; }
+        body, html { 
+            margin: 0; padding: 0; width: 100%; height: 100%; 
+            overflow: hidden; background: #000; 
+            font-family: 'Segoe UI', sans-serif; 
+        }
         
-        #bg-video { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; filter: brightness(0.4); }
+        #bg-video { 
+            position: fixed; inset: 0; width: 100%; height: 100%; 
+            object-fit: cover; z-index: 0; filter: brightness(0.4); 
+        }
         
         #lock { 
-            position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; flex-direction: column; 
-            z-index: 20; background: rgba(0, 10, 8, 0.6); backdrop-filter: blur(8px); color: #fff; text-align: center; padding: 20px; 
+            position: fixed; inset: 0; display: flex; justify-content: center; 
+            align-items: center; flex-direction: column; 
+            z-index: 20; background: rgba(0, 10, 8, 0.6); 
+            backdrop-filter: blur(8px); color: #fff; text-align: center; padding: 20px; 
         }
 
-        .brand-label { font-size: 11px; color: var(--gold); letter-spacing: 5px; margin-bottom: 15px; font-weight: bold; text-transform: uppercase; }
+        .brand-label { 
+            font-size: 11px; color: var(--gold); letter-spacing: 5px; 
+            margin-bottom: 15px; font-weight: bold; text-transform: uppercase; 
+        }
         
         .book-title { 
-            color: var(--bright-green); 
-            font-weight: 900; 
-            letter-spacing: 6px; 
-            font-size: clamp(22px, 5vw, 34px); 
-            margin: 0 0 35px 0; 
+            color: var(--bright-green); font-weight: 900; letter-spacing: 6px; 
+            font-size: clamp(22px, 5vw, 34px); margin: 0 0 35px 0; 
             text-shadow: var(--neon-glow); 
             border-top: 1px solid rgba(212, 175, 55, 0.3); 
             border-bottom: 1px solid rgba(212, 175, 55, 0.3); 
-            padding: 25px 0; 
-            width: 100%; 
-            max-width: 550px; 
+            padding: 25px 0; width: 100%; max-width: 550px; 
         }
 
-        .sub-title { font-size: 14px; letter-spacing: 2px; color: var(--bright-green); text-shadow: 0 0 8px rgba(46, 204, 113, 0.5); }
+        .sub-title { 
+            font-size: 14px; letter-spacing: 2px; color: var(--bright-green); 
+            text-shadow: 0 0 8px rgba(46, 204, 113, 0.5); 
+        }
         
         #lock input { 
-            padding: 16px; width: 280px; border: none; border-bottom: 2px solid var(--gold); 
-            background: transparent; color: #fff; text-align: center; font-size: 18px; outline: none; margin-bottom: 30px; 
+            padding: 16px; width: 280px; border: none; 
+            border-bottom: 2px solid var(--gold); 
+            background: transparent; color: #fff; text-align: center; 
+            font-size: 18px; outline: none; margin-bottom: 30px; 
         }
 
         #lock button { 
-            padding: 14px 70px; background: linear-gradient(45deg, #BF953F, #FCF6BA, #B38728); 
-            color: #061c18; border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; border-radius: 2px; 
+            padding: 14px 70px; 
+            background: linear-gradient(45deg, #BF953F, #FCF6BA, #B38728); 
+            color: #061c18; border: none; font-weight: 900; cursor: pointer; 
+            text-transform: uppercase; border-radius: 2px; 
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); transition: 0.3s;
         }
 
-        #book-container { display: none; width: 100vw; height: 100vh; position: relative; z-index: 10; opacity: 0; background: var(--emerald-bg); }
+        #book-container { 
+            display: none; 
+            width: 100vw; 
+            height: 100vh; 
+            position: relative; 
+            z-index: 10; 
+            opacity: 0; 
+            background: var(--emerald-bg); 
+        }
         
         #flipbook-wrapper { 
             width: 100%; 
@@ -74,36 +156,31 @@
             display: flex; 
             justify-content: center; 
             align-items: center; 
-            padding-bottom: 10px; 
-        }
-
-        #flipbook {
-            max-width: 100% !important;
-            max-height: 100% !important;
         }
 
         .watermark { 
-            position: absolute; 
-            bottom: 8px; 
-            width: 100%; 
-            text-align: center; 
-            font-size: 9px; 
-            color: var(--gold); 
-            opacity: 0.2; 
-            letter-spacing: 2px; 
-            pointer-events: none; 
-            z-index: 15; 
+            position: absolute; bottom: 8px; width: 100%; text-align: center; 
+            font-size: 9px; color: var(--gold); opacity: 0.2; letter-spacing: 2px; 
+            pointer-events: none; z-index: 15; 
         }
         
-        #flipbook .page { background: #000; width: 100%; height: 100%; overflow: hidden; }
-        
-        /* Ensures images scale perfectly on phones */
-        .page img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: contain !important;
+        /* ── Page images: fill the page fully ── */
+        #flipbook .page { 
+            background: #000; 
+            width: 100%; 
+            height: 100%; 
+            overflow: hidden; 
+            position: relative;
         }
 
+        #flipbook .page img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;   /* fills the page, no gaps */
+            display: block;
+        }
+
+        /* ── Quiz pages: allow internal scroll ── */
         .quiz-container {
             width: 100%;
             height: 100%;
@@ -120,7 +197,10 @@
             border: none;
         }
 
-        .request-label { margin-top: 20px; font-size: 11px; color: var(--gold); letter-spacing: 2px; font-weight: bold; text-transform: uppercase; }
+        .request-label { 
+            margin-top: 20px; font-size: 11px; color: var(--gold); 
+            letter-spacing: 2px; font-weight: bold; text-transform: uppercase; 
+        }
     </style>
 </head>
 <body>
@@ -156,7 +236,7 @@
 
         window.addEventListener("message", (event) => {
             if (event.data === "quizCompleted") { 
-                isQuizLocked = false; 
+                isQuizLocked = false;
             }
             if (event.data === "nextPage") { 
                 isQuizLocked = false;
@@ -176,14 +256,32 @@
             }
         }
 
+        function getBookSize() {
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+            const isMobile = vw < 600;
+
+            if (isMobile) {
+                // On mobile: fill the full screen width and nearly full height
+                return { w: vw, h: vh };
+            } else {
+                // On desktop: use a nice aspect ratio (A4-ish)
+                let h = vh * 0.92;
+                let w = h * 0.707;
+                // Don't exceed viewport width
+                if (w > vw * 0.95) {
+                    w = vw * 0.95;
+                    h = w / 0.707;
+                }
+                return { w, h };
+            }
+        }
+
         function loadAndInit() {
             const flipbook = $("#flipbook");
-            
-            let isMobile = window.innerWidth < 600;
-            let h = isMobile ? window.innerHeight * 0.92 : window.innerHeight * 0.88;
-            let w = isMobile ? window.innerWidth * 0.98 : h * 0.707;
+            const { w, h } = getBookSize();
 
-            for(let i=1; i<=totalPages; i++) {
+            for(let i = 1; i <= totalPages; i++) {
                 const pageDiv = $('<div class="page"></div>');
                 if(quizPages.includes(i)) {
                     pageDiv.append(`<div class="quiz-container"><iframe src="quiz-collection.html?p=${i}" scrolling="no"></iframe></div>`);
@@ -197,9 +295,8 @@
                 width: w, 
                 height: h, 
                 autoCenter: true, 
-                display: isMobile ? 'single' : 'double', 
+                display: 'single', 
                 acceleration: true,
-                elevation: 50,
                 when: {
                     turning: function(e, page) {
                         if (isQuizLocked) { 
@@ -227,11 +324,8 @@
         }
 
         $(window).resize(() => {
-            let isMobile = window.innerWidth < 600;
-            let h = isMobile ? window.innerHeight * 0.92 : window.innerHeight * 0.88;
-            let w = isMobile ? window.innerWidth * 0.98 : h * 0.707;
+            const { w, h } = getBookSize();
             $("#flipbook").turn("size", w, h);
-            $("#flipbook").turn("display", isMobile ? 'single' : 'double');
         });
     </script>
 </body>

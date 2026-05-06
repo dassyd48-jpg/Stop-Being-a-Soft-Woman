@@ -145,7 +145,7 @@
 
 #flipbook-wrapper { 
     width: 100%; 
-    height: 110%; 
+    height: 100%; 
     display: flex; 
     justify-content: center; 
     align-items: flex-start; /* FIX: Pushes the book to the top on mobile */
@@ -154,7 +154,7 @@
 
 .watermark { 
     position: absolute; 
-    bottom: 10px; /* Moves it down slightly so the book has more room */
+    bottom: 15px; /* Keeps it clear of the iPhone home bar */
     width: 100%; 
     text-align: center; 
     font-size: 9px; 
@@ -166,7 +166,7 @@
 #flipbook .page { 
     background: #000; 
     width: 100%; 
-    height: 120%; 
+    height: 100%; 
     overflow: hidden; 
     position: relative;
     display: flex;
@@ -176,14 +176,14 @@
 
         #flipbook .page img {
     width: 100%;    
-    height: 120%;   
-    object-fit: fill; /* This forces the page to stretch to the red lines you drew */
+    height: 100%;   
+    object-fit: fill; /* This forces the page to stretch vertically to your red line */
     display: block;
 }
 
         .quiz-container {
             width: 100%;
-            height: 120%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -193,7 +193,7 @@
 
         .quiz-container iframe {
             width: 100%;
-            height: 120%;
+            height: 100%;
             border: none;
         }
 
@@ -262,14 +262,13 @@
     const isMobile = vw < 600;
 
     if (isMobile) {
-        // FIX: This stretches the height to 92% of the screen,
-        // filling the gap down to the watermark.
+        // FIX: This stretches the height of the book container 
+        // to fill the space down to the watermark.
         return { 
             w: vw, 
-            h: vh * 0.92 
+            h: vh * 0.88 // Adjusting this to 0.88 or 0.90 will hit your red line perfectly
         }; 
     } else {
-        // Keeps the perfect centered look for desktop
         let h = vh * 0.92;
         let w = h * 0.707;
         if (w > vw * 0.95) {

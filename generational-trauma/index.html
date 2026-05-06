@@ -154,14 +154,12 @@
 
 .watermark { 
     position: absolute; 
-    bottom: 20px; /* FIX: Raised significantly to clear mobile navigation bars */
+    bottom: 10px; /* Moves it down slightly so the book has more room */
     width: 100%; 
     text-align: center; 
     font-size: 9px; 
     color: var(--gold); 
-    opacity: 0.4; /* Slightly more visible */
-    letter-spacing: 2px; 
-    pointer-events: none; 
+    opacity: 0.4;
     z-index: 20; 
 }
 
@@ -179,7 +177,7 @@
         #flipbook .page img {
     width: 100%;    
     height: 100%;   
-    object-fit: fill; /* FIX: Forces image to fill the screen height on mobile */
+    object-fit: fill; /* This forces the page to stretch to the red lines you drew */
     display: block;
 }
 
@@ -259,24 +257,28 @@
         }
 
         function getBookSize() {
-            const vw = window.innerWidth;
-            const vh = window.innerHeight;
-            const isMobile = vw < 600;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const isMobile = vw < 600;
 
-            if (isMobile) {
-                const h = vh - 20; 
-                const w = vw;
-                return { w, h };
-            } else {
-                let h = vh * 0.95;
-                let w = h * 0.707;
-                if (w > vw * 0.95) {
-                    w = vw * 0.95;
-                    h = w / 0.707;
-                }
-                return { w, h };
-            }
+    if (isMobile) {
+        // FIX: This stretches the height to 92% of the screen,
+        // filling the gap down to the watermark.
+        return { 
+            w: vw, 
+            h: vh * 0.92 
+        }; 
+    } else {
+        // Keeps the perfect centered look for desktop
+        let h = vh * 0.92;
+        let w = h * 0.707;
+        if (w > vw * 0.95) {
+            w = vw * 0.95;
+            h = w / 0.707;
         }
+        return { w, h };
+    }
+}
 
         function loadAndInit() {
             const flipbook = $("#flipbook");

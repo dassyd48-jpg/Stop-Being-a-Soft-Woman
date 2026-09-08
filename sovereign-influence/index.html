@@ -3,150 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>THE DOMINANCE CODE - DASSY DIGITAL LIBRARY</title>
+    <title>ဩဇာတိက္ကမဖြင့် ခေတ်သစ်အမျိုးသမီးတို့အတွက် စိတ္တဇမဟာဗျူဟာများ | DASSY DIGITAL LIBRARY</title>
     
-    <meta name="description" content="The official interactive psychological book 'The Mirror of Truth' by DASSY. Exploring the depths of Force vs Power and inner transformation.">
-    <meta name="keywords" content="Dassy, Dassy Digital Library, Force vs Power, Psychology Myanmar, Interactive Book, The Mirror of Truth, Myanmar Psychology Book, DASSY author">
-    <meta name="author" content="DASSY">
-    <meta name="creator" content="DASSY">
-    <meta name="publisher" content="DASSY Digital Library">
-    <meta name="copyright" content="© DASSY Digital Library. All Rights Reserved.">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="Myanmar, English">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="turn.js"></script>
 
     <style>
-        :root { 
-            --gold: #D4AF37; 
-            --deep-purple: #1a052e; 
-            --dark-purple: #0d0216;
-            --emerald-bg: #0d0216;
-        }
-
+        :root { --crimson: #4a0e17; --dark-bg: #140204; --gold: #d4af37; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #000; overflow: hidden; font-family: 'Segoe UI', 'Pyidaungsu', sans-serif; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: var(--dark-bg); font-family: 'Pyidaungsu', sans-serif; }
         
-        #bg-video { 
-            position: fixed; inset: 0; width: 100%; height: 100%; 
-            object-fit: cover; z-index: 0; 
-            filter: brightness(0.5) saturate(0.8);
-        }
+        .video-bg-container { position: fixed; inset: 0; z-index: 0; background: var(--dark-bg); }
+        .video-bg-container video { width: 100%; height: 100%; object-fit: cover; }
+        .video-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,2,4,0.85) 0%, rgba(74,14,23,0.5) 50%, rgba(20,2,4,0.95) 100%); z-index: 1; }
         
-        #lock { 
-            position: fixed; inset: 0; display: flex; justify-content: center; 
-            align-items: center; flex-direction: column; z-index: 2000;
-            background: radial-gradient(circle, rgba(26, 5, 46, 0.7) 0%, rgba(5, 1, 10, 0.85) 100%);
-            backdrop-filter: blur(4px); color: #fff; text-align: center; padding: 20px;
-        }
+        #lock { position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; flex-direction: column; z-index: 20; color: #fff; text-align: center; padding: 20px; }
+        .brand-label { font-size: 11px; color: var(--gold); letter-spacing: 5px; margin-bottom: 15px; font-weight: bold; }
+        .book-title { color: #fff; font-weight: 900; letter-spacing: 2px; font-size: clamp(18px, 4.5vw, 26px); margin: 0; padding-top: 20px; width: 100%; max-width: 500px; line-height: 1.6; border-top: 1px solid rgba(212,175,55,0.2); }
+        .book-subtitle { font-size: clamp(12px, 2.5vw, 14px); color: var(--gold); font-style: italic; letter-spacing: 1px; margin-bottom: 30px; width: 100%; max-width: 500px; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 20px; }
 
-        .brand-label { font-size: 10px; color: var(--gold); letter-spacing: 4px; margin-bottom: 15px; font-weight: bold; }
+        #lock input { padding: 15px; width: 100%; max-width: 280px; border: none; border-bottom: 2px solid var(--gold); background: transparent; color: #fff; text-align: center; font-size: 18px; outline: none; margin-bottom: 30px; letter-spacing: 3px; }
+        #lock button { padding: 15px 50px; width: 100%; max-width: 280px; background: linear-gradient(45deg, #8a1426, #d4af37, #8a1426); color: #fff; border: none; font-weight: 900; cursor: pointer; text-transform: uppercase; border-radius: 4px; }
         
-        .book-title { 
-            color: #f8f4ff;
-            font-weight: 900; font-size: clamp(24px, 7vw, 36px); 
-            margin-bottom: 30px; text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            line-height: 1.4;
-        }
-
-        #lock input { 
-            padding: 14px;
-            width: 260px; border: 1px solid rgba(212, 175, 55, 0.4);
-            background: rgba(0, 0, 0, 0.5); color: #fff; text-align: center; 
-            margin-bottom: 25px;
-            border-radius: 4px; outline: none;
-        }
-
-        #lock button { 
-            padding: 14px 70px;
-            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 50%, #B38728 100%); 
-            color: #1a052e; border: none; font-weight: 900; cursor: pointer; 
-            text-transform: uppercase; border-radius: 4px;
-            letter-spacing: 1px;
-        }
-
-        .request-link {
-            margin-top: 20px;
-            color: #BF00FF;
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(191, 0, 255, 0.4);
-            transition: 0.3s;
-        }
-
-        @media screen and (max-width: 600px) {
-            .request-link { margin-top: 10px; margin-bottom: 40px; }
-        }
-
-        .footer-copyright {
-            position: fixed;
-            bottom: 20px; 
-            width: 100%;
-            text-align: center;
-            font-size: 9px;
-            color: var(--gold);
-            opacity: 0.5;
-            z-index: 5000;
-            letter-spacing: 2px;
-            pointer-events: none;
-            text-transform: uppercase;
-        }
-
-        @media screen and (max-width: 768px) {
-            .footer-copyright { bottom: 12px; font-size: 8px; letter-spacing: 1px; opacity: 0.4; }
-        }
-
-        /* Book Container */
-        #book-container {
-            display: none;
+        /* 📌 Computer Screeen တွင် စာအုပ် Aspect Ratio မှန်ကန်စေရန် နေရာချထားမှု ပြင်ဆင်ထားသည် */
+        #book-container { 
+            display: none; 
             width: 100vw; 
-            height: 100vh;
+            height: 100vh; 
             position: relative; 
-            z-index: 10;
-            background: var(--emerald-bg);
-            opacity: 0;
-            transform: translateZ(0);
-            backface-visibility: hidden;
+            z-index: 10; 
+            opacity: 0; 
+            overflow: hidden;
+            background: var(--dark-bg);
+        }
+        
+        #flipbook-wrapper { 
+            width: 100vw; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            position: relative;
+            overflow: hidden;
         }
 
-        /* 🛠️ Bookmark Button Style */
+        #flipbook {
+            margin: 0 auto !important;
+            box-shadow: 0 0 40px rgba(0,0,0,0.9);
+        }
+        
+        .fixed-watermark { position: fixed; bottom: 12px; left: 0; width: 100%; text-align: center; font-size: 9px; color: var(--gold); opacity: 0.5; letter-spacing: 2px; z-index: 99; pointer-events: none; }
+
+        .page {
+            background: #140204;
+            overflow: hidden;
+        }
+
+        .page img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            display: block;
+        }
+
+        /* 📌 Bookmark Button Style */
         #bookmark-btn {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 10px;
+            right: 10px;
             z-index: 1500;
-            padding: 8px 16px;
-            background: rgba(0, 0, 0, 0.7);
+            padding: 6px 12px;
+            background: rgba(20, 2, 4, 0.85);
             border: 1px solid var(--gold);
             color: var(--gold);
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 1px;
             text-transform: uppercase;
-            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            box-shadow: 0 0 10px rgba(0,0,0,0.8);
         }
         #bookmark-btn.bookmarked {
             background: var(--gold);
-            color: #000;
+            color: #140204;
             box-shadow: 0 0 15px var(--gold);
         }
 
-        /* 🛠️ စာမျက်နှာ ၁ သို့ ပြန်သွားရန် ခလုတ် Style */
+        /* ⭐ Floating Review Button Style (စခရင်အောက်ခြေအထိကပ်ပြီး အလွန်သေးအောင် ပြင်ထားသည်) */
+        #review-trigger-btn {
+            position: fixed;
+            bottom: 6px;
+            right: 8px;
+            z-index: 1500;
+            padding: 3px 6px;
+            background: linear-gradient(45deg, #d4af37, #8a1426, #d4af37);
+            background-size: 200% 200%;
+            animation: gradientAnimation 3s ease infinite;
+            color: #fff;
+            border: 1px solid var(--gold);
+            font-size: 8px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ↺ စာမျက်နှာ ၁ သို့ ပြန်သွားရန် ခလုတ် Style */
         #restart-btn {
             display: none;
             position: fixed;
-            bottom: 120px;
+            bottom: 35px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 1500;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 50%, #B38728 100%);
-            color: #1a052e;
+            padding: 8px 18px;
+            background: linear-gradient(45deg, #8a1426, #d4af37, #8a1426);
+            color: #fff;
             border: none;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             border-radius: 20px;
             cursor: pointer;
@@ -154,460 +140,351 @@
             letter-spacing: 1px;
             transition: all 0.3s ease;
         }
-        #restart-btn:active {
-            transform: translateX(-50%) scale(0.95);
+
+        /* 💬 Review Modal (Popup Window) Style */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-card {
+            background: #1c0408;
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            max-width: 420px;
+            width: 100%;
+            padding: 25px 20px;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 22px;
+            color: var(--gold);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .modal-title {
+            font-size: 16px;
+            color: var(--gold);
+            font-weight: bold;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .modal-text {
+            font-size: 12px;
+            color: #e0e0e0;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        .modal-offer {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid var(--gold);
+            padding: 10px;
+            font-size: 12px;
+            color: var(--gold);
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .modal-step {
+            font-size: 11px;
+            color: #bbb;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        .modal-btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .modal-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .btn-fb {
+            background: #1877f2;
+            color: #fff;
+        }
+        .btn-msg {
+            background: linear-gradient(45deg, #0084ff, #a832a7);
+            color: #fff;
+        }
+        .btn-tg {
+            background: #0088cc;
+            color: #fff;
         }
 
         @media screen and (max-width: 768px) {
-            #bookmark-btn {
-                top: 15px;
-                right: 15px;
-                padding: 6px 12px;
-                font-size: 10px;
+            #bookmark-btn { top: 8px; right: 8px; padding: 5px 10px; font-size: 9px; }
+            #review-trigger-btn { 
+                bottom: 4px; 
+                right: 6px; 
+                padding: 2px 5px; 
+                font-size: 7.5px; 
             }
-            #restart-btn {
-                bottom: 90px;
-                padding: 8px 16px;
-                font-size: 11px;
-            }
+            #restart-btn { bottom: 30px; padding: 6px 14px; font-size: 10px; }
+            .fixed-watermark { bottom: 8px; font-size: 8px; }
         }
-
-        #flipbook-wrapper { 
-            width: 100%; 
-            height: 100%; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            padding-bottom: 35px;
-        }
-        
-        #flipbook .page { background-color: #000; background-size: 100% 100%; position: relative; }
-        
-        /* Quiz Styles */
-        #quiz-overlay { 
-            display: none; 
-            position: fixed; 
-            inset: 0; 
-            background: rgba(0,0,0,0.85); 
-            z-index: 4000; 
-            justify-content: center; 
-            align-items: center; 
-            padding: 15px; 
-        }
-        #quiz-content { width: 100%; max-width: 420px; background: #0a0a0a; padding: 18px; border: 1px solid var(--gold); border-radius: 12px; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(0,0,0,0.5); }
-        #options-container { overflow-y: auto; flex-grow: 1; margin-top: 5px; }
-        #test-question { font-size: 13.5px; line-height: 1.6; margin-bottom: 15px; color: #ddd; }
-        .quiz-option { padding: 10px 12px; margin-bottom: 8px; border: 1px solid rgba(212,175,55,0.25); color: #fff; font-size: 11.5px; cursor: pointer; border-radius: 6px; background: rgba(255,255,255,0.03); transition: 0.3s; }
-        .quiz-option:active { background: rgba(212,175,55,0.2); }
-        .btn-continue { width: 100%; padding: 14px; background: var(--gold); color: #000; border: none; font-size: 13px; font-weight: bold; margin-top: 15px; border-radius: 4px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <video id="bg-video" autoplay muted loop playsinline>
-        <source src="video.mp4" type="video/mp4">
-    </video>
+    <div class="video-bg-container">
+        <video autoplay loop muted playsinline poster="page1.jpg"><source src="video.mp4" type="video/mp4"></video>
+        <div class="video-overlay"></div>
+    </div>
 
     <div id="lock">
         <span class="brand-label">DASSY DIGITAL LIBRARY PRESENTS</span>
-        <h1 class="book-title">ဩဇာ၏ နိယာမ<br><span style="font-size:14px; color:var(--gold);">(THE DOMINANCE CODE)</span></h1>
-        <input type="password" id="pass" placeholder="ACCESS KEY">
-        <button onclick="unlock()">ENTER THE MIRROR</button>
-        <a href="https://t.me/Dassy_digital_Library" target="_blank" class="request-link">REQUEST PRIVATE ACCESS FROM DASSY</a>
+        <h1 class="book-title">ဩဇာတိက္ကမဖြင့်<br>ခေတ်သစ်အမျိုးသမီးတို့အတွက် စိတ္တဇမဟာဗျူဟာများ</h1>
+        <div class="book-subtitle">"The Power of Presence & Sovereign Influence"</div>
+        <input type="password" id="pass" placeholder="ACCESS KEY" autocomplete="off" onkeypress="if(event.key === 'Enter') unlock()">
+        <button onclick="unlock()">ENTER THE SOVEREIGNTY</button>
     </div>
 
     <div id="book-container">
-        <!-- 🛠️ Floating Bookmark Button -->
+        <!-- Floating Bookmark Button -->
         <button id="bookmark-btn" onclick="toggleBookmark()">SAVE BOOKMARK</button>
 
-        <!-- 🛠️ စာမျက်နှာ ၁ သို့ ပြန်သွားရန် ခလုတ် -->
+        <!-- Floating Review Button -->
+        <button id="review-trigger-btn" onclick="openReviewModal()">⭐ Review ပေးရန် (15% OFF)</button>
+
+        <!-- စာမျက်နှာ ၁ သို့ ပြန်သွားရန် ခလုတ် -->
         <button id="restart-btn" onclick="goToFirstPage()">↺ စာမျက်နှာ ၁ သို့ ပြန်သွားရန်</button>
 
         <div id="flipbook-wrapper">
             <div id="flipbook"></div>
         </div>
-        
-        <div class="footer-copyright">
-            © DASSY DIGITAL LIBRARY | ALL RIGHTS RESERVED
-        </div>
     </div>
 
-    <div id="quiz-overlay">
-        <div id="quiz-content">
-            <div id="test-title" style="color:var(--gold); font-size:16px; margin-bottom:15px; text-align:center; font-weight:bold; letter-spacing:1px;"></div>
-            <div id="test-question"></div>
-            <div id="options-container"></div>
+    <!-- 💬 Review & Follow Modal Popup (Links Updated) -->
+    <div id="review-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeReviewModal()">✕</button>
+            <div class="modal-title">သင့်၏ ထင်မြင်ယူဆချက်သည် ကျွန်ုပ်တို့အတွက် လွန်စွာတန်ဖိုးရှိပါသည်။</div>
+            
+            <div class="modal-text">
+                စာဖတ်သူ၏ Review တစ်ခုနှင့် Follow တစ်ခုသည် နောက်ထပ် စာအုပ်ဖတ်ရှုမည့် လူငယ်များအတွက် များစွာ အကျိုးသက်ရောက်မှုရှိပြီး စာပေမဖတ်ရှုရသေးသူများအတွက်လည်း လမ်းပြအလင်းရောင်နှင့် အားအင်များစွာ ဖြစ်စေပါသည်။
+            </div>
+
+            <div class="modal-offer">
+                🎁 Follow လုပ်ပြီး Review ပေးပါက နောက်ထပ်(တစ်ကြိမ်) ဝယ်ယူမည့် စာအုပ်တိုင်းအတွက် 15% DISCOUNT ရရှိပါမည်။
+            </div>
+
+            <div class="modal-step">၁။ Facebook Page ကို <b>Follow ပြုလုပ်၍ Review ရေးသားပါ</b> (ပြီးလျှင် Screenshot ရိုက်ယူပါ)။</div>
+            <div class="modal-step" style="margin-bottom: 15px;">၂။ Screenshot ကို Messenger (သို့မဟုတ်) Telegram သို့ ပေးပို့၍ Discount ရယူပါ။</div>
+
+            <div class="modal-btn-group">
+                <!-- 🛠️ Dassy Digital Library Review Link -->
+                <a href="https://www.facebook.com/share/1E3zQjMZHA/?mibextid=wwXIfr" target="_blank" class="modal-btn btn-fb">
+                    👍 Follow လုပ်ရန် & Review ရေးရန်
+                </a>
+                
+                <!-- 🛠️ Messenger Direct Link -->
+                <a href="https://www.facebook.com/share/1E3zQjMZHA/?mibextid=wwXIfr" target="_blank" class="modal-btn btn-msg">
+                    💬 Messenger သို့ Screenshot ပို့ရန်
+                </a>
+
+                <!-- 🛠️ Telegram Link -->
+                <a href="https://t.me/Dassy_digital_Library" target="_blank" class="modal-btn btn-tg">
+                    ✈️ Telegram သို့ Screenshot ပို့ရန်
+                </a>
+            </div>
         </div>
     </div>
-
-    <audio id="sound-flip" src="flip.mp3" preload="auto"></audio>
-    <audio id="bgm-dark" src="dark-theme.mp3" loop preload="auto"></audio>
-    <audio id="bgm-light" src="light-theme.mp3" loop preload="auto"></audio>
-
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="turn.js"></script>
-    <script src="intro-quiz.js"></script>
-    <script src="psychologyTests_Part1.js"></script> 
+    
+    <div id="global-watermark" class="fixed-watermark" style="display:none;">PROPRIETARY MATERIAL | © DASSY DIGITAL LIBRARY</div>
+    <audio id="sound" src="flip.mp3" preload="auto"></audio>
 
     <script>
-    const totalPages = 84; 
-    const quizPages = [12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80];
-    let isQuizLocked = false;
-    const myPassword = "DC@MIRROR";
+        const myPassword = "#Sovereign#"; 
+        const totalPages = 59; 
+        const quizPages = [2, 14, 21, 28, 35, 43, 48, 55]; 
+        let isQuizLocked = false;
+        const storageBookmarkKey = "sovereign_saved_bookmark";
+        const storageKeyAuth = "sovereign_authenticated";
 
-    $(document).ready(function() {
-        const isUnlocked = localStorage.getItem("dc_unlocked");
-        if (isUnlocked === "true") {
-            $("#lock, #bg-video").hide();
-            $("#book-container").show().css("opacity", 1);
-            loadAndInit();
-            document.getElementById("bgm-dark").play().catch(()=>{});
-        }
-    });
+        $(document).ready(function() {
+            if (localStorage.getItem(storageKeyAuth) === "true") {
+                $("#lock, .video-bg-container").hide();
+                $("#book-container").show().css("opacity", 1);
+                $("#global-watermark").show();
+                loadAndInitBook();
+            }
+        });
 
-    function getBookSize() {
-        let w = window.innerWidth;
-        let h = window.innerHeight - 40;
+        /* 📌 Desktop မော်နီတာနှင့် Mobile ဖုန်းအလိုက် စာအုပ် Aspect Ratio မှန်ကန်စေမည့် Calculation Function */
+        function getBookSize() { 
+            let w = window.innerWidth;
+            let h = window.innerHeight;
 
-        if (window.innerWidth < 768) {
-            w = window.innerWidth; 
-        } else {
-            const tabletRatio = 0.72;
-            if (w / h > tabletRatio) { w = h * tabletRatio; } else { h = w / tabletRatio; }
-        }
-        return { w, h };
-    }
-
-    function unlock() {
-        if(document.getElementById("pass").value === myPassword) {
-            localStorage.setItem("dc_unlocked", "true");
-            requestFullscreenMode();
-            
-            $("#lock, #bg-video").fadeOut(500);
-            $("#book-container").show().css("opacity", 1);
-            loadAndInit(); 
-        } else {
-            alert("ACCESS DENIED: ကုဒ်မှားယွင်းနေပါသည်။");
-        }
-    }
-
-    function requestFullscreenMode() {
-        let docElm = document.documentElement;
-        if (docElm.requestFullscreen) {
-            docElm.requestFullscreen().catch(err => console.log(err));
-        } else if (docElm.webkitRequestFullscreen) {
-            docElm.webkitRequestFullscreen().catch(err => console.log(err));
-        } else if (docElm.msRequestFullscreen) {
-            docElm.msRequestFullscreen().catch(err => console.log(err));
-        }
-    }
-
-    function startIntroQuiz() {
-        const data = introQuiz["2"];
-        if(!data) { initBook(); return; }
-        
-        $("#test-title").text(data.title);
-        renderIntroScenario(data, 0);
-        
-        $("body").append($("#quiz-overlay"));
-        $("#quiz-overlay").css({
-            "position": "fixed",
-            "inset": 0,
-            "width": "100%",
-            "height": "100%",
-            "z-index": 4000
-        }).fadeIn(300).css("display", "flex");
-    }
-
-    function renderIntroScenario(data, index) {
-        let introScores = window.introScores || { A: 0, B: 0, C: 0 };
-        window.introScores = introScores;
-        
-        if (index >= data.scenarios.length) {
-            let maxScore = Math.max(introScores.A, introScores.B, introScores.C);
-            let tiedKeys = Object.keys(introScores).filter(key => introScores[key] === maxScore);
-            
-            let resultHtml = "";
-            if (tiedKeys.length > 1) {
-                resultHtml = data.results.Hybrid;
+            if (w < 768) {
+                // Mobile Screen
+                w = window.innerWidth;
+                h = window.innerHeight;
             } else {
-                let resultKey = tiedKeys[0];
-                resultHtml = data.results[resultKey];
+                // Computer / Laptop Screen - စာအုပ်ပုံစံမပျက်စေရန် အချိုးအစားညှိပေးထားပါသည်
+                h = window.innerHeight * 0.95;
+                w = h * 0.62;
+            }
+            return { w, h }; 
+        }
+
+        function resizeAndCenterBook() {
+            const { w, h } = getBookSize();
+            if ($("#flipbook").data() && $("#flipbook").data().done) {
+                $("#flipbook").turn("size", w, h);
+            }
+        }
+
+        function unlock() {
+            if(document.getElementById("pass").value === myPassword) {
+                localStorage.setItem(storageKeyAuth, "true");
+                $("#lock").fadeOut(500, () => {
+                    $(".video-bg-container").fadeOut(500); 
+                    $("#book-container").show().animate({opacity: 1}, 800);
+                    $("#global-watermark").fadeIn(800);
+                    loadAndInitBook();
+                });
+            } else { alert("ACCESS DENIED: ကုဒ်မှားယွင်းနေပါသည်။"); }
+        }
+
+        /* Review Modal Open/Close Logic */
+        function openReviewModal() {
+            $("#review-modal").css("display", "flex").hide().fadeIn(300);
+        }
+
+        function closeReviewModal() {
+            $("#review-modal").fadeOut(300);
+        }
+
+        window.addEventListener("message", function(event) {
+            if (event.data === "quizCompleted") {
+                isQuizLocked = false;
+                setTimeout(() => { $("#flipbook").turn("next"); }, 100);
+            }
+        }, false);
+
+        /* Bookmark Toggle Function */
+        function toggleBookmark() {
+            const flipbook = $("#flipbook");
+            const currentPage = flipbook.turn("page");
+            const bookmarkedPage = localStorage.getItem(storageBookmarkKey);
+
+            if (bookmarkedPage && parseInt(bookmarkedPage) === currentPage) {
+                localStorage.removeItem(storageBookmarkKey);
+            } else {
+                localStorage.setItem(storageBookmarkKey, currentPage);
+            }
+            updateBookmarkButton(currentPage);
+        }
+
+        /* Update Bookmark UI Button */
+        function updateBookmarkButton(page) {
+            const btn = $("#bookmark-btn");
+            const bookmarkedPage = localStorage.getItem(storageBookmarkKey);
+
+            if (bookmarkedPage && parseInt(bookmarkedPage) === page) {
+                btn.addClass("bookmarked");
+                btn.text("UNSAVE BOOKMARK");
+            } else {
+                btn.removeClass("bookmarked");
+                btn.text("SAVE BOOKMARK");
+            }
+        }
+
+        /* စာမျက်နှာ ၁ သို့ ပြန်သွားရန် Function */
+        function goToFirstPage() {
+            $("#flipbook").turn("page", 1);
+        }
+
+        function loadAndInitBook() {
+            const flipbook = $("#flipbook");
+            if (flipbook.children().length > 0) return;
+
+            const savedBookmark = localStorage.getItem(storageBookmarkKey);
+            let startPage = 1;
+            if (savedBookmark) {
+                startPage = parseInt(savedBookmark);
             }
 
-            $("#test-question").html(`<div style="color:var(--gold); margin-bottom:10px; font-weight:bold;">Analysis Result:</div><div style="font-size:13px; line-height:1.6;">${resultHtml}</div>`);
-            $("#options-container").html('<button class="btn-continue" onclick="initBook()">စာအုပ်ကို စတင်ဖတ်ရှုမည်</button>');
-            return;
-        }
-        
-        const sc = data.scenarios[index];
-        $("#test-question").text(sc.q);
-        $("#options-container").empty();
-        sc.options.forEach(opt => {
-            const btn = $('<div class="quiz-option"></div>').text(opt.t);
-            btn.on('click', () => { 
-                if(opt.v) introScores[opt.v]++; 
-                renderIntroScenario(data, index + 1); 
-            });
-            $("#options-container").append(btn);
-        });
-    }
-
-    function initBook() {
-        requestFullscreenMode();
-        $("#quiz-overlay").fadeOut(400, function() {
-            $("#flipbook").turn("page", 3);
-        });
-        document.getElementById("bgm-dark").play().catch(()=>{});
-    }
-
-    /* 🛠️ Bookmark Functions */
-    function toggleBookmark() {
-        const flipbook = $("#flipbook");
-        const currentPage = flipbook.turn("page");
-        const bookmarkedPage = localStorage.getItem("dc_bookmarked_page");
-
-        if (bookmarkedPage && parseInt(bookmarkedPage) === currentPage) {
-            // Unsave Bookmark
-            localStorage.removeItem("dc_bookmarked_page");
-        } else {
-            // Save Bookmark
-            localStorage.setItem("dc_bookmarked_page", currentPage);
-        }
-        updateBookmarkButton(currentPage);
-    }
-
-    function updateBookmarkButton(page) {
-        const btn = $("#bookmark-btn");
-        const bookmarkedPage = localStorage.getItem("dc_bookmarked_page");
-
-        if (bookmarkedPage && parseInt(bookmarkedPage) === page) {
-            btn.addClass("bookmarked");
-            btn.text("UNSAVE BOOKMARK");
-        } else {
-            btn.removeClass("bookmarked");
-            btn.text("SAVE BOOKMARK");
-        }
-    }
-
-    /* 🛠️ စာမျက်နှာ ၁ သို့ ပြန်သွားရန် Function */
-    function goToFirstPage() {
-        $("#flipbook").turn("page", 1);
-    }
-
-    function loadAndInit() {
-        const flipbook = $("#flipbook");
-        const { w, h } = getBookSize();
-
-        if (flipbook.children().length > 0) return;
-        for (let i = 1; i <= totalPages; i++) {
-            const pageDiv = $('<div />').addClass('page').css({
-                'background-image': `url('pages/page${i}.jpg')`,
-                'background-size': '100% 100%',
-                'background-color': '#000'
-            });
-            flipbook.append(pageDiv);
-        }
-
-        // 🛠️ Bookmark ရယူခြင်း
-        const bookmarkedPage = localStorage.getItem("dc_bookmarked_page");
-        let startPage = 1;
-        if (bookmarkedPage) {
-            startPage = parseInt(bookmarkedPage);
-        }
-
-        flipbook.turn({
-            width: w, height: h, 
-            autoCenter: true, display: 'single', 
-            pages: totalPages, acceleration: true,
-            elevation: 0, gradients: false, duration: 400, 
-            when: {
-                turning: function(e, page) {
-                    if (isQuizLocked) { e.preventDefault(); return; }
-                    document.getElementById("sound-flip").play().catch(()=>{});
-                },
-                turned: function(e, page) {
-                    handleMusic(page);
-                    updateBookmarkButton(page); 
-
-                    // 🛠️ နောက်ဆုံးစာမျက်နှာ (Page 84) ရောက်လျှင် "စာမျက်နှာ ၁ သို့ ပြန်သွားရန်" ခလုတ်ပြပေးမည်
-                    if (page === totalPages) {
-                        $("#restart-btn").fadeIn(300);
-                    } else {
-                        $("#restart-btn").fadeOut(300);
-                    }
-
-                    if (quizPages.includes(page)) {
-                        triggerPsychologyTest(page);
-                    }
-                    if (page === 2) {
-                        startIntroQuiz();
-                    }
+            for(let i=1; i<=totalPages; i++) {
+                const pageDiv = $('<div class="page"></div>');
+                if(quizPages.includes(i)) {
+                    pageDiv.append(`<iframe src="page${i}.html" style="width:100%; height:100%; border:none;" scrolling="yes"></iframe>`);
+                } else {
+                    pageDiv.append($('<img />').attr('src', `page${i}.jpg`));
                 }
+                flipbook.append(pageDiv);
             }
-        });
 
-        // 🛠️ Bookmark ထားသည့် Page သို့ တိုက်ရိုက် ရောက်ရှိစေရေးအတွက် သီးသန့် Force jump လုပ်ခြင်း
-        if (startPage > 1) {
             setTimeout(() => {
-                flipbook.turn("page", startPage);
+                const { w, h } = getBookSize();
+
+                flipbook.turn({
+                    width: w, 
+                    height: h, 
+                    autoCenter: true, 
+                    display: 'single', 
+                    acceleration: true,
+                    page: startPage,
+                    when: {
+                        turning: function(e, page) {
+                            if (isQuizLocked) { e.preventDefault(); return; }
+                            const s = document.getElementById("sound");
+                            if(s) { s.currentTime = 0; s.play().catch(()=>{}); }
+                        },
+                        turned: function(e, page) {
+                            isQuizLocked = quizPages.includes(page);
+                            updateBookmarkButton(page);
+
+                            if (page === totalPages) {
+                                $("#restart-btn").fadeIn(300);
+                            } else {
+                                $("#restart-btn").fadeOut(300);
+                            }
+                        }
+                    }
+                });
+
+                updateBookmarkButton(startPage);
+
+                if (startPage === totalPages) {
+                    $("#restart-btn").show();
+                }
+
+                setTimeout(resizeAndCenterBook, 100);
             }, 100);
         }
 
-        updateBookmarkButton(startPage);
-
-        if (startPage === totalPages) {
-            $("#restart-btn").show();
-        }
-
-        setTimeout(() => {
-            const { w, h } = getBookSize();
-            $("#flipbook").turn("size", w, h);
-        }, 300);
-    }
-
-    function triggerPsychologyTest(pageNumber) {
-        const test = psychologyTests[pageNumber];
-        if (!test) return;
-        
-        isQuizLocked = true;
-        $("body").append($("#quiz-overlay"));
-        $("#quiz-overlay").css({"position": "fixed", "width": "100%", "height": "100%"});
-        
-        $("#test-title").text(test.title);
-        $("#test-question").text(test.q);
-        $("#options-container").empty();
-        
-        test.options.forEach(opt => {
-            const btn = $('<div class="quiz-option"></div>').text(opt.t);
-            btn.on('click', () => {
-                $("#test-question").html(`<div style='color:var(--gold); font-weight:bold; margin-bottom:12px;'>Result Analysis:</div><div style='background:rgba(255,255,255,0.05); padding:12px; border-radius:5px;'>${opt.r}</div>`);
-                $("#options-container").empty().html('<button class="btn-continue" onclick="closeQuiz()">ဆက်လက်ဖတ်ရှုမည်</button>');
-            });
-            $("#options-container").append(btn);
+        window.addEventListener('resize', () => {
+            resizeAndCenterBook();
         });
-        $("#quiz-overlay").fadeIn().css("display", "flex");
-    }
 
-    function closeQuiz() { 
-        $("#quiz-overlay").fadeOut(() => { 
-            isQuizLocked = false; 
-            const currentPage = $("#flipbook").turn("page");
-            if (currentPage < totalPages) {
-                $("#flipbook").turn("next"); 
-            }
-        });
-    }
-
-    function handleMusic(page) {
-        const dark = document.getElementById("bgm-dark");
-        const light = document.getElementById("bgm-light");
-        if (page <= 43) { 
-            if (dark.paused) { light.pause(); dark.play().catch(()=>{}); } 
-        } else { 
-            if (light.paused) { dark.pause(); light.play().catch(()=>{}); } 
-        }
-    }
-
-    $(window).resize(() => {
-        const { w, h } = getBookSize();
-        $("#flipbook").turn("size", w, h);
-    });
-</script>
-
-<!-- ========================================== -->
-<!-- 🔻 Review System Code Block Start (Dassy) 🔻 -->
-<!-- ========================================== -->
-
-<!-- 1. CSS Style (Review Button & Modal Style) -->
-<style>
-    /* ⭐ Floating Review Button Style */
-    #review-trigger-btn {
-        position: fixed;
-        bottom: 20px;
-        right: 15px;
-        z-index: 1500;
-        padding: 5px 10px;
-        background: linear-gradient(45deg, #d4af37, #8a1426, #d4af37);
-        background-size: 200% 200%;
-        animation: gradientAnimation 3s ease infinite;
-        color: #fff;
-        border: 1px solid var(--gold, #d4af37);
-        font-size: 9.5px;
-        font-weight: bold;
-        border-radius: 15px;
-        cursor: pointer;
-        box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-        letter-spacing: 0.5px;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-    }
-
-    @keyframes gradientAnimation {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    /* 💬 Modal Popup Style */
-    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
-    .modal-card { background: #1c0408; border: 1px solid var(--gold, #d4af37); border-radius: 12px; max-width: 420px; width: 100%; padding: 25px 20px; color: #fff; text-align: center; position: relative; box-shadow: 0 0 25px rgba(212, 175, 55, 0.3); }
-    .modal-close { position: absolute; top: 10px; right: 15px; font-size: 22px; color: var(--gold, #d4af37); cursor: pointer; background: none; border: none; }
-    .modal-title { font-size: 16px; color: var(--gold, #d4af37); font-weight: bold; margin-bottom: 12px; line-height: 1.4; }
-    .modal-text { font-size: 12px; color: #e0e0e0; line-height: 1.7; margin-bottom: 15px; text-align: justify; }
-    .modal-offer { background: rgba(212, 175, 55, 0.1); border-left: 3px solid var(--gold, #d4af37); padding: 10px; font-size: 12px; color: var(--gold, #d4af37); font-weight: bold; margin-bottom: 20px; text-align: center; }
-    .modal-step { font-size: 11px; color: #bbb; margin-bottom: 8px; text-align: left; }
-    .modal-btn-group { display: flex; flex-direction: column; gap: 10px; }
-    .modal-btn { display: block; width: 100%; padding: 12px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: bold; text-align: center; transition: all 0.3s ease; }
-    .btn-fb { background: #1877f2; color: #fff; }
-    .btn-msg { background: linear-gradient(45deg, #0084ff, #a832a7); color: #fff; }
-    .btn-tg { background: #0088cc; color: #fff; }
-
-    @media screen and (max-width: 768px) {
-        #review-trigger-btn { bottom: 12px; right: 8px; padding: 4px 8px; font-size: 8.5px; }
-    }
-</style>
-
-<!-- 2. HTML Elements (Button & Popup Modal) -->
-<button id="review-trigger-btn" onclick="openReviewModal()">⭐ Review ပေးရန် (15% OFF)</button>
-
-<div id="review-modal" class="modal-overlay">
-    <div class="modal-card">
-        <button class="modal-close" onclick="closeReviewModal()">✕</button>
-        <div class="modal-title">သင့်၏ စာအုပ်အပေါ်အမြင်နှင့် တန်ဖိုးရှိသော မျှဝေမှုများသည် ကျွန်ုပ်တို့အတွက် လွန်စွာတန်ဖိုးရှိပါသည်။</div>
-        
-        <div class="modal-text">
-            စာဖတ်သူ၏ Review တစ်ခုနှင့် Follow တစ်ခုသည် နောက်ထပ် စာအုပ်ဖတ်ရှုမည့် လူငယ်များအတွက် များစွာ အကျိုးသက်ရောက်မှုရှိပြီး စာပေ မဖတ်ရှုရသေးသူများအတွက်လည်း လမ်းပြအလင်းရောင်နှင့် အားအင်များစွာ ဖြစ်စေပါသည်။
-        </div>
-
-        <div class="modal-offer">
-            🎁 Follow လုပ်ပြီး Review ပေးပါက နောက်ထပ်တစ်ကြိမ် ဝယ်ယူမည့် စာအုပ်တိုင်းအတွက် 15% DISCOUNT ရရှိပါမည်။
-        </div>
-
-        <div class="modal-step">၁။ Facebook Page ကို <b>Follow ပြုလုပ်၍ Review ရေးသားပါ</b> (ပြီးလျှင် Screenshot ရိုက်ယူပါ)။</div>
-        <div class="modal-step" style="margin-bottom: 15px;">၂။ Screenshot ကို Messenger (သို့မဟုတ်) Telegram သို့ ပေးပို့၍ Discount ရယူပါ။</div>
-
-        <div class="modal-btn-group">
-             <a href="https://www.facebook.com/share/1E3zQjMZHA/?mibextid=wwXIfr" target="_blank" class="modal-btn btn-fb">👍 Follow လုပ်ရန် & Review ရေးရန်</a>
-            <a href="https://www.facebook.com/share/1E3zQjMZHA/?mibextid=wwXIfr" target="_blank" class="modal-btn btn-msg">💬 Messenger သို့ Screenshot ပို့ရန်</a>
-            <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" class="modal-btn btn-tg">✈️ Telegram သို့ Screenshot ပို့ရန် (Plan B)</a>
-        </div>
-    </div>
-</div>
-
-<!-- 3. JavaScript Logic -->
-<script>
-    function openReviewModal() {
-        $("#review-modal").css("display", "flex").hide().fadeIn(300);
-    }
-    function closeReviewModal() {
-        $("#review-modal").fadeOut(300);
-    }
-</script>
-
-<!-- ========================================== -->
-<!-- 🔺 Review System Code Block End 🔺 -->
-<!-- ========================================== -->
+        document.addEventListener('fullscreenchange', () => setTimeout(resizeAndCenterBook, 100));
+        document.addEventListener('webkitfullscreenchange', () => setTimeout(resizeAndCenterBook, 100));
+        document.addEventListener('MSFullscreenChange', () => setTimeout(resizeAndCenterBook, 100));
+    </script>
 </body>
 </html>
